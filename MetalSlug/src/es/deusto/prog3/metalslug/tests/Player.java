@@ -38,6 +38,7 @@ public class Player extends Ellipse {
 			e.printStackTrace();
 		}
 		this.setRadii(sprite.getWidth() / 2, sprite.getHeight() / 2);
+		
 	}
 	
 	protected void setAnimation(Image[] images, int duration) {
