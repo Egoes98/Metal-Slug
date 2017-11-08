@@ -23,7 +23,6 @@ public class Player extends Ellipse {
 	
 	private String isFacing = "RIGHT"; //por defecto true sera derecha, y false izquierda
 
-
 	public Player() {
 		super(640, 200, 0, 0);
 		input = new Input(720);
