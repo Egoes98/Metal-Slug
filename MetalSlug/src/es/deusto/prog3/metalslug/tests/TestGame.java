@@ -38,7 +38,7 @@ public class TestGame extends BasicGame {
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
 		g.setColor(Color.red);
-		g.fill(player);
+		player.draw();
 		g.setColor(Color.white);
 		for(Rectangle platform : platforms) {
 			g.fill(platform);

@@ -1,19 +1,29 @@
 package es.deusto.prog3.metalslug.tests;
 
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Rectangle;
 
-public class Player extends Rectangle {
+public class Player extends Ellipse {
 	
 	private Input input;
 	private int vy;
 	private boolean hasjumped;
 	private static final int GRAVITY = 1500; // In pixels/s^2
+	private Image sprite;
 
 	public Player() {
-		super(640, 200, 30, 30);
+		super(640, 200, 0, 0);
 		input = new Input(720);
-		
+		try {
+			sprite = new Image("sprite.png");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setRadii(sprite.getWidth() / 2, sprite.getHeight() / 2);
 	}
 	
 	protected void jump() {
@@ -72,6 +82,15 @@ public class Player extends Rectangle {
 		}
 		
 		setX(getX() + (isLeft ? -300*deltaSeconds : 300*deltaSeconds));
+	}
+	
+	public Image getSprite() {
+		return sprite;
+	}
+
+	public void draw() {
+		// TODO Auto-generated method stub
+		sprite.draw(x, y);
 	}
 
 	
