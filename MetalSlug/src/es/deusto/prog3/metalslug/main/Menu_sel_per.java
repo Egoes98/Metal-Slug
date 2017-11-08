@@ -1,4 +1,4 @@
-package main;
+package es.deusto.prog3.metalslug.main;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;

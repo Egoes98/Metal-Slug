@@ -1,4 +1,4 @@
-package main;
+package es.deusto.prog3.metalslug.main;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;

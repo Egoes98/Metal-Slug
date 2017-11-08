@@ -11,6 +11,7 @@ public class Playing extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
