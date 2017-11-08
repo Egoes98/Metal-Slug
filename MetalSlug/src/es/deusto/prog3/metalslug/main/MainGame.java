@@ -1,21 +1,30 @@
-package es.deusto.prog3.metalslug.main;
+package main;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
 
 public class MainGame extends StateBasedGame {
 
-	public MainGame(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+	public static final String gamename = "Metal Smug";
+	public static final int main_menu = 0;
+	public static final int menu_sel_per = 1;
+	
+	public MainGame(String gamename) {
+		super(gamename);
+		this.addState(new Main_menu(main_menu));
+		this.addState(new Menu_sel_per(menu_sel_per));
+	}
+	
+	public void initStatesList(GameContainer gc) throws SlickException {
+		this.getState(main_menu).init(gc, this);
+		this.getState(menu_sel_per).init(gc, this);
+		this.enterState(main_menu);
 	}
 
-	@Override
-	public void initStatesList(GameContainer container) throws SlickException {
-		// TODO Auto-generated method stub
-		addState(new Playing());
-		enterState(0);
+	public static void main(String[] args) throws SlickException {
+		AppGameContainer appgc;
+		appgc = new AppGameContainer(new MainGame(gamename));
+		appgc.setDisplayMode(640, 360, false);
+		appgc.start();
 	}
-
 }
