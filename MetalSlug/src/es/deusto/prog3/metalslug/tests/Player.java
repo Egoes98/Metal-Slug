@@ -121,6 +121,7 @@ public class Player extends Ellipse {
 		setX(getX() + (isLeft ? -300*deltaSeconds : 300*deltaSeconds));
 	}
 	
+	
 	public Image getSprite() {
 		return sprite;
 	}
