@@ -13,33 +13,45 @@ public class Player extends Ellipse {
 	
 	
 	private HashMap<String,Animation> movingAnimations;
+	private HashMap<String, Image> sprites;
 	private Input input;
+	private Image image;
 	private int vy;
 	private boolean hasjumped;
 	private static final int GRAVITY = 1500; // In pixels/s^2
-	private Image sprite;
+	
 	private boolean isLeft = true;
 	private boolean move = false;
 	
-	private String isFacing = "RIGHT"; //por defecto true sera derecha, y false izquierda
+	private String isFacing; //por defecto true sera derecha, y false izquierda
 
 	public Player() {
 		super(640, 200, 0, 0);
 		input = new Input(720);
 		try {
-			sprite = new Image("resources/data/sprite_1.png");
-			
+			image = new Image("resources/data/sprite_1.png");
+			setSprite(image);
 			setAnimation(new Image[] {new Image("resources/data/sprite_1.png"),
 									  new Image("resources/data/sprite_2.png"),
 									  new Image("resources/data/sprite_3.png")}, 150);
+			
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setRadii(sprite.getWidth() / 2, sprite.getHeight() / 2);
+		
+		this.setRadii(image.getWidth() / 2, image.getHeight() / 2);
+		isFacing = "RIGHT";
 		
 	}
 	
+	private void setSprite(Image image) {
+		sprites = new HashMap<String,Image>();
+		sprites.put("RIGHT", image);
+		sprites.put("LEFT", image.getFlippedCopy(true, false));
+		
+	}
+
 	protected void setAnimation(Image[] images, int duration) {
 		movingAnimations = new HashMap<String,Animation>();
 		
@@ -121,16 +133,14 @@ public class Player extends Ellipse {
 	}
 	
 	
-	public Image getSprite() {
-		return sprite;
-	}
+	
 
 	public void draw() {
 		// TODO Auto-generated method stub
 		if(move) {
 			movingAnimations.get(isFacing).draw(x,y);
 		}else if(!move){
-			sprite.draw(x,y);
+			sprites.get(isFacing).draw(x,y);
 		}
 		
 	}
