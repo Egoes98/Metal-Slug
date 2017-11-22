@@ -5,7 +5,7 @@ import org.lwjgl.input.*;
 import org.lwjgl.opengl.Drawable;
 import org.newdawn.slick.state.*;
 
-public class Main_menu extends BasicGameState{
+public class MainMenu extends BasicGameState{
 	Image fondo;
 	Image campaing, campaing_sele, scores, scores_sele, options, options_sele, exit_game, exit_game_sele;
 
@@ -15,50 +15,50 @@ public class Main_menu extends BasicGameState{
 	int mouseX;
 	
 	
-	public Main_menu(int state) {
+	public MainMenu(int state) {
 	}
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		fondo = new Image ("resources/Menu/Main_menu/fondo_logo.png");
+		fondo = new Image ("resources/Menu/Main_menu720/fondo_logo.jpg");
 		
-		campaing = new Image("resources/Menu/Main_menu/boton_campaña.png");
-		campaing_sele = new Image("resources/Menu/Main_menu/boton_campaña_sele.png");
+		campaing = new Image("resources/Menu/Main_menu720/boton_campaÃ±a.jpg");
+		campaing_sele = new Image("resources/Menu/Main_menu720/boton_campaÃ±a_sele.jpg");
 		
-		scores = new Image("resources/Menu/Main_menu/boton_score.png");
-		scores_sele = new Image("resources/Menu/Main_menu/boton_score_sele.png");
+		scores = new Image("resources/Menu/Main_menu720/boton_score.jpg");
+		scores_sele = new Image("resources/Menu/Main_menu720/boton_score_sele.jpg");
 		
-		options = new Image("resources/Menu/Main_menu/boton_options.png");
-		options_sele = new Image("resources/Menu/Main_menu/boton_options_sele.png");
+		options = new Image("resources/Menu/Main_menu720/boton_options.jpg");
+		options_sele = new Image("resources/Menu/Main_menu720/boton_options_sele.jpg");
 		
-		exit_game = new Image("resources/Menu/Main_menu/boton_exit.png"); 
-		exit_game_sele = new Image("resources/Menu/Main_menu/boton_exit_sele.png"); 
+		exit_game = new Image("resources/Menu/Main_menu720/boton_exit.jpg"); 
+		exit_game_sele = new Image("resources/Menu/Main_menu720/boton_exit_sele.jpg"); 
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException { // Para pintar el contenido
 		fondo.draw(0,0);
 		
 		if(sel_c) {
-			campaing_sele.draw(96,136);
+			campaing_sele.draw(192,272);
 		}else {
-			campaing.draw(96,136);
+			campaing.draw(192,272);
 		}
 		
 		if(sel_s) {
-			scores_sele.draw(352,136);
+			scores_sele.draw(704,272);
 		}else {
-			scores.draw(352,136);
+			scores.draw(704,272);
 		}
 		
 		if(sel_o) {
-			options_sele.draw(96,251);
+			options_sele.draw(192,502);
 		}else {
-			options.draw(96,251);
+			options.draw(192,502);
 		}
 		
 		if(sel_e) {
-			exit_game_sele.draw(352,251);
+			exit_game_sele.draw(704,502);
 		}else {
-			exit_game.draw(352,251);
+			exit_game.draw(704,502);
 		}
 	}
 	
@@ -66,34 +66,34 @@ public class Main_menu extends BasicGameState{
 		mouseX = Mouse.getX();
 		mouseY = Mouse.getY();
 		
-		if((mouseX >= 96 && mouseX <= 277) && (mouseY >= 158 && mouseY <= 223)) {
+		if((mouseX >= 192 && mouseX <= 554) && (mouseY >= 316 && mouseY <= 446)) {
 			sel_c = true;
 			if(Mouse.isButtonDown(0)) {
 				sbg.enterState(1);
 			}
-		}else {
+		} else {
 			sel_c = false;
 		}
 		
-		if((mouseX >= 352 && mouseX <= 533) && (mouseY >= 158 && mouseY <= 223)) {
+		if((mouseX >= 704 && mouseX <= 1066) && (mouseY >= 316 && mouseY <= 446)) {
 			sel_s = true;
 			if(Mouse.isButtonDown(0)) {
 				
 			}
-		}else {
+		} else {
 			sel_s = false;
 		}
 		
-		if((mouseX >= 96 && mouseX <= 277) && (mouseY >= 43 && mouseY <= 108)) {
+		if((mouseX >= 192 && mouseX <= 554) && (mouseY >= 86 && mouseY <= 216)) {
 			sel_o = true;
 			if(Mouse.isButtonDown(0)) {
 				
 			}
-		}else {
+		} else {
 			sel_o = false;
 		}
 		
-		if((mouseX >= 352 && mouseX <= 533) && (mouseY >= 43 && mouseY <= 108)) {
+		if((mouseX >= 704 && mouseX <= 1066) && (mouseY >= 83 && mouseY <= 216)) {
 			sel_e = true;
 			if(Mouse.isButtonDown(0)) {
 				System.exit(0);

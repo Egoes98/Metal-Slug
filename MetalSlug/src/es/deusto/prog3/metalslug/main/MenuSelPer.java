@@ -10,7 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import net.java.games.input.Keyboard;
 
-public class Menu_sel_per extends BasicGameState {
+public class MenuSelPer extends BasicGameState {
 	Image fondo;
 	Image player1_pointer;
 	Image per1,per1_sel;
@@ -18,7 +18,7 @@ public class Menu_sel_per extends BasicGameState {
 	Boolean sel_per1 = false, sel_per2 = false, sel_per3 = false, sel_per4 = false;
 	int mouseY, mouseX;
 
-	public Menu_sel_per(int state) {
+	public MenuSelPer(int state) {
 	}
 
 	@Override

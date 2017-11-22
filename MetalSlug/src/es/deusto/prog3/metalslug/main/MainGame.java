@@ -11,8 +11,8 @@ public class MainGame extends StateBasedGame {
 	
 	public MainGame(String gamename) {
 		super(gamename);
-		this.addState(new Main_menu(main_menu));
-		this.addState(new Menu_sel_per(menu_sel_per));
+		this.addState(new MainMenu(main_menu));
+		this.addState(new MenuSelPer(menu_sel_per));
 	}
 	
 	public void initStatesList(GameContainer gc) throws SlickException {
@@ -24,7 +24,7 @@ public class MainGame extends StateBasedGame {
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer appgc;
 		appgc = new AppGameContainer(new MainGame(gamename));
-		appgc.setDisplayMode(640, 360, false);
+		appgc.setDisplayMode(1280, 720, false);
 		appgc.start();
 	}
 }
