@@ -11,7 +11,7 @@ public class Player extends Rectangle {
 	private static final int GRAVITY = 1500; // In pixels/s^2
 
 	public Player() {
-		super(640, 200, 30, 30);
+		super(200, 200, 30, 30);
 		input = new Input(720);
 		
 	}

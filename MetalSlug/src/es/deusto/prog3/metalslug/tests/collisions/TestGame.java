@@ -34,6 +34,8 @@ public class TestGame extends BasicGame {
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
+		if(player.getCenterX() > gc.getWidth()/2)
+			g.translate(-player.getCenterX() + gc.getWidth()/2, 0);
 		g.setColor(Color.red);
 		g.fill(player);
 		g.setColor(Color.white);
@@ -46,9 +48,10 @@ public class TestGame extends BasicGame {
 	public void init(GameContainer gc) throws SlickException {
 		// TODO Auto-generated method stub
 		player = new Player();
-		platforms.add(new Rectangle(0, 700, 1280, 20));
+		platforms.add(new Rectangle(0, 700, 2800, 20));
 		platforms.add(new Rectangle(200, 550, 100, 20));
 		platforms.add(new Rectangle(500, 600, 100, 100));
+		platforms.add(new Rectangle(2000, 600, 100, 100));
 		
 	}
 
