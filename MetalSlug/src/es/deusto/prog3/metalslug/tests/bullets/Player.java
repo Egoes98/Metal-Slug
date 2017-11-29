@@ -1,7 +1,9 @@
-package es.deusto.prog3.metalslug.tests.collisions;
+package es.deusto.prog3.metalslug.tests.bullets;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Vector2f;
 
 public class Player extends Rectangle {
 	
@@ -9,6 +11,7 @@ public class Player extends Rectangle {
 	private int vy;
 	private boolean hasjumped;
 	private static final int GRAVITY = 1500; // In pixels/s^2
+	private Bullet bala;
 
 	public Player() {
 		super(200, 200, 30, 30);
@@ -32,10 +35,17 @@ public class Player extends Rectangle {
 			moveX(delta, true);
 		if(input.isKeyDown(Input.KEY_RIGHT))
 			moveX(delta, false);
-		
+		if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON))
+			shootBullet(delta, true);
 		moveY(delta);
 		
 		detectCollisions();
+	}
+
+	private void shootBullet(int delta, boolean b) {
+		
+		bala = new Bullet(new Vector2f(getX(),getY()),new Vector2f(Mouse.getX(),Mouse.getY()));
+		
 	}
 
 	private void detectCollisions() {
@@ -83,7 +93,6 @@ public class Player extends Rectangle {
 		setX(getX() + (isLeft ? -300*deltaSeconds : 300*deltaSeconds));
 	}
 
-	
 	
 
 }
