@@ -9,7 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 
 public class TestGame extends BasicGame {
@@ -17,6 +17,7 @@ public class TestGame extends BasicGame {
 	Player player;
 	static ArrayList<Rectangle> platforms = new ArrayList<>();
 	static ArrayList<Slope> slopes = new ArrayList<>();
+	static ArrayList<Bullet> bullets = new ArrayList<>();
 
 	public TestGame(String title) {
 		super(title);
@@ -47,6 +48,9 @@ public class TestGame extends BasicGame {
 		for(Slope slope : slopes) {
 			g.fill(slope);
 		}
+		for (Bullet b : bullets) {
+			g.fill(new Circle(b.getX(), b.getY(), 2));
+		}
 		
 	}
 
@@ -67,6 +71,9 @@ public class TestGame extends BasicGame {
 	public void update(GameContainer gc, int delta) throws SlickException {
 		// TODO Auto-generated method stub
 		player.update(delta);
+		for (Bullet b : bullets) {
+			b.move(delta);
+		}
 	}
 	
 	@Override
@@ -74,6 +81,18 @@ public class TestGame extends BasicGame {
 		if(key == Input.KEY_SPACE) {
 			player.jump();
 		}
+	}
+	
+	public void mousePressed(int button, int x, int y) {
+		addNewBullet(x,y);
+	}
+
+	private void addNewBullet(int x, int y) {
+		// TODO Auto-generated method stub
+		if(player.getCenterX() < 640) 
+			bullets.add(new Bullet(player, x, y));
+		else
+			bullets.add(new Bullet(player, x - 640 + player.getCenterX(), y));
 	}
 
 }
