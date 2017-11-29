@@ -1,6 +1,7 @@
 package es.deusto.prog3.metalslug.tests.collisions;
 
 import org.newdawn.slick.Input;
+import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
 public class Player extends Rectangle {
@@ -12,12 +13,12 @@ public class Player extends Rectangle {
 
 	public Player() {
 		super(200, 200, 30, 30);
-		input = new Input(720);
-		
+		input = new Input(720);		
 	}
 	
 	protected void jump() {
 		// TODO Auto-generated method stub
+		System.out.println(hasjumped);
 		if(!hasjumped) {
 			vy = -800;
 			setY(getY() - 2);
@@ -34,7 +35,6 @@ public class Player extends Rectangle {
 			moveX(delta, false);
 		
 		moveY(delta);
-		
 		detectCollisions();
 	}
 
@@ -65,9 +65,21 @@ public class Player extends Rectangle {
 				}
 			}
 		}
+		
+		for(Slope slope : TestGame.slopes) {
+			// TODO get it to jump properly
+			if(slope.contains(getCenterX(), getMaxY() - 0.1f)) {
+				intersected = true;
+				this.setY(slope.getMaxYIn(getCenterX()) - height);
+				vy = 0;
+				hasjumped = false;
+			}
+		}
+		
 		if(!intersected) {
 			hasjumped = true;
 		}
+		
 	}
 
 	private void moveY(int delta) {

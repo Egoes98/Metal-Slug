@@ -9,12 +9,14 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 
 public class TestGame extends BasicGame {
 	
 	Player player;
 	static ArrayList<Rectangle> platforms = new ArrayList<>();
+	static ArrayList<Slope> slopes = new ArrayList<>();
 
 	public TestGame(String title) {
 		super(title);
@@ -42,6 +44,10 @@ public class TestGame extends BasicGame {
 		for(Rectangle platform : platforms) {
 			g.fill(platform);
 		}
+		for(Slope slope : slopes) {
+			g.fill(slope);
+		}
+		
 	}
 
 	@Override
@@ -52,6 +58,8 @@ public class TestGame extends BasicGame {
 		platforms.add(new Rectangle(200, 550, 100, 20));
 		platforms.add(new Rectangle(500, 600, 100, 100));
 		platforms.add(new Rectangle(2000, 600, 100, 100));
+		slopes.add(new Slope(1000, 700, 1200, 600));
+		
 		
 	}
 
