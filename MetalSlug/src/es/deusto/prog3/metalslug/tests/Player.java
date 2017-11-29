@@ -46,7 +46,7 @@ public class Player extends Ellipse {
 	}
 	
 	private void setSprite(Image image) {
-		sprites = new HashMap<String,Image>();
+		this.sprites = new HashMap<String,Image>();
 		sprites.put("RIGHT", image);
 		sprites.put("LEFT", image.getFlippedCopy(true, false));
 		
@@ -87,8 +87,7 @@ public class Player extends Ellipse {
 		}else {
 			move = false;
 		}
-			
-		
+
 		moveY(delta);
 	}
 	

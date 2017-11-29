@@ -1,5 +1,8 @@
 package es.deusto.prog3.metalslug.tests.collisions;
 
+import java.util.HashMap;
+
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -8,6 +11,7 @@ public class Player extends Rectangle {
 	private Input input;
 	private int vy;
 	private boolean hasjumped;
+	private HashMap<String, Image> sprites;
 	private static final int GRAVITY = 1500; // In pixels/s^2
 
 	public Player() {
@@ -83,6 +87,7 @@ public class Player extends Rectangle {
 		setX(getX() + (isLeft ? -300*deltaSeconds : 300*deltaSeconds));
 	}
 
+	
 	
 
 }
