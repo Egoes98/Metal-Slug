@@ -1,4 +1,4 @@
-package es.deusto.prog3.metalslug.game.basededatos;
+package es.deusto.prog3.metalslug.basededatos;
 import java.util.HashMap;
 
 public class PruebasBD {
@@ -7,8 +7,8 @@ public class PruebasBD {
 		// TODO Auto-generated method stub
 		
 		HashMap<String, Integer> puntuacion = new HashMap<>();
-		 HashMap<String, Integer> puntT = new HashMap<>();
-		 HashMap<String, Integer> puntN = new HashMap<>();
+		HashMap<String, Integer> puntT = new HashMap<>();
+		HashMap<String, Integer> puntN = new HashMap<>();
 		
 		puntuacion.put("Egoitz", 1);
 		puntuacion.put("Player", 1);
