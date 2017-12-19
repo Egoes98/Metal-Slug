@@ -1,14 +1,12 @@
 package es.deusto.prog3.metalslug.tests.collisions;
 
-import org.newdawn.slick.geom.Rectangle;
-
-public class Enemy extends Rectangle {
+public class Enemy extends Character {
 	
 	private Player player;
 	private Thread updateShooting;
 	private boolean shooting;
 	private Thread changeDirection;
-	private boolean movingRight;
+	private boolean movingLeft;
 	
 	{
 		updateShooting = new Thread(() -> {
@@ -25,9 +23,9 @@ public class Enemy extends Rectangle {
 		});
 		
 		changeDirection = new Thread(() -> {
-			movingRight = true;
+			movingLeft = true;
 			while(true) {
-				movingRight = !movingRight;
+				movingLeft = !movingLeft;
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
@@ -47,6 +45,13 @@ public class Enemy extends Rectangle {
 	private float distanceTo(float[] a, float[] b) {
 		// TODO Auto-generated method stub
 		return (float) Math.hypot(a[0] - b[0], a[1] - b[1]);
+	}
+	
+	public void update(int delta) {
+		moveX(delta, movingLeft);
+		
+		moveY(delta);
+		detectCollisions();
 	}
 
 }
