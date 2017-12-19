@@ -51,7 +51,7 @@ public class BaseDeDatos{
 			  }
 			desconectar();
 		 }
-	 public static void AñadirDatos(HashMap<String, Integer> puntuacion, int nivel) {
+	 public static void anadirDatos(HashMap<String, Integer> puntuacion, int nivel) {
 		  try {
 			  conectar();
 			  boolean repetido = false;

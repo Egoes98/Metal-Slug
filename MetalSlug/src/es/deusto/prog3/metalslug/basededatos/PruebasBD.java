@@ -13,12 +13,12 @@ public class PruebasBD {
 		puntuacion.put("Egoitz", 1);
 		puntuacion.put("Player", 1);
 		puntuacion.put("Rama",1);
-		BaseDeDatos.AñadirDatos(puntuacion,1);
+		BaseDeDatos.anadirDatos(puntuacion,1);
 		
 		puntuacion.replace("Egoitz", 1);
 		puntuacion.replace("Rama",1);
 		puntuacion.replace("Player", 1);
-		BaseDeDatos.AñadirDatos(puntuacion,2);
+		BaseDeDatos.anadirDatos(puntuacion,2);
 		
 		puntT = BaseDeDatos.puntuacionTotal();
 		
