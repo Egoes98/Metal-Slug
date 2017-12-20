@@ -52,7 +52,7 @@ public class PruebasBD {
 				// Si quieres simpelmente se sobrescribiran
 				//Si no quieres se te pedira poner otro nombre diferente
 		//En caso negativo: Se añadiran los datos directamente
-	public static void añadirPuntos() {
+	public static void agregarPuntos() {
 		String jugador;
 		int puntos = 0;
 		int nivel = 1;
