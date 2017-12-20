@@ -25,16 +25,18 @@ public class Character extends Rectangle {
 				float topOverlap = platform.getMaxY() - this.getMinY();
 				float overlappingSide = CollisionUtils.min(leftOverlap, rightOverlap, bottomOverlap, topOverlap);
 				
-				if(overlappingSide == leftOverlap) {
+				if(overlappingSide == leftOverlap && bottomOverlap > 10) {
 					setX(getX() - leftOverlap);
-				} else if(overlappingSide == rightOverlap) {
+				} else if(overlappingSide == rightOverlap && bottomOverlap > 10) {
 					setX(getX() + rightOverlap);
 				} else if(overlappingSide == bottomOverlap) {
 					setY(getY() - bottomOverlap);
-					vy = 0;
+					if(vy > 0)
+						vy = 0;
 					hasjumped = false;
 				} else if(overlappingSide == topOverlap) {
-					vy = 0;
+					if(vy < 0)
+						vy = 0;
 					setY(getY() + topOverlap + 1);
 					
 				}

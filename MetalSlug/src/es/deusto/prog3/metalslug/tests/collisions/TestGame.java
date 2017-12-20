@@ -63,6 +63,7 @@ public class TestGame extends BasicGame {
 		platforms.add(new Rectangle(500, 600, 100, 100));
 		platforms.add(new Rectangle(2000, 600, 100, 100));
 		slopes.add(new Slope(1000, 700, 1200, 600));
+		platforms.add(new Rectangle(1200, 600, 300, 300));
 		
 		
 	}
