@@ -78,7 +78,7 @@ public class PruebasBD {
 		}while(seguir);
 		
 		if(mayor) {
-			BaseDeDatos.AñadirPuntuacion(jugador, puntos, nivel);
+			BaseDeDatos.agregarPuntuacion(jugador, puntos, nivel);
 		}
 	}
 }

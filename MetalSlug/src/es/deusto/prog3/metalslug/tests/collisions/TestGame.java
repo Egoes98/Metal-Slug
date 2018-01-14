@@ -74,23 +74,15 @@ public class TestGame extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		player.update(delta);
-<<<<<<< HEAD
 		for (Bullet b : bullets) {
 			b.move(delta);
+			if(b.detectCollision(player)) {
+				bullets.remove(b);
+			}
 		}
 		for (Granada gr : granadas) {
 			gr.update(delta);
 		}
-=======
-		Iterator<Bullet> iterator = bullets.iterator();
-		while(iterator.hasNext()) {
-			Bullet ibullet = iterator.next();
-			ibullet.move(delta);
-			if(ibullet.detectCollision(player)) {
-				iterator.remove();
-			}
-		};
->>>>>>> branch 'master' of https://github.com/Egoes98/Metal-Smug.git
 	}
 	
 	@Override

@@ -44,7 +44,7 @@ public class Bullet extends Point {
 			if(x < 0 || x > 1280) {
 				collided = true;
 			}	
-		}else {
+		} else {
 			if(x < player.getCenterX() - 640 || x > player.getCenterX() + 640) {
 				collided = true;
 			}
