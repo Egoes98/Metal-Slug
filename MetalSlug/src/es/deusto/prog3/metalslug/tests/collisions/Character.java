@@ -7,9 +7,11 @@ public class Character extends Rectangle {
 	private static final int GRAVITY = 1500;
 	protected boolean hasjumped;
 	protected int vy;
+	private int speed;
 
-	public Character(float x, float y, float width, float height) {
+	public Character(float x, float y, float width, float height, int speed) {
 		super(x, y, width, height);
+		this.speed = speed;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -69,7 +71,7 @@ public class Character extends Rectangle {
 	protected void moveX(int delta, boolean isLeft) {
 		// TODO Auto-generated method stub
 		float deltaSeconds = delta/1000f;
-		setX(getX() + (isLeft ? -300*deltaSeconds : 300*deltaSeconds));
+		setX(getX() + (isLeft ? -speed*deltaSeconds : speed*deltaSeconds));
 	}
 
 }

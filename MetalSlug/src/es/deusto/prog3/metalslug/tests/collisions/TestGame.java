@@ -20,6 +20,8 @@ public class TestGame extends BasicGame {
 	static ArrayList<Slope> slopes = new ArrayList<>();
 	static ArrayList<Bullet> bullets = new ArrayList<>();
 	static ArrayList<Granada> granadas = new ArrayList<>();
+	static ArrayList<Bullet> enemyBullets = new ArrayList<>();
+	static ArrayList<Enemy> enemies = new ArrayList<>();
 
 	public TestGame(String title) {
 		super(title);
@@ -40,6 +42,10 @@ public class TestGame extends BasicGame {
 			g.translate(-player.getCenterX() + gc.getWidth()/2, 0);
 		g.setColor(Color.red);
 		g.fill(player);
+		// TODO Sustituir por iterators para evitar ConcurrentModificationException
+		for(Enemy e : enemies) {
+			g.fill(e);
+		}
 		g.setColor(Color.white);
 		for(Rectangle platform : platforms) {
 			g.fill(platform);
@@ -49,6 +55,10 @@ public class TestGame extends BasicGame {
 		}
 		g.setColor(Color.cyan);
 		for (Bullet b : bullets) {
+			g.fill(new Circle(b.getX(), b.getY(), 2));
+		}
+		
+		for(Bullet b : enemyBullets) {
 			g.fill(new Circle(b.getX(), b.getY(), 2));
 		}
 		g.setColor(Color.green);
@@ -67,6 +77,7 @@ public class TestGame extends BasicGame {
 		platforms.add(new Rectangle(2000, 600, 100, 100));
 		slopes.add(new Slope(1000, 700, 1200, 600));
 		platforms.add(new Rectangle(1200, 600, 300, 300));
+		enemies.add(new Enemy(1000, 200, player));
 		
 		
 	}
@@ -76,11 +87,11 @@ public class TestGame extends BasicGame {
 		player.update(delta);
 		for(Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext(); ) {
 			Bullet ibullet = iterator.next();
-			ibullet.move(delta);
+			ibullet.update(delta);
 			if(ibullet.detectCollision(player)) {
 				iterator.remove();
 			}
-		};
+		}
 		
 		for (Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
 			Granada gr = iterator.next();
@@ -90,8 +101,18 @@ public class TestGame extends BasicGame {
 				// TODO comprobar colisiones con enemigos
 				iterator.remove();
 			}
-			
 		}
+		
+		// TODO Sustituir por iterators para evitar ConcurrentModificationException
+		for(Enemy e : enemies) {
+			e.update(delta);
+		}
+		
+		for(Bullet b: enemyBullets) {
+			b.update(delta);
+		}
+		
+		
 	}
 	
 	@Override
@@ -110,9 +131,9 @@ public class TestGame extends BasicGame {
 
 	private void addNewBullet(int x, int y) {
 		if(player.getCenterX() < 640) 
-			bullets.add(new Bullet(player, x, y));
+			bullets.add(new Bullet(player, x, y, 1f));
 		else
-			bullets.add(new Bullet(player, x - 640 + player.getCenterX(), y));
+			bullets.add(new Bullet(player, x - 640 + player.getCenterX(), y, 1f));
 	}
 
 }

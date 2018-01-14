@@ -7,15 +7,14 @@ public class Enemy extends Character {
 	private boolean shooting;
 	private Thread changeDirection;
 	private boolean movingLeft;
-	
-	{
+
+	public Enemy(float x, float y, Player player) {
+		super(x, y, 30, 30, 100);
+		this.player = player;
 		updateShooting = new Thread(() -> {
 			while(true) {
-				if(distanceTo(this.getCenter(), player.getCenter()) < 200) {
-					shooting = true;
-				} else {
-					shooting = false;
-				}
+				if(distanceTo(this.getCenter(), player.getCenter()) < 500)
+					shoot();
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) { }
@@ -28,18 +27,15 @@ public class Enemy extends Character {
 				movingLeft = !movingLeft;
 				try {
 					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				} catch (InterruptedException e) { }
 			}
 		});
+		updateShooting.start();
+		changeDirection.start();
 	}
 
-	public Enemy(float x, float y) {
-		super(x, y, 30, 30);
-		updateShooting.start();
-		// TODO Auto-generated constructor stub
+	private void shoot() {
+		TestGame.enemyBullets.add(new Bullet(this, player.getCenterX(), player.getCenterY(), 0.5f));
 	}
 
 	private float distanceTo(float[] a, float[] b) {

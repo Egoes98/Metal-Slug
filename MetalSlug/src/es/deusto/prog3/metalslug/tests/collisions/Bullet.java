@@ -5,23 +5,23 @@ import org.newdawn.slick.geom.Rectangle;
 
 public class Bullet extends Point {
 	
-	private final float speed = 1;
-	private double angle;
+	private float speed;
 	private double sin, cos;
 
-	public Bullet(Player player, float x, float y) {
+	public Bullet(Character player, float x, float y, float speed) {
 		super(player.getCenterX(), player.getCenterY());
-		angle = Math.atan2(x - player.getCenterX(), player.getCenterY() - y);
+		this.speed = speed;
+		double angle = Math.atan2(x - player.getCenterX(), player.getCenterY() - y);
 		sin = Math.sin(angle);
 		cos = Math.cos(angle);
 	}
 	
-	public void move(int delta) {
+	public void update(int delta) {
 		x += speed * sin * delta;
 		y += speed * -cos * delta;
 	}
 	
-	public boolean detectCollision(Player player) {
+	public boolean detectCollision(Character player) {
 		boolean collided = false;
 		
 		for(Rectangle platform : TestGame.platforms) {

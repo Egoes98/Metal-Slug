@@ -9,7 +9,7 @@ public class Player extends Character {
 	private Input input;
 	private boolean movingLeft = false;
 	public Player() {
-		super(200, 200, 30, 30);
+		super(200, 200, 30, 30, 300);
 		input = new Input(720);		
 	}
 	
