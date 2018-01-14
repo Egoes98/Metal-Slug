@@ -7,6 +7,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class Player extends Character {
 	
 	private Input input;
+	private boolean movingLeft = false;
 	public Player() {
 		super(200, 200, 30, 30);
 		input = new Input(720);		
@@ -25,13 +26,21 @@ public class Player extends Character {
 	private static final long serialVersionUID = 1L;
 	
 	public void update(int delta) {
-		if(input.isKeyDown(Input.KEY_LEFT))
+		if(input.isKeyDown(Input.KEY_LEFT)) {
 			moveX(delta, true);
-		if(input.isKeyDown(Input.KEY_RIGHT))
+			movingLeft = true;
+		}
+		if(input.isKeyDown(Input.KEY_RIGHT)) {
 			moveX(delta, false);
+			movingLeft = false;
+		}
 		
 		moveY(delta);
 		detectCollisions();
+	}
+	
+	public boolean getMovingLeft() {
+		return movingLeft;
 	}
 	
 

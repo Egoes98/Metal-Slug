@@ -18,10 +18,10 @@ public class TestGame extends BasicGame {
 	static ArrayList<Rectangle> platforms = new ArrayList<>();
 	static ArrayList<Slope> slopes = new ArrayList<>();
 	static ArrayList<Bullet> bullets = new ArrayList<>();
+	static ArrayList<Granada> granadas = new ArrayList<>();
 
 	public TestGame(String title) {
 		super(title);
-		// TODO Auto-generated constructor stub
 	}
 
 	public static void main(String[] args) {
@@ -29,14 +29,12 @@ public class TestGame extends BasicGame {
 			AppGameContainer container = new AppGameContainer(new TestGame("Prueba"), 1280, 720, false);
 			container.start();
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
 		if(player.getCenterX() > gc.getWidth()/2)
 			g.translate(-player.getCenterX() + gc.getWidth()/2, 0);
 		g.setColor(Color.red);
@@ -51,12 +49,15 @@ public class TestGame extends BasicGame {
 		for (Bullet b : bullets) {
 			g.fill(new Circle(b.getX(), b.getY(), 2));
 		}
+		g.setColor(Color.green);
+		for(Granada gr : granadas) {
+			g.fill(gr);
+		}
 		
 	}
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		// TODO Auto-generated method stub
 		player = new Player();
 		platforms.add(new Rectangle(0, 700, 2800, 20));
 		platforms.add(new Rectangle(200, 550, 100, 20));
@@ -70,10 +71,12 @@ public class TestGame extends BasicGame {
 
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
-		// TODO Auto-generated method stub
 		player.update(delta);
 		for (Bullet b : bullets) {
 			b.move(delta);
+		}
+		for (Granada gr : granadas) {
+			gr.update(delta);
 		}
 	}
 	
@@ -81,6 +84,9 @@ public class TestGame extends BasicGame {
 	public void keyPressed(int key, char c) {
 		if(key == Input.KEY_SPACE) {
 			player.jump();
+		} else if (key == Input.KEY_G) {
+			// TODO Granadas limitadas, comprobar a ver si quedan
+			granadas.add(new Granada(player.getCenterX(), player.getCenterY(), player.getMovingLeft()));
 		}
 	}
 	
@@ -89,7 +95,6 @@ public class TestGame extends BasicGame {
 	}
 
 	private void addNewBullet(int x, int y) {
-		// TODO Auto-generated method stub
 		if(player.getCenterX() < 640) 
 			bullets.add(new Bullet(player, x, y));
 		else
