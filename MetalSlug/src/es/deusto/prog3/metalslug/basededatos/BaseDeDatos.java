@@ -15,9 +15,8 @@ import es.deusto.prog3.metalslug.tests.collisions.Slope;
 public class BaseDeDatos{
 	 static Connection connection = null;
 	 static Statement statement;
-	 static int niveles = 5;
 	 
-	 public static void conectar() throws ClassNotFoundException {
+	 public static void conectar() throws ClassNotFoundException {//Conecta la base de datos
 		  Class.forName("org.sqlite.JDBC");
 
 		  try {
@@ -28,7 +27,7 @@ public class BaseDeDatos{
 			  System.err.println(e.getMessage());
 		  }
 	 }
-	 public static void desconectar() {
+	 public static void desconectar() {//Desconecta la base de datos
 		 try{
 			 if(connection != null) {
 				 connection.close();
@@ -38,49 +37,46 @@ public class BaseDeDatos{
 				  System.err.println(e);
 		 }
 	 }
-	 public static void crearTablas() throws ClassNotFoundException {
+	 public static void crearTablas() throws ClassNotFoundException {//crea las tablas de puntuacion y plataformas.
 			try {
 				conectar();
-				//Cuantos niveles tiene el juego
-				for(int n = 1; n <= niveles; n++) {
-					statement.executeUpdate("create table pnivel"+n+" (jugador String, puntos int)");
-					statement.executeUpdate("create table platnivel"+n+" (tipo string, x1 float, y1 float, x2 float, y2 float)");
-				}
+					statement.executeUpdate("create table puntuacion (jugador String, puntos int, nivel int)");
+					statement.executeUpdate("create table plataformas (tipo string, x1 float, y1 float, x2 float, y2 float, int nivel)");
 			  }catch(SQLException e) {
 				  System.err.println(e.getMessage());
 			  }
 			desconectar();
 		 }
-	 public static void anadirDatos(HashMap<String, Integer> puntuacion, int nivel) {
+	 public static void agregarPuntuacion(String jugador, int puntos, int nivel) {//Añade la puntuacion al final de cada nivel
 		  try {
 			  conectar();
 			  boolean repetido = false;
-			  for(String key : puntuacion.keySet()){
-				  ResultSet rs = statement.executeQuery("select jugador from pnivel"+nivel);
+				  ResultSet rs = statement.executeQuery("select jugador from puntuacion where nivel="+nivel+"");
 				  while(rs.next()){
-			   	      if(rs.getString("jugador").equals(key)) {
+					  // Leer el resultset
+			   	      if(rs.getString("jugador").equals(jugador)) {
 			   	    	  repetido = true;
 			   	    	  break;
 			   	      }
 				  }
 				  if(repetido) {
-					  statement.executeUpdate("update pnivel"+nivel+" set puntos="+ puntuacion.get(key) +" WHERE jugador="+ "'" + key + "'" +";");
+					  statement.executeUpdate("update puntuacion set puntos="+puntos+" WHERE jugador='"+jugador+"' AND nivel="+nivel+";");
 				  }else {
-					  statement.executeUpdate("insert into pnivel"+nivel+" values("+ "'" +key + "'" +" , "+ puntuacion.get(key) +")");	
+					  statement.executeUpdate("insert into puntuacion values('"+jugador+"', "+puntos+", "+nivel+")");	
 				  }
 				  repetido = false;
-			  }
+			  
 		  } catch (SQLException | ClassNotFoundException e) {
 			  // TODO Auto-generated catch block
 			  e.printStackTrace();
 		  }
 		  desconectar();
 	  }
-	 public static HashMap<String, Integer> puntuacionNivel(int nivel) {
+	 public static HashMap<String, Integer> puntuacionNivel(int nivel) {//Saca puntuacion por nivel pedido
 		 HashMap<String, Integer> puntN = new HashMap<>();
 		 try {
 			 conectar();
-			 ResultSet rs = statement.executeQuery("select * from pnivel"+nivel);
+			 ResultSet rs = statement.executeQuery("select jugador, puntos from puntuacion where nivel="+nivel+"");
 			 while(rs.next()){
 				 // Leer el resultset
 				 puntN.put(rs.getString("jugador"), rs.getInt("puntos"));
@@ -92,86 +88,108 @@ public class BaseDeDatos{
 		 desconectar();
 		return puntN;
 	 } 
-	 public static HashMap<String, Integer> puntuacionTotal() {
+	 public static HashMap<String, Integer> puntuacionTotal() {//Saca puntuaciones totales
 		 HashMap<String, Integer> puntT = new HashMap<>();
-		 String key;
-		 int puntuacion = 0;
-
 		 try {
 			 conectar();
-			 for(int i = 1; i <= niveles; i++){
-				 ResultSet rs = statement.executeQuery("select jugador from pnivel"+i);
-				 while(rs.next()){
-					 key = rs.getString("jugador");
-					 if(puntT.containsKey(key)) {
-					 }else {
-						 for(int n = 1; n <= niveles; n++){
-							 ResultSet p = statement.executeQuery("select * from pnivel"+n+" where jugador='Egoitz';");
-							 p.next();
-							 //La siguiente linea es la qu eda el error.
-							 puntuacion += p.getInt("puntos");
-						 }
-						 puntT.put(key, puntuacion);
-					 }
-				 }
-			 } 
-		 } catch (SQLException | ClassNotFoundException e) {
-			 // TODO Auto-generated catch block
+			 ResultSet rp = statement.executeQuery("select jugador, sum(puntos) as pT from puntuacion group by jugador;");
+				while(rp.next()) {
+					puntT.put(rp.getString("jugador"), rp.getInt("pT"));
+				}
+			
+		 } catch (ClassNotFoundException | SQLException e) {
+			  
 			 e.printStackTrace();
 		 }
 		 desconectar();
 		return puntT;
-	 }
-	 
-	public static ArrayList<Shape> getPlataformas(int nivel) {
-		try {
-			conectar();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ArrayList<Shape> plataformas = new ArrayList<>();
-		try {
-			ResultSet plats = statement.executeQuery("select * from platnivel" + nivel);
-			do {
-				if (plats.getString(0).equals("Rectangle")) {
-					plataformas.add(new Rectangle(plats.getFloat(1), plats.getFloat(2), plats.getFloat(3), plats.getFloat(4)));
-				} else if (plats.getString(0).equals("Slope")) {
-					plataformas.add(new Slope(plats.getFloat(1), plats.getFloat(2), plats.getFloat(3), plats.getFloat(4)));
+	 }	 
+	 public static boolean existeJ(String jugador) {//Comprueba si existe ese jugador
+		 boolean existe = false;
+		 try {
+			 conectar();
+			 ResultSet rs = statement.executeQuery("select jugador from puntuacion;");
+				while(rs.next()) {
+					if(rs.getString("jugador").equals(jugador)) {
+						existe = true;
+						break;
+					}
 				}
-			} while (plats.next());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return plataformas;
-
-	}
-	
-	public static void guardarPlataformas(ArrayList<Shape> plataformas, int nivel) {
-		try {
-			conectar();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String sql = "";
-		for (Shape shape : plataformas) {
-			if(shape instanceof Rectangle)
-				sql = "insert into platnivel" + nivel + " values (Rectangle," + shape.getX() + "," + shape.getY() + "," + shape.getWidth() + "," + shape.getHeight() + ")";
-			else if (shape instanceof Slope) {
-				Slope slope = (Slope) shape;
-				float[] point0 = slope.getPoint(0);
-				float[] point1 = slope.getPoint(1);
-				sql = "insert into platnivel" + nivel + " values (Slope," + point0[0] + "," + point0[1] + "," + point1[0] + "," + point1[1] + ")";
-			}
+			
+		 } catch (ClassNotFoundException | SQLException e) {
+			  
+			 e.printStackTrace();
+		 }
+		 desconectar();
+		 return existe;
+	 }
+	 public static boolean mayorP(String jugador, int puntos){//Comprueba si la puntuacion obtenida es mejor que la que ya tenia en caso de repeticion
+		 boolean mayor = false;
+		 try {
+			 conectar();
+			 ResultSet rs = statement.executeQuery("select puntos from puntuacion where jugador='"+jugador+"';");
+				while(rs.next()) {
+					int p =rs.getInt("puntos");
+					if(puntos < p) {
+						mayor = true;
+					}
+				}
+			
+		 } catch (ClassNotFoundException | SQLException e) {
+			  
+			 e.printStackTrace();
+		 }
+		 desconectar();
+		 return mayor;
+	 }
+	 public static void guardarPlataformas(ArrayList<Shape> plataformas, int nivel) {
 			try {
-				statement.executeQuery(sql);
+				conectar();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String sql = "";
+			for (Shape shape : plataformas) {
+				if(shape instanceof Rectangle)
+					sql = "insert into plataformas values (Rectangle," + shape.getX() + "," + shape.getY() + "," + shape.getWidth() + "," + shape.getHeight() + ")";
+				else if (shape instanceof Slope) {
+					Slope slope = (Slope) shape;
+					float[] point0 = slope.getPoint(0);
+					float[] point1 = slope.getPoint(1);
+					sql = "insert into plataformas values (Slope," + point0[0] + "," + point0[1] + "," + point1[0] + "," + point1[1] + ")";
+				}
+				try {
+					statement.executeQuery(sql);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	 public static ArrayList<Shape> getPlataformas(int nivel) {
+			try {
+				conectar();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ArrayList<Shape> plataformas = new ArrayList<>();
+			try {
+				ResultSet plats = statement.executeQuery("select * from platformas where nivel="+nivel+"");
+				while (plats.next()){
+					if (plats.getString(0).equals("Rectangle")) {
+						plataformas.add(new Rectangle(plats.getFloat(1), plats.getFloat(2), plats.getFloat(3), plats.getFloat(4)));
+					} else if (plats.getString(0).equals("Slope")) {
+						plataformas.add(new Slope(plats.getFloat(1), plats.getFloat(2), plats.getFloat(3), plats.getFloat(4)));
+					}
+				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return plataformas;
+
 		}
-	}
-		 
 }
+
