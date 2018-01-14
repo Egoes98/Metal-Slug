@@ -16,7 +16,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class TestGame extends BasicGame {
 	
 	Player player;
-	static ArrayList<Rectangle> platforms = new ArrayList<>();
+	static ArrayList<Rectangle> platforms = new ArrayList<>(); // TODO una clase especial para platform
 	static ArrayList<Slope> slopes = new ArrayList<>();
 	static ArrayList<Bullet> bullets = new ArrayList<>();
 	static ArrayList<Granada> granadas = new ArrayList<>();
@@ -74,14 +74,23 @@ public class TestGame extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		player.update(delta);
-		for (Bullet b : bullets) {
-			b.move(delta);
-			if(b.detectCollision(player)) {
-				bullets.remove(b);
+		for(Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext(); ) {
+			Bullet ibullet = iterator.next();
+			ibullet.move(delta);
+			if(ibullet.detectCollision(player)) {
+				iterator.remove();
 			}
-		}
-		for (Granada gr : granadas) {
+		};
+		
+		for (Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
+			Granada gr = iterator.next();
 			gr.update(delta);
+			gr.detectCollisions();
+			if(gr.getStatus() == Granada.STATUS_EXPLODING) {
+				// TODO comprobar colisiones con enemigos
+				iterator.remove();
+			}
+			
 		}
 	}
 	
