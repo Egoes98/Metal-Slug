@@ -1,7 +1,6 @@
 package es.deusto.prog3.metalslug.tests.collisions;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -47,7 +46,6 @@ public class TestGame extends BasicGame {
 		for(Slope slope : slopes) {
 			g.fill(slope);
 		}
-		g.setColor(Color.cyan);
 		for (Bullet b : bullets) {
 			g.fill(new Circle(b.getX(), b.getY(), 2));
 		}
@@ -74,23 +72,12 @@ public class TestGame extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		player.update(delta);
-<<<<<<< HEAD
 		for (Bullet b : bullets) {
 			b.move(delta);
 		}
 		for (Granada gr : granadas) {
 			gr.update(delta);
 		}
-=======
-		Iterator<Bullet> iterator = bullets.iterator();
-		while(iterator.hasNext()) {
-			Bullet ibullet = iterator.next();
-			ibullet.move(delta);
-			if(ibullet.detectCollision(player)) {
-				iterator.remove();
-			}
-		};
->>>>>>> branch 'master' of https://github.com/Egoes98/Metal-Smug.git
 	}
 	
 	@Override
