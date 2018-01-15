@@ -14,9 +14,10 @@ public class Character extends Rectangle {
 	private int speed;
 	private ArrayList<Shape> platforms;
 
-	public Character(float x, float y, float width, float height, int speed) {
+	public Character(float x, float y, float width, float height, int speed, ArrayList<Shape> platforms) {
 		super(x, y, width, height);
 		this.speed = speed;
+		this.platforms = platforms;
 		// TODO Auto-generated constructor stub
 	}
 	

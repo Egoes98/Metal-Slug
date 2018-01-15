@@ -1,15 +1,19 @@
 package es.deusto.prog3.metalslug.tests.boss;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 
 public class Player extends Character {
 	
 	private Input input;
 	private boolean movingLeft = false;
-	public Player() {
-		super(200, 200, 30, 30, 300);
+	
+	public Player(ArrayList<Shape> platforms) {
+		super(200, 200, 30, 30, 300, platforms);
 		input = new Input(720);		
 	}
 	
