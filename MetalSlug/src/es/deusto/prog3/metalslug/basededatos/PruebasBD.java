@@ -15,13 +15,13 @@ public class PruebasBD {
 		HashMap<String, Integer> puntT = new HashMap<>();
 		HashMap<String, Integer> puntN = new HashMap<>();
 		
-		/*cargar datos
-		jugador = "Anselmo";
-		puntos = 5;
-		BaseDeDatos.AñadirPuntuacion(jugador, puntos, 2);
-		Estos datos de ejemplo ya estan en la base de datos pueden cambiarse para añadir mas datos*/
 		
-	
+		BaseDeDatos.agregarPuntuacion("Egoitz", 100, 1);
+		BaseDeDatos.agregarPuntuacion("Egoitz", 300, 2);
+		BaseDeDatos.agregarPuntuacion("Michael", 100, 1);
+		BaseDeDatos.agregarPuntuacion("Michael", 100, 1);
+		
+	/*
 		puntN = BaseDeDatos.puntuacionNivel(1);
 		System.out.println("Puntos Nivel 1");
 		System.out.println("--------------");
@@ -44,6 +44,7 @@ public class PruebasBD {
 		for(String key:puntN.keySet()) {
 			System.out.println("Jugador: " +key + " Puntos:" + puntT.get(key));
 		}
+		*/
 	}
 	
 	//Metodos que estara preente al dfinal de cada nivel y servira para añadir los datos a la base
