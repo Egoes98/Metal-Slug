@@ -56,7 +56,6 @@ public class TestGame extends BasicGame {
 
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
-		// TODO Auto-generated method stub
 		player.update(delta);
 	}
 	

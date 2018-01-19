@@ -40,8 +40,8 @@ public class TestGame extends BasicGame {
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		if(player.getCenterX() > gc.getWidth()/2)
 			g.translate(-player.getCenterX() + gc.getWidth()/2, 0);
-		g.setColor(Color.red);
-		g.fill(player);
+		player.drawPiernas();
+		player.drawCabeza();	
 		// TODO Sustituir por iterators para evitar ConcurrentModificationException
 		for(Enemy e : enemies) {
 			g.fill(e);

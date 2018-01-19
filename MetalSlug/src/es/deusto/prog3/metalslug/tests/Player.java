@@ -136,9 +136,9 @@ public class Player extends Ellipse {
 
 	public void draw() {
 		// TODO Auto-generated method stub
-		if(move) {
+		if(!move) {
 			movingAnimations.get(isFacing).draw(x,y);
-		}else if(!move){
+		}else if(move){
 			sprites.get(isFacing).draw(x,y);
 		}
 		
