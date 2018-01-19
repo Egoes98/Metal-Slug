@@ -15,7 +15,7 @@ public class Boss extends Circle {
 	private double angle;
 
 	public Boss(ArrayList<Shape> platforms, ArrayList<Bullet> enemyBullets) {
-		super(600, 300, 80);
+		super(600, 300, 60);
 		this.platforms = platforms;
 		this.enemyBullets = enemyBullets;
 		vx = vy = 0.2f;
@@ -29,12 +29,12 @@ public class Boss extends Circle {
 		detectCollisions();
 		aliveTime += delta;
 		angle += 0.01*delta;
-		if(aliveTime > 500) {
+		if(aliveTime > 200) {
 			aliveTime = 0;
-			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle, 0.8f));
-			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle + Math.PI/2, 0.8f));
-			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle + Math.PI, 0.8f));
-			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle - Math.PI/2, 0.8f));
+			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle, 0.5f));
+			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle + Math.PI/2, 0.5f));
+			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle + Math.PI, 0.5f));
+			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle - Math.PI/2, 0.5f));
 		}
 	}
 	
@@ -49,8 +49,10 @@ public class Boss extends Circle {
 				
 				if (overlappingSide == leftOverlap || overlappingSide == rightOverlap) {
 					vx = -vx;
+					setX(getX() + Math.signum(vx)*3);
 				} else if (overlappingSide == topOverlap || overlappingSide == bottomOverlap) {
 					vy = -vy;
+					setY(getY() + Math.signum(vy)*3);
 				}
 			}
 		}

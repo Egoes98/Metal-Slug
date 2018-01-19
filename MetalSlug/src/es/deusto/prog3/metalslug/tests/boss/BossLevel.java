@@ -8,6 +8,7 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
@@ -108,6 +109,15 @@ public class BossLevel extends BasicGame {
 		// TODO Auto-generated method stub
 		super.mousePressed(button, x, y);
 		playerBullets.add(new Bullet(player.getCenterX(), player.getCenterY(), x, y, 1));
+	}
+
+	@Override
+	public void keyPressed(int key, char c) {
+		// TODO Auto-generated method stub
+		super.keyPressed(key, c);
+		if(key == Input.KEY_SPACE) {
+			player.jump();
+		}
 	}
 	
 	
