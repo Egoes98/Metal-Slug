@@ -21,17 +21,17 @@ public class MainMenu extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		fondo = new Image ("resources/Menu/Main_menu720/fondo_logo.jpg");
 		
-		campaing = new Image("resources/Menu/Main_menu720/boton_campaña.jpg");
-		campaing_sele = new Image("resources/Menu/Main_menu720/boton_campaña_sele.jpg");
+		campaing = new Image("resources/Menu/Main_menu720/boton_campana.png");
+		campaing_sele = new Image("resources/Menu/Main_menu720/boton_campana_sele.png");
 		
-		scores = new Image("resources/Menu/Main_menu720/boton_score.jpg");
-		scores_sele = new Image("resources/Menu/Main_menu720/boton_score_sele.jpg");
+		scores = new Image("resources/Menu/Main_menu720/boton_score.png");
+		scores_sele = new Image("resources/Menu/Main_menu720/boton_score_sele.png");
 		
-		options = new Image("resources/Menu/Main_menu720/boton_options.jpg");
-		options_sele = new Image("resources/Menu/Main_menu720/boton_options_sele.jpg");
+		options = new Image("resources/Menu/Main_menu720/boton_options.png");
+		options_sele = new Image("resources/Menu/Main_menu720/boton_options_sele.png");
 		
-		exit_game = new Image("resources/Menu/Main_menu720/boton_exit.jpg"); 
-		exit_game_sele = new Image("resources/Menu/Main_menu720/boton_exit_sele.jpg"); 
+		exit_game = new Image("resources/Menu/Main_menu720/boton_exit.png"); 
+		exit_game_sele = new Image("resources/Menu/Main_menu720/boton_exit_sele.png"); 
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException { // Para pintar el contenido
@@ -78,7 +78,7 @@ public class MainMenu extends BasicGameState{
 		if((mouseX >= 704 && mouseX <= 1066) && (mouseY >= 316 && mouseY <= 446)) {
 			sel_s = true;
 			if(Mouse.isButtonDown(0)) {
-				
+				sbg.enterState(2);
 			}
 		} else {
 			sel_s = false;
