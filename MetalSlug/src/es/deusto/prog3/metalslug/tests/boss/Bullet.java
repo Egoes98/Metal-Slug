@@ -14,13 +14,14 @@ public class Bullet extends Point {
 	private ArrayList<Shape> platforms;
 
 	public Bullet(float sourceX, float sourceY, float x, float y, float speed) {
+		this(sourceX, sourceY, Math.atan2(x - sourceX, sourceY - y), speed);
+	}
+	
+	public Bullet(float sourceX, float sourceY, double angle, float speed) {
 		super(sourceX, sourceY);
 		this.speed = speed;
-		this.sourceX = sourceX;
-		this.sourceY = sourceY;
-		double angle = Math.atan2(x - sourceX, sourceY - y);
-		sin = Math.sin(angle);
-		cos = Math.cos(angle);
+		this.cos = Math.cos(angle);
+		this.sin = Math.sin(angle);
 	}
 	
 	public void update(int delta) {
@@ -40,10 +41,6 @@ public class Bullet extends Point {
 		if(getY() < 100 || getY() > 720) {
 			collided = true;
 		}
-		
-		if(Math.hypot(sourceX - getX(), sourceY - getY()) > 2000) {
-			collided = true;
-		}	
 		
 		return collided;
 	}

@@ -11,12 +11,16 @@ public class Boss extends Circle {
 	private ArrayList<Bullet> enemyBullets;
 	private float vx, vy;
 	private int aliveTime = 0;
+	private int health;
+	private double angle;
 
 	public Boss(ArrayList<Shape> platforms, ArrayList<Bullet> enemyBullets) {
 		super(600, 300, 80);
 		this.platforms = platforms;
 		this.enemyBullets = enemyBullets;
 		vx = vy = 0.2f;
+		health = 100;
+		angle = 0;
 	}
 	
 	public void update(int delta) {
@@ -24,12 +28,13 @@ public class Boss extends Circle {
 		setY(getY() + vy * delta);
 		detectCollisions();
 		aliveTime += delta;
+		angle += 0.01*delta;
 		if(aliveTime > 500) {
 			aliveTime = 0;
-			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), getCenterX() + 1, getCenterY(), 0.8f));
-			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), getCenterX() - 1, getCenterY(), 0.8f));
-			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), getCenterX(), getCenterY() + 1, 0.8f));
-			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), getCenterX(), getCenterY() - 1, 0.8f));
+			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle, 0.8f));
+			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle + Math.PI/2, 0.8f));
+			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle + Math.PI, 0.8f));
+			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle - Math.PI/2, 0.8f));
 		}
 	}
 	
@@ -49,6 +54,14 @@ public class Boss extends Circle {
 				}
 			}
 		}
+	}
+	
+	public void hit() {
+		health -= 2;
+	}
+	
+	public int getHealth() {
+		return health;
 	}
 	
 	

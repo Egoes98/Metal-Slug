@@ -20,6 +20,7 @@ public class BossLevel extends BasicGame {
 	private ArrayList<Shape> platforms = new ArrayList<>();
 	private ArrayList<Bullet> playerBullets = new ArrayList<>();
 	private ArrayList<Bullet> enemyBullets = new ArrayList<>();
+	private Rectangle healthBar;
 
 	public BossLevel(String title) {
 		super(title);
@@ -34,6 +35,10 @@ public class BossLevel extends BasicGame {
 			Bullet b = iterator.next();
 			g.fill(new Circle(b.getX(), b.getY(), 2));
 		}
+		for (Iterator<Bullet> iterator = playerBullets.iterator(); iterator.hasNext();) {
+			Bullet b = iterator.next();
+			g.fill(new Circle(b.getX(), b.getY(), 2));
+		}
 		g.setColor(Color.white);
 		for (Iterator<Shape> iterator = platforms.iterator(); iterator.hasNext();) {
 			Shape s = iterator.next();
@@ -43,6 +48,7 @@ public class BossLevel extends BasicGame {
 		
 		g.setColor(Color.red);
 		g.fill(player);
+		g.fill(healthBar);
 		g.setColor(Color.green);
 		g.fill(boss);
 	}
@@ -56,6 +62,7 @@ public class BossLevel extends BasicGame {
 		platforms.add(new Rectangle(0, 0, 1280, 20));
 		platforms.add(new Rectangle(0, 700, 1280, 20));
 		platforms.add(new Rectangle(1260, 0, 20, 720));
+		healthBar = new Rectangle(140, 50, 1000, 20);
 	}
 
 	@Override
@@ -65,7 +72,24 @@ public class BossLevel extends BasicGame {
 		for (Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext();) {
 			Bullet b = iterator.next();
 			b.update(delta);
+			if(b.getX() < 0 || b.getX() > 1280 || b.getY() < 0 || b.getY() > 720) {
+				iterator.remove();
+			}
 		}
+		
+		for (Iterator<Bullet> iterator = playerBullets.iterator(); iterator.hasNext();) {
+			Bullet b = iterator.next();
+			b.update(delta);
+			if(boss.contains(b.getX(), b.getY())) {
+				iterator.remove();
+				boss.hit();
+				healthBar.setWidth(boss.getHealth()*10);
+			}
+			if(b.getX() < 0 || b.getX() > 1280 || b.getY() < 0 || b.getY() > 720) {
+				iterator.remove();
+			}
+		}
+		
 		boss.update(delta);
 	}
 	
@@ -78,5 +102,14 @@ public class BossLevel extends BasicGame {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void mousePressed(int button, int x, int y) {
+		// TODO Auto-generated method stub
+		super.mousePressed(button, x, y);
+		playerBullets.add(new Bullet(player.getCenterX(), player.getCenterY(), x, y, 1));
+	}
+	
+	
 
 }
