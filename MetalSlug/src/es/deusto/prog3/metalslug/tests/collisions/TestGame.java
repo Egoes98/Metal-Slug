@@ -42,27 +42,32 @@ public class TestGame extends BasicGame {
 			g.translate(-player.getCenterX() + gc.getWidth()/2, 0);
 		player.drawPiernas();
 		player.drawCabeza();	
-		// TODO Sustituir por iterators para evitar ConcurrentModificationException
-		for(Enemy e : enemies) {
+		for(Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
+			Enemy e = iterator.next();
 			g.fill(e);
 		}
 		g.setColor(Color.white);
-		for(Rectangle platform : platforms) {
+		for(Iterator<Rectangle> iterator = platforms.iterator(); iterator.hasNext();) {
+			Rectangle platform = iterator.next();
 			g.fill(platform);
 		}
-		for(Slope slope : slopes) {
+		for(Iterator<Slope> iterator = slopes.iterator();iterator.hasNext();) {
+			Slope slope = iterator.next();
 			g.fill(slope);
 		}
 		g.setColor(Color.cyan);
-		for (Bullet b : bullets) {
+		for (Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext();) {
+			Bullet b = iterator.next();
 			g.fill(new Circle(b.getX(), b.getY(), 2));
 		}
 		
-		for(Bullet b : enemyBullets) {
+		for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext();) {
+			Bullet b = iterator.next();
 			g.fill(new Circle(b.getX(), b.getY(), 2));
 		}
 		g.setColor(Color.green);
-		for(Granada gr : granadas) {
+		for(Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
+			Granada gr = iterator.next();
 			g.fill(gr);
 		}
 		
@@ -104,11 +109,16 @@ public class TestGame extends BasicGame {
 		}
 		
 		// TODO Sustituir por iterators para evitar ConcurrentModificationException
-		for(Enemy e : enemies) {
-			e.update(delta);
+		for(Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
+			Enemy e = iterator.next();
+			e.update(delta, bullets, granadas);
+			if(e.isDead()) {
+				iterator.remove(); // Sustituir por animación de morir?
+			}
 		}
 		
-		for(Bullet b: enemyBullets) {
+		for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext();) {
+			Bullet b = iterator.next();
 			b.update(delta);
 		}
 		

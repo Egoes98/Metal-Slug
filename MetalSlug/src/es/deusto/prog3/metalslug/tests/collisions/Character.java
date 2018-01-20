@@ -15,7 +15,7 @@ public class Character extends Rectangle {
 		// TODO Auto-generated constructor stub
 	}
 	
-	protected void detectCollisions() {
+	protected void detectPlatformCollisions() {
 		// TODO Auto-generated method stub
 		boolean intersected = false;
 		for(Rectangle platform : TestGame.platforms) {

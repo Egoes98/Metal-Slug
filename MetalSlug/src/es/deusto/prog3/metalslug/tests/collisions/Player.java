@@ -122,7 +122,7 @@ public class Player extends Character {
 		}
 		
 		moveY(delta);
-		detectCollisions();
+		detectPlatformCollisions();
 	}
 	
 	public boolean getMovingLeft() {
