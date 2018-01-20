@@ -18,6 +18,7 @@ public class Player extends Character {
 	private String isFacing;
 	
 	private boolean movingLeft = false;
+	private boolean shoot = false;
 	
 	public Player() {
 		super(200, 200, 31, 38, 300);
@@ -27,7 +28,7 @@ public class Player extends Character {
 		addAnimation("RunHead", AnimationImages.eriRunHead, 100);
 		addAnimation("RunFoot1", AnimationImages.eriRunFoot1, 100);
 		addAnimation("RunFoot2", AnimationImages.eriRunFoot2, 90);
-	
+		addAnimation("Shoot", AnimationImages.eriShoot, 50);
 		isFacing = "RIGHT";
 	}
 
@@ -46,9 +47,6 @@ public class Player extends Character {
 		
 		
 	}
-
-
-	
 
 	protected void jump() {
 		// TODO Auto-generated method stub
@@ -80,6 +78,12 @@ public class Player extends Character {
 			firstRun = true;
 		}
 		
+		if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			shoot  = true;
+		}else {
+			shoot = false;
+		}
+		
 		moveY(delta);
 		detectPlatformCollisions();
 	}
@@ -88,14 +92,26 @@ public class Player extends Character {
 		return movingLeft;
 	}
 	
+//	public void mousePressed(int button, int x, int y) {
+//		shoot = true;
+//	}
+	
 	public void drawCabeza() {
-		
-		if(move) {
+	
+		if(move && shoot && isFacing == "LEFT") {
+			animations.get("Shoot").get(isFacing).draw(x-24,y);
+		}else if(move && shoot) {
+			animations.get("Shoot").get(isFacing).draw(x+1,y);
+		}else if(move){
 			animations.get("RunHead").get(isFacing).draw(x,y);
-		}else if(!move){
+		}else if(!move && shoot && isFacing == "LEFT"){
+			animations.get("Shoot").get(isFacing).draw(x-24,y);
+		}else if(!move && shoot){
+			animations.get("Shoot").get(isFacing).draw(x+1,y);
+		}else if (!move) {
 			animations.get("StandbyHead").get(isFacing).draw(x,y);
-			
 		}
+		
 		
 	}
 

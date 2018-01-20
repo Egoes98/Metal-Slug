@@ -10,6 +10,8 @@ public class AnimationImages {
 	public static Image[] eriRunHead;
 	public static Image[] eriRunFoot1;
 	public static Image[] eriRunFoot2;
+	public static Image[] eriShoot;
+
 
 	static {
 		try {
@@ -50,6 +52,15 @@ public class AnimationImages {
 					new Image("resources/EriAnimations/Run/RunFoot14.png"),
 					new Image("resources/EriAnimations/Run/RunFoot15.png"),
 					new Image("resources/EriAnimations/Run/RunFoot16.png") };
+			
+			eriShoot = new Image[] { new Image("resources/EriAnimations/Shoot/Shoot1.png"),
+					new Image("resources/EriAnimations/Shoot/Shoot2.png"),
+					new Image("resources/EriAnimations/Shoot/Shoot3.png"),
+					new Image("resources/EriAnimations/Shoot/Shoot4.png"),
+					new Image("resources/EriAnimations/Shoot/Shoot5.png"),
+					new Image("resources/EriAnimations/Shoot/Shoot6.png") };
+					
+			
 		} catch (SlickException e) {
 		}
 	}

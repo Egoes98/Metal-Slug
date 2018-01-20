@@ -114,6 +114,7 @@ public class TestGame extends BasicGame {
 			e.update(delta, bullets, granadas);
 			if(e.isDead()) {
 				iterator.remove(); // Sustituir por animación de morir?
+								   
 			}
 		}
 		
