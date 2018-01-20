@@ -21,7 +21,7 @@ public class Player extends Character {
 	private boolean shoot = false;
 	
 	public Player() {
-		super(200, 200, 31, 38, 300);
+		super(200, 200, 93, 114, 300);
 		input = new Input(720);
 		addAnimation("StandbyHead", AnimationImages.eriStandbyHead, 400);
 		addAnimation("StandbyFoot", AnimationImages.eriStandbyFoot, 300);
@@ -29,6 +29,10 @@ public class Player extends Character {
 		addAnimation("RunFoot1", AnimationImages.eriRunFoot1, 100);
 		addAnimation("RunFoot2", AnimationImages.eriRunFoot2, 90);
 		addAnimation("Shoot", AnimationImages.eriShoot, 50);
+		addAnimation("JumpHead1", AnimationImages.eriJumpHead1, 270);
+		addAnimation("JumpFoot1", AnimationImages.eriJumpFoot1, 270);
+		addAnimation("JumpHead2", AnimationImages.eriJumpHead2, 270);
+		addAnimation("JumpFoot2", AnimationImages .eriJumpFoot2, 270);
 		isFacing = "RIGHT";
 	}
 
@@ -91,23 +95,26 @@ public class Player extends Character {
 	public boolean getMovingLeft() {
 		return movingLeft;
 	}
-	
-//	public void mousePressed(int button, int x, int y) {
-//		shoot = true;
-//	}
+
+	//TODO Pasar algunas animaciones a que solo se reproduzcan 1 vez
 	
 	public void drawCabeza() {
 	
 		if(move && shoot && isFacing == "LEFT") {
-			animations.get("Shoot").get(isFacing).draw(x-24,y);
+			animations.get("Shoot").get(isFacing).draw(x-72,y);
 		}else if(move && shoot) {
-			animations.get("Shoot").get(isFacing).draw(x+1,y);
-		}else if(move){
+			animations.get("Shoot").get(isFacing).draw(x+3,y);
+		}else if(move && hasjumped && isFacing == "LEFT"){
+			//TODO cuadrar las animaciones de jump2 con las piernas
+			animations.get("JumpHead2").get(isFacing).draw(x+10,y-10  );
+		}else if(move) {
 			animations.get("RunHead").get(isFacing).draw(x,y);
 		}else if(!move && shoot && isFacing == "LEFT"){
-			animations.get("Shoot").get(isFacing).draw(x-24,y);
+			animations.get("Shoot").get(isFacing).draw(x-72,y);
 		}else if(!move && shoot){
-			animations.get("Shoot").get(isFacing).draw(x+1,y);
+			animations.get("Shoot").get(isFacing).draw(x+3,y);
+		}else if (!move && hasjumped) {
+			animations.get("JumpHead1").get(isFacing).draw(x,y);
 		}else if (!move) {
 			animations.get("StandbyHead").get(isFacing).draw(x,y);
 		}
@@ -122,6 +129,10 @@ public class Player extends Character {
 			firstRun = false;
 		}else if(move && !firstRun){
 			animations.get("RunFoot2").get(isFacing).draw(x,y);
+		}else if(move && hasjumped){
+			animations.get("JumpFoot2").get(isFacing).draw(x,y);
+		}else if(!move && hasjumped) {
+			animations.get("JumpFoot1").get(isFacing).draw(x,y);
 		}else if(!move) {
 			animations.get("StandbyFoot").get(isFacing).draw(x,y);
 		}
