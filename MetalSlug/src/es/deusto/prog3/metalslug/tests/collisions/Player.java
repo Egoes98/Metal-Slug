@@ -22,53 +22,12 @@ public class Player extends Character {
 	public Player() {
 		super(200, 200, 31, 38, 300);
 		input = new Input(720);
-		try {
-			
-
-
-			addAnimation("StandbyHead", new Image[] {new Image("resources/EriAnimations/Standby/StandbyCabeza1.png"),
-					 								 new Image("resources/EriAnimations/Standby/StandbyCabeza2.png"),
-					 								 new Image("resources/EriAnimations/Standby/StandbyCabeza3.png"),
-					 								 new Image("resources/EriAnimations/Standby/StandbyCabeza4.png")}, 400);
-			
-			addAnimation("StandbyFoot", new Image[] {new Image("resources/EriAnimations/Standby/StandbyPiernas1.png")}, 300);
-			
-			
-			addAnimation("RunHead", new Image[] {new Image("resources/EriAnimations/Run/RunHead1.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead2.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead3.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead4.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead5.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead6.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead7.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead8.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead9.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead10.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead11.png"),
-					 							 new Image("resources/EriAnimations/Run/RunHead12.png")}, 100);
-			
-			addAnimation("RunFoot1", new Image[] {new Image("resources/EriAnimations/Run/RunFoot1.png"),
-					 							 new Image("resources/EriAnimations/Run/RunFoot2.png"),
-					 							 new Image("resources/EriAnimations/Run/RunFoot3.png"),
-					 							 new Image("resources/EriAnimations/Run/RunFoot4.png")}, 100);
-			
-			addAnimation("RunFoot2", new Image[] {new Image("resources/EriAnimations/Run/RunFoot5.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot6.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot7.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot8.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot9.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot10.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot11.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot12.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot13.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot14.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot15.png"),
-					 							  new Image("resources/EriAnimations/Run/RunFoot16.png")}, 90);
-			
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		addAnimation("StandbyHead", AnimationImages.eriStandbyHead, 400);
+		addAnimation("StandbyFoot", AnimationImages.eriStandbyFoot, 300);
+		addAnimation("RunHead", AnimationImages.eriRunHead, 100);
+		addAnimation("RunFoot1", AnimationImages.eriRunFoot1, 100);
+		addAnimation("RunFoot2", AnimationImages.eriRunFoot2, 90);
+	
 		isFacing = "RIGHT";
 	}
 
