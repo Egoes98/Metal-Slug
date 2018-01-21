@@ -44,6 +44,9 @@ public class NivelNormal extends BasicGameState {
 		// TODO Auto-generated method stub
 		platforms = BaseDeDatos.getPlataformas(nivel);
 		player = new Player(platforms);
+		enemyBullets = new ArrayList<>();
+		playerBullets = new ArrayList<>();
+		granadas = new ArrayList<>();
 		enemies = BaseDeDatos.getEnemigos(nivel);
 		
 		for(Enemy e : enemies) {
