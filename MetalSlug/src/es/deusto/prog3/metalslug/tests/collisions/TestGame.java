@@ -13,12 +13,12 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 
 public class TestGame extends BasicGame {
 	
 	Player player;
-	static ArrayList<Rectangle> platforms = new ArrayList<>(); // TODO una clase especial para platform
-	static ArrayList<Slope> slopes = new ArrayList<>();
+	static ArrayList<Shape> platforms = new ArrayList<>(); // TODO una clase especial para platform
 	static ArrayList<Bullet> bullets = new ArrayList<>();
 	static ArrayList<Granada> granadas = new ArrayList<>();
 	static ArrayList<Bullet> enemyBullets = new ArrayList<>();
@@ -40,8 +40,11 @@ public class TestGame extends BasicGame {
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		if(player.getCenterX() > gc.getWidth()/2)
+		if(player.getCenterX() > gc.getWidth()/2 && player.getCenterX() < background.getWidth() - gc.getWidth()/2)
 			g.translate(-player.getCenterX() + gc.getWidth()/2, 0);
+		else if(player.getCenterX() > background.getWidth() - gc.getWidth()/2) {
+			g.translate(-background.getWidth() + gc.getWidth(), 0);
+		}
 		background.draw(0, 0);
 		player.drawPiernas();
 		player.drawCabeza();	
@@ -49,15 +52,15 @@ public class TestGame extends BasicGame {
 			Enemy e = iterator.next();
 			g.fill(e);
 		}
+		
 		g.setColor(Color.white);
-		for(Iterator<Rectangle> iterator = platforms.iterator(); iterator.hasNext();) {
-			Rectangle platform = iterator.next();
+		
+		for(Iterator<Shape> iterator = platforms.iterator(); iterator.hasNext();) {
+			Shape platform = iterator.next();
 			g.fill(platform);
 		}
-		for(Iterator<Slope> iterator = slopes.iterator();iterator.hasNext();) {
-			Slope slope = iterator.next();
-			g.fill(slope);
-		}
+		
+		
 		g.setColor(Color.cyan);
 		for (Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext();) {
 			Bullet b = iterator.next();
@@ -79,13 +82,13 @@ public class TestGame extends BasicGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		player = new Player();
-		platforms.add(new Rectangle(0, 700, 2800, 20));
-		platforms.add(new Rectangle(200, 550, 100, 20));
-		platforms.add(new Rectangle(500, 600, 100, 100));
-		platforms.add(new Rectangle(2000, 600, 100, 100));
-		slopes.add(new Slope(1000, 700, 1200, 600));
-		platforms.add(new Rectangle(1200, 600, 300, 300));
-		enemies.add(new Enemy(1000, 200, player));
+		platforms.add(new Platform(0, 680, 7947, 40, false));
+		platforms.add(new Platform(1760, 525, 154, 100, true));
+		platforms.add(new Platform(1911, 417, 175, 263, false));
+		platforms.add(new Platform(2086, 362, 436, 50, false));
+		platforms.add(new Platform(3868, 382, 528, 40, false));
+		platforms.add(new Platform(4734, 382, 528, 40, false));
+		
 		
 		background = new Image("resources/data/Mission1.png", false, Image.FILTER_NEAREST).getScaledCopy(3);
 		
@@ -113,7 +116,6 @@ public class TestGame extends BasicGame {
 			}
 		}
 		
-		// TODO Sustituir por iterators para evitar ConcurrentModificationException
 		for(Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
 			Enemy e = iterator.next();
 			e.update(delta, bullets, granadas);

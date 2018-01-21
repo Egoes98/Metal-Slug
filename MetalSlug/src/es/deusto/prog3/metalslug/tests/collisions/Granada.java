@@ -2,6 +2,7 @@ package es.deusto.prog3.metalslug.tests.collisions;
 
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 
 public class Granada extends Circle {
 
@@ -40,16 +41,14 @@ public class Granada extends Circle {
 	}
 
 	public void detectCollisions() {
-		for (Rectangle r : TestGame.platforms) {
+		for (Shape r : TestGame.platforms) {
 			if (this.intersects(r)) {
-				this.setCenterY(r.getMinY());
-				this.setRadius(50);
-				status = STATUS_EXPLODING;
-			}
-		}
-		for (Slope s : TestGame.slopes) {
-			if (this.intersects(s)) {
-				this.setCenterY(s.getMaxYIn(x));
+				if(r instanceof Rectangle)
+					this.setCenterY(r.getMinY());
+				if(r instanceof Slope) {
+					Slope s = (Slope) r;
+					this.setCenterY(s.getMaxYIn(x));
+				}
 				this.setRadius(50);
 				status = STATUS_EXPLODING;
 			}

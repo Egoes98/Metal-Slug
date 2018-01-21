@@ -2,6 +2,7 @@ package es.deusto.prog3.metalslug.tests.collisions;
 
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 
 public class Bullet extends Point {
 	
@@ -24,14 +25,8 @@ public class Bullet extends Point {
 	public boolean detectCollision(Character player) {
 		boolean collided = false;
 		
-		for(Rectangle platform : TestGame.platforms) {
+		for(Shape platform : TestGame.platforms) {
 			if(platform.contains(getX(), getY())) {
-				collided = true;
-			}
-		}
-		
-		for(Slope slope : TestGame.slopes) {
-			if(slope.contains(getX(), getY())) {
 				collided = true;
 			}
 		}
