@@ -3,6 +3,7 @@ package es.deusto.prog3.metalslug.tests.collisions;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
@@ -73,9 +74,13 @@ public class TestGame extends BasicGame {
 		g.setColor(Color.green);
 		for(Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
 			Granada gr = iterator.next();
-			g.fill(gr);
+			if(gr.getStatus() == Granada.STATUS_EXPLODING) {
+				gr.drawExplosion();
+			}
+			else 
+				g.fill(gr);
 		}
-		
+		// explosion.draw(500, 200);
 	}
 
 	@Override
@@ -100,8 +105,6 @@ public class TestGame extends BasicGame {
 		platforms.add(new Platform(-20, 0, 20, 720, false));
 		platforms.add(new Platform(7947, 0 , 20, 720, false));
 		
-		
-		
 		background = new Image("resources/data/Mission1.png", false, Image.FILTER_NEAREST).getScaledCopy(3);
 		
 		
@@ -124,7 +127,6 @@ public class TestGame extends BasicGame {
 			gr.detectCollisions();
 			if(gr.getStatus() == Granada.STATUS_EXPLODING) {
 				// TODO comprobar colisiones con enemigos
-				iterator.remove();
 			}
 		}
 		
