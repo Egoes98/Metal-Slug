@@ -10,6 +10,7 @@ import java.util.HashMap;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
+import es.deusto.prog3.metalslug.tests.collisions.Platform;
 import es.deusto.prog3.metalslug.tests.collisions.Slope;
 
 public class BaseDeDatos{
@@ -41,7 +42,7 @@ public class BaseDeDatos{
 			try {
 				conectar();
 					statement.executeUpdate("create table puntuacion (jugador String, puntos int, nivel int)");
-					statement.executeUpdate("create table plataformas (tipo string, x1 float, y1 float, x2 float, y2 float, nivel int)");
+					statement.executeUpdate("create table plataformas (tipo string, x1 float, y1 float, x2 float, y2 float, atravesable tinyint, nivel int)");
 			  }catch(SQLException e) {
 				  System.err.println(e.getMessage());
 			  }
@@ -151,13 +152,15 @@ public class BaseDeDatos{
 			}
 			String sql = "";
 			for (Shape shape : plataformas) {
-				if(shape instanceof Rectangle)
-					sql = "insert into plataformas values (Rectangle," + shape.getX() + "," + shape.getY() + "," + shape.getWidth() + "," + shape.getHeight() + ")";
+				if(shape instanceof Platform) {
+					Platform pl = (Platform) shape;
+					sql = "insert into plataformas values ('Platform'," + pl.getX() + "," + pl.getY() + "," + pl.getWidth() + "," + pl.getHeight() + "," + (pl.isAtravesable() ? 1 : 0) + "," + nivel +  ")";
+				}
 				else if (shape instanceof Slope) {
 					Slope slope = (Slope) shape;
 					float[] point0 = slope.getPoint(0);
 					float[] point1 = slope.getPoint(1);
-					sql = "insert into plataformas values (Slope," + point0[0] + "," + point0[1] + "," + point1[0] + "," + point1[1] + ")";
+					sql = "insert into plataformas values ('Slope'," + point0[0] + "," + point0[1] + "," + point1[0] + "," + point1[1] + 0 + "," + nivel + ")";
 				}
 				try {
 					statement.executeQuery(sql);
@@ -178,8 +181,8 @@ public class BaseDeDatos{
 			try {
 				ResultSet plats = statement.executeQuery("select * from platformas where nivel="+nivel+"");
 				while (plats.next()){
-					if (plats.getString(0).equals("Rectangle")) {
-						plataformas.add(new Rectangle(plats.getFloat(1), plats.getFloat(2), plats.getFloat(3), plats.getFloat(4)));
+					if (plats.getString(0).equals("Platform")) {
+						plataformas.add(new Platform(plats.getFloat(1), plats.getFloat(2), plats.getFloat(3), plats.getFloat(4), plats.getBoolean(5)));
 					} else if (plats.getString(0).equals("Slope")) {
 						plataformas.add(new Slope(plats.getFloat(1), plats.getFloat(2), plats.getFloat(3), plats.getFloat(4)));
 					}
