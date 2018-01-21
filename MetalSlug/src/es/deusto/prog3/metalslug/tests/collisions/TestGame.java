@@ -54,13 +54,12 @@ public class TestGame extends BasicGame {
 		}
 		
 		g.setColor(Color.white);
-		
+		/*
 		for(Iterator<Shape> iterator = platforms.iterator(); iterator.hasNext();) {
 			Shape platform = iterator.next();
 			g.fill(platform);
 		}
-		
-		
+		*/
 		g.setColor(Color.cyan);
 		for (Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext();) {
 			Bullet b = iterator.next();
@@ -82,13 +81,25 @@ public class TestGame extends BasicGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		player = new Player();
-		platforms.add(new Platform(0, 680, 7947, 40, false));
-		platforms.add(new Platform(1760, 525, 154, 100, true));
-		platforms.add(new Platform(1911, 417, 175, 263, false));
+		platforms.add(new Platform(1700, 680, 7947, 40, false));
+		platforms.add(new Platform(1760, 525, 154, 5, true));
+		platforms.add(new Platform(1911, 417, 175, 5, true));
 		platforms.add(new Platform(2086, 362, 436, 50, false));
-		platforms.add(new Platform(3868, 382, 528, 40, false));
+		platforms.add(new Platform(3868, 382, 528, 20, false));
 		platforms.add(new Platform(4734, 382, 528, 40, false));
 		platforms.add(new Platform(3576, 526, 236, 10, true));
+		platforms.add(new Platform(4492, 526, 186, 10, true));
+		platforms.add(new Platform(5554, 526, 132, 10, true));
+		platforms.add(new Platform(5554, 440, 132, 10, true));
+		platforms.add(new Platform(5787, 335, 855, 32, false));
+		platforms.add(new Slope(0, 609, 466, 513));
+		platforms.add(new Slope(466, 513, 925, 652));
+		platforms.add(new Slope(923, 652, 1274, 560));
+		platforms.add(new Slope(1274, 560, 1716, 680));
+		platforms.add(new Platform(0, 640, 1500, 80, false));
+		platforms.add(new Platform(-20, 0, 20, 720, false));
+		platforms.add(new Platform(7947, 0 , 20, 720, false));
+		
 		
 		
 		background = new Image("resources/data/Mission1.png", false, Image.FILTER_NEAREST).getScaledCopy(3);

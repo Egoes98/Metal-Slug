@@ -62,7 +62,7 @@ public class Character extends Rectangle {
 				Slope slope = (Slope) s;
 				if(slope.contains(getCenterX(), getMaxY() - 0.1f)) {
 					intersected = true;
-					this.setY(slope.getMaxYIn(getCenterX()) - height);
+					this.setY(slope.getMaxYIn(getCenterX()) - height + 2);
 					vy = 0;
 					hasjumped = false;
 				}
