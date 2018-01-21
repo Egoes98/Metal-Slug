@@ -87,7 +87,7 @@ public class MainMenu extends BasicGameState{
 		if((mouseX >= 192 && mouseX <= 554) && (mouseY >= 86 && mouseY <= 216)) {
 			sel_o = true;
 			if(Mouse.isButtonDown(0)) {
-				
+				sbg.enterState(3);
 			}
 		} else {
 			sel_o = false;
