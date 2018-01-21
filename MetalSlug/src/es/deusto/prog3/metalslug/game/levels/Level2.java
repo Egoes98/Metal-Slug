@@ -1,4 +1,4 @@
-package es.deusto.prog3.metalslug.tests.collisions;
+package es.deusto.prog3.metalslug.game.levels;
 
 import java.util.ArrayList;
 import java.util.Iterator;

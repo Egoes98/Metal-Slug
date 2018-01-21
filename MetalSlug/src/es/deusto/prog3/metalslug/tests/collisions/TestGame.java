@@ -110,7 +110,7 @@ public class TestGame extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		player.update(delta);
-		for(Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext(); ) {
+		for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext(); ) {
 			Bullet ibullet = iterator.next();
 			ibullet.update(delta);
 			if(ibullet.detectCollision(player)) {
@@ -137,7 +137,7 @@ public class TestGame extends BasicGame {
 			}
 		}
 		
-		for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext();) {
+		for(Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext();) {
 			Bullet b = iterator.next();
 			b.update(delta);
 		}
