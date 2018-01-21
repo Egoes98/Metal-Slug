@@ -44,7 +44,7 @@ public class NivelNormal extends BasicGameState {
 		// TODO Auto-generated method stub
 		platforms = BaseDeDatos.getPlataformas(nivel);
 		player = new Player(platforms);
-		enemies = null; // TODO cargar los enemigos de BD
+		enemies = BaseDeDatos.getEnemigos(nivel);
 		
 		for(Enemy e : enemies) {
 			e.setBullets(enemyBullets);
