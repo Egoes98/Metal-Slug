@@ -88,6 +88,7 @@ public class TestGame extends BasicGame {
 		platforms.add(new Platform(2086, 362, 436, 50, false));
 		platforms.add(new Platform(3868, 382, 528, 40, false));
 		platforms.add(new Platform(4734, 382, 528, 40, false));
+		platforms.add(new Platform(3576, 526, 236, 10, true));
 		
 		
 		background = new Image("resources/data/Mission1.png", false, Image.FILTER_NEAREST).getScaledCopy(3);
