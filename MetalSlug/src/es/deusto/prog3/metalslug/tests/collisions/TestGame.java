@@ -3,7 +3,6 @@ package es.deusto.prog3.metalslug.tests.collisions;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
@@ -48,10 +47,11 @@ public class TestGame extends BasicGame {
 		}
 		background.draw(0, 0);
 		player.drawPiernas();
-		player.drawCabeza();	
+		player.drawCabeza();
+		
 		for(Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
 			Enemy e = iterator.next();
-			g.fill(e);
+			e.draw();
 		}
 		
 		g.setColor(Color.white);
@@ -74,13 +74,9 @@ public class TestGame extends BasicGame {
 		g.setColor(Color.green);
 		for(Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
 			Granada gr = iterator.next();
-			if(gr.getStatus() == Granada.STATUS_EXPLODING) {
-				gr.drawExplosion();
-			}
-			else 
-				g.fill(gr);
+			g.fill(gr);
 		}
-		// explosion.draw(500, 200);
+		
 	}
 
 	@Override
@@ -104,6 +100,8 @@ public class TestGame extends BasicGame {
 		platforms.add(new Platform(0, 640, 1500, 80, false));
 		platforms.add(new Platform(-20, 0, 20, 720, false));
 		platforms.add(new Platform(7947, 0 , 20, 720, false));
+		enemies.add(new Enemy(1300, 200, player));
+		
 		
 		background = new Image("resources/data/Mission1.png", false, Image.FILTER_NEAREST).getScaledCopy(3);
 		
@@ -113,7 +111,7 @@ public class TestGame extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		player.update(delta);
-		for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext(); ) {
+		for(Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext(); ) {
 			Bullet ibullet = iterator.next();
 			ibullet.update(delta);
 			if(ibullet.detectCollision(player)) {
@@ -127,6 +125,7 @@ public class TestGame extends BasicGame {
 			gr.detectCollisions();
 			if(gr.getStatus() == Granada.STATUS_EXPLODING) {
 				// TODO comprobar colisiones con enemigos
+				iterator.remove();
 			}
 		}
 		
@@ -139,7 +138,7 @@ public class TestGame extends BasicGame {
 			}
 		}
 		
-		for(Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext();) {
+		for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext();) {
 			Bullet b = iterator.next();
 			b.update(delta);
 		}

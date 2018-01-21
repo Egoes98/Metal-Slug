@@ -16,7 +16,8 @@ public class AnimationImages {
 	public static Image[] eriJumpHead1;
 	public static Image[] eriJumpHead2;
 	
-	public static Image[] explosion;
+	public static Image[] soldierWalk;
+	public static Image[] soldierShoot;
 
 	static {
 		try {
@@ -93,21 +94,25 @@ public class AnimationImages {
 					new Image("resources/EriAnimations/Jump2/JumpHead5.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
 					new Image("resources/EriAnimations/Jump1/JumpHead6.png", false, Image.FILTER_NEAREST).getScaledCopy(3) };
 			
-			explosion = new Image[] {new Image("resources/explosionAnimation/Explosion1.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion2.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion3.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion4.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion5.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion6.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion7.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion8.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion9.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion10.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion11.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion12.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion13.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion14.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
-					new Image("resources/explosionAnimation/Explosion15.png", false, Image.FILTER_NEAREST).getScaledCopy(3)};
+			soldierWalk = new Image[] { new Image("resources/SoldierAnimation/Run/SoldierRun1.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun2.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun3.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun4.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun5.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun6.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun7.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun8.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun9.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun10.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun11.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Run/SoldierRun12.png", false, Image.FILTER_NEAREST).getScaledCopy(3),		
+			};
+			
+			soldierShoot = new Image[] { new Image("resources/SoldierAnimation/Shoot/SoldierPreShoot1.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Shoot/SoldierPreShoot2.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/SoldierAnimation/Shoot/SoldierPreShoot3.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+			};
+
 
 		} catch (SlickException e) {
 		}
