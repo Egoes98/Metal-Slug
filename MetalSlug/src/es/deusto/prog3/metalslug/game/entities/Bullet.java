@@ -49,7 +49,7 @@ public class Bullet extends Point {
 	
 	public boolean detectCollisionCharacter(Character character) {
 		if(character.contains(getX(), getY())) {
-			character.dead();
+			character.die();
 			return true;
 		}
 		

@@ -13,6 +13,7 @@ public class Character extends Rectangle {
 	protected boolean hasjumped;
 	protected int vy;
 	private int speed;
+	private boolean dead;
 	
 	private Platform atravesando;
 	private boolean encima;
@@ -23,6 +24,7 @@ public class Character extends Rectangle {
 		super(x, y, width, height);
 		this.speed = speed;
 		this.platforms = platforms;
+		dead = false;
 	}
 	
 	protected void detectPlatformCollisions() {
@@ -91,17 +93,28 @@ public class Character extends Rectangle {
 	}
 
 	protected void moveX(int delta, boolean isLeft) {
-		float deltaSeconds = delta/1000f;
-		setX(getX() + (isLeft ? -speed*deltaSeconds : speed*deltaSeconds));
+		if (!dead) {
+			float deltaSeconds = delta / 1000f;
+			setX(getX() + (isLeft ? -speed * deltaSeconds : speed * deltaSeconds));
+		}
 	}
 	
 	public void setPlataformas(ArrayList<Shape> platforms) {
 		this.platforms = platforms;
 	}
 
-	public void dead() {
+	public void die() {
 		// TODO Auto-generated method stub
-		
+		dead = true;
 	}
+
+	public boolean isDead() {
+		return dead;
+	}
+
+	public void setDead(boolean dead) {
+		this.dead = dead;
+	}
+	
 
 }

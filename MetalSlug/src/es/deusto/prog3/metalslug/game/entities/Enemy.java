@@ -10,19 +10,15 @@ public class Enemy extends Character {
 	private Player player;
 	private boolean shooting;
 	private boolean movingLeft;
-	private boolean dead;
 	private int timeCounter;
-	private float minX, maxX;
+	private float minMovementX, maxMovementX;
 	
 	private ArrayList<Bullet> bullets;
 
-	public Enemy(float x, float y, Player player, float minX, float maxX, ArrayList<Bullet> bullets, ArrayList<Shape> platforms) {
-		super(x, y, 30, 30, 100, platforms);
-		this.player = player;
-		dead = false;
-		this.minX = minX;
-		this.maxX = maxX;
-		this.bullets = bullets;
+	public Enemy(float x, float y, float minX, float maxX) {
+		super(x, y, 30, 30, 100, null);
+		this.minMovementX = minX;
+		this.maxMovementX = maxX;
 	}
 
 	private void shoot() {
@@ -40,32 +36,33 @@ public class Enemy extends Character {
 
 		moveY(delta);
 		detectPlatformCollisions();
-		for (Iterator<Bullet> iterator = playerbullets.iterator(); iterator.hasNext();) {
-			Bullet b = iterator.next();
-			if (this.contains(b.getX(), b.getY())) {
-				dead = true;
-			}
-		}
-		for (Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
-			Granada g = iterator.next();
-			if (this.intersects(g)) {
-				dead = true;
-			}
-		}
 
 		if (timeCounter > 1000 && distanceTo(this.getCenter(), player.getCenter()) < 500) {
 			shoot();
 			timeCounter = 0;
 		}
+		if(getX() < minMovementX || getX() > maxMovementX) {
+			movingLeft = !movingLeft;
+		}
 
-	}
-
-	public boolean isDead() {
-		return dead;
 	}
 	
 	public void setBullets(ArrayList<Bullet> bullets) {
 		this.bullets = bullets;
 	}
+	
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public float getMinMovementX() {
+		return minMovementX;
+	}
+
+	public float getMaxMovementX() {
+		return maxMovementX;
+	}
+	
+	
 
 }

@@ -24,6 +24,8 @@ public class Player extends Character {
 	private boolean movingLeft = false;
 	private boolean shoot = false;
 	
+	private int lives;
+	
 	public Player(ArrayList<Shape> platforms) {
 		super(200, 200, 93, 114, 300, platforms);
 		input = new Input(720);
@@ -38,6 +40,7 @@ public class Player extends Character {
 		addAnimation("JumpHead2", AnimationImages.eriJumpHead2, 270);
 		addAnimation("JumpFoot2", AnimationImages .eriJumpFoot2, 270);
 		isFacing = "RIGHT";
+		lives = 3;
 	}
 
 	private void addAnimation(String name, Image[] images, int duration) {
@@ -143,5 +146,19 @@ public class Player extends Character {
 		
 		
 	}
+
+	@Override
+	public void die() {
+		// TODO Auto-generated method stub
+		super.die();
+		lives -= 1;
+		if(lives > 0) {
+			this.setLocation(200, 200);
+			this.setDead(false);
+		}
+			
+	}
+	
+	
 
 }

@@ -125,12 +125,16 @@ public class NivelNormal extends BasicGameState {
 				iterator.remove();
 			}
 		}
+		if(player.getX() > background.getWidth()) {
+			game.addState(new NivelNormal(nivel + 1));
+			game.enterState(nivel + 10 + 1);
+		}
 	}
 
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 10 + nivel;
 	}
 
 }
