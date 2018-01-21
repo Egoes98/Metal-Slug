@@ -41,7 +41,7 @@ public class BaseDeDatos{
 			try {
 				conectar();
 					statement.executeUpdate("create table puntuacion (jugador String, puntos int, nivel int)");
-					statement.executeUpdate("create table plataformas (tipo string, x1 float, y1 float, x2 float, y2 float, int nivel)");
+					statement.executeUpdate("create table plataformas (tipo string, x1 float, y1 float, x2 float, y2 float, nivel int)");
 			  }catch(SQLException e) {
 				  System.err.println(e.getMessage());
 			  }

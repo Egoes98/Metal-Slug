@@ -8,6 +8,7 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
@@ -22,6 +23,7 @@ public class TestGame extends BasicGame {
 	static ArrayList<Granada> granadas = new ArrayList<>();
 	static ArrayList<Bullet> enemyBullets = new ArrayList<>();
 	static ArrayList<Enemy> enemies = new ArrayList<>();
+	private Image background;
 
 	public TestGame(String title) {
 		super(title);
@@ -40,6 +42,7 @@ public class TestGame extends BasicGame {
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		if(player.getCenterX() > gc.getWidth()/2)
 			g.translate(-player.getCenterX() + gc.getWidth()/2, 0);
+		background.draw(0, 0);
 		player.drawPiernas();
 		player.drawCabeza();	
 		for(Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
@@ -83,6 +86,8 @@ public class TestGame extends BasicGame {
 		slopes.add(new Slope(1000, 700, 1200, 600));
 		platforms.add(new Rectangle(1200, 600, 300, 300));
 		enemies.add(new Enemy(1000, 200, player));
+		
+		background = new Image("resources/data/Mission1.png", false, Image.FILTER_NEAREST).getScaledCopy(3);
 		
 		
 	}
