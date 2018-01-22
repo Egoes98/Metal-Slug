@@ -174,7 +174,17 @@ public class Player extends Character {
 		this.canShoot = canShoot;
 	}
 
+	public float getShootingX() {
+		if(isFacing.equals("RIGHT")) {
+			return getMaxX();
+		} else {
+			return getMinX();
+		}
+	}
 	
+	public float getShootingY() {
+		return getY() + 30;
+	}
 	
 	
 

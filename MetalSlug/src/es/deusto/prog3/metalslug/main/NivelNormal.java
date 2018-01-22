@@ -88,12 +88,12 @@ public class NivelNormal extends BasicGameState {
 		g.setColor(Color.cyan);
 		for (Iterator<Bullet> iterator = playerBullets.iterator(); iterator.hasNext();) {
 			Bullet b = iterator.next();
-			g.fill(new Circle(b.getX(), b.getY(), 10));
+			b.draw();
 		}
 		
 		for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext();) {
 			Bullet b = iterator.next();
-			g.fill(new Circle(b.getX(), b.getY(), 2));
+			b.draw();
 		}
 		g.setColor(Color.green);
 		for(Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
@@ -220,9 +220,9 @@ public class NivelNormal extends BasicGameState {
 	
 	private void addNewBullet(int x, int y) {
 		if(player.getCenterX() < 640) 
-			playerBullets.add(new Bullet(player.getCenterX(), player.getCenterY(), x, y, 1f));
+			playerBullets.add(new Bullet(player.getShootingX(), player.getShootingY(), x, y, 1f));
 		else
-			playerBullets.add(new Bullet(player.getCenterX(), player.getCenterY(), x - 640 + player.getCenterX(), y, 1f));
+			playerBullets.add(new Bullet(player.getShootingX(), player.getShootingY(), x - 640 + player.getCenterX(), y, 1f));
 	}
 
 }
