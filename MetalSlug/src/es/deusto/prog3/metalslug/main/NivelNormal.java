@@ -33,6 +33,10 @@ public class NivelNormal extends BasicGameState {
 	private Input input;
 	
 	private Image background;
+	
+	//Pausa
+	Image menu_pausa;
+	boolean pausa;
 
 	public NivelNormal(int nivel) {
 		super();
@@ -59,6 +63,10 @@ public class NivelNormal extends BasicGameState {
 		}
 		input = new Input(720);
 		background = new Image("resources/data/Mission" + nivel + ".png", false, Image.FILTER_NEAREST).getScaledCopy(3);
+		
+		//Menu Pausa
+		menu_pausa = new Image("resources/data/pausa.png");
+		pausa = false;
 	}
 
 	@Override
@@ -96,50 +104,92 @@ public class NivelNormal extends BasicGameState {
 			else 
 				g.fill(gr);
 		}
+		//Pausa
+	 	if (pausa) {
+	        	Color trans = new Color(0f,0f,0f,0.5f);
+	        	g.setColor(trans);
+	        	g.fillRect(0,0, background.getWidth(), background.getHeight());
+	        	g.resetTransform();
+	        	menu_pausa.draw(250,140);
+	   	}
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
 		// TODO Auto-generated method stub
-		player.update(delta);
-		if(player.isCanShoot() && input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			addNewBullet(input.getMouseX(), input.getMouseY());
-			player.setCanShoot(false);
-		}
-		for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext(); ) {
-			Bullet ibullet = iterator.next();
-			ibullet.update(delta);
-			if(ibullet.detectCollisionCharacter(player)) {
-				iterator.remove();
+		if(!pausa){
+			player.update(delta);
+			if(player.isCanShoot() && input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+				addNewBullet(input.getMouseX(), input.getMouseY());
+				player.setCanShoot(false);
 			}
-		}
-		
-		for (Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
-			Granada gr = iterator.next();
-			gr.update(delta);
-			gr.detectCollisions();
-			if(gr.getStatus() == Granada.STATUS_EXPLODED) {
-				// TODO comprobar colisiones con enemigos
-				iterator.remove();
+			for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext(); ) {
+				Bullet ibullet = iterator.next();
+				ibullet.update(delta);
+				if(ibullet.detectCollisionCharacter(player)) {
+					iterator.remove();
+				}
 			}
-		}
 		
-		for(Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
-			Enemy e = iterator.next();
-			e.update(delta, playerBullets, granadas);
-			if(e.isDead()) {
-				iterator.remove(); // Sustituir por animación de morir?
+			for (Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
+				Granada gr = iterator.next();
+				gr.update(delta);
+				gr.detectCollisions();
+				if(gr.getStatus() == Granada.STATUS_EXPLODED) {
+					// TODO comprobar colisiones con enemigos
+					iterator.remove();
+				}
+			}
+		
+			for(Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
+				Enemy e = iterator.next();
+				e.update(delta, playerBullets, granadas);
+				if(e.isDead()) {
+					iterator.remove(); // Sustituir por animación de morir?
 								   
+				}
+			}
+		
+			for(Iterator<Bullet> iterator = playerBullets.iterator(); iterator.hasNext();) {
+				Bullet b = iterator.next();
+				b.update(delta);
+				if(b.detectCollisionCharacter(enemies)) {
+					iterator.remove();
+				}
+			}
+			if(player.getX() > background.getWidth()) {
+				game.addState(new NivelNormal(nivel + 1));
+				game.getState(10 + nivel + 1).init(gc, game);
+				game.getState(10 + nivel).leave(gc, game);
+				game.enterState(nivel + 10 + 1);
 			}
 		}
 		
-		for(Iterator<Bullet> iterator = playerBullets.iterator(); iterator.hasNext();) {
-			Bullet b = iterator.next();
-			b.update(delta);
-			if(b.detectCollisionCharacter(enemies)) {
-				iterator.remove();
+		//Menu Pausa
+		Input input = gc.getInput();
+		if(input.isKeyPressed(Input.KEY_ESCAPE)){
+			if(pausa){
+				pausa = false;
+			} else {
+				pausa = true;
 			}
 		}
+		
+		if(pausa) {
+			if(input.getMouseX() >= 456 && input.getMouseX()<= 832 && input.getMouseY() >= 386 && input.getMouseY() <= 469){
+				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+					pausa = false;
+				}
+			}
+			
+			if(input.getMouseX() >= 456 && input.getMouseX() <= 832 && input.getMouseY() >= 287 && input.getMouseX() <= 366){
+				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+					System.out.println("Entra en menu");
+				}
+			}
+			
+		}
+		
 		if(player.getX() > background.getWidth()) {
 			if(nivel + 1 == 3) {
 				game.addState(new NivelBoss());
