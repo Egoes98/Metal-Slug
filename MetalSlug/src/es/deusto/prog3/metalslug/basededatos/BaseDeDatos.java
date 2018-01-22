@@ -248,7 +248,7 @@ public class BaseDeDatos {
 		try {
 			ResultSet enems = statement.executeQuery("select * from enemigos where nivel=" + nivel + "");
 			while (enems.next()) {
-				enemigos.add(new Enemy(enems.getFloat(0), enems.getFloat(1), enems.getFloat(2), enems.getFloat(3)));
+				enemigos.add(new Enemy(enems.getFloat(1), enems.getFloat(2), enems.getFloat(3), enems.getFloat(4)));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
