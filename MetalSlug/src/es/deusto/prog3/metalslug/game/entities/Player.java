@@ -117,17 +117,16 @@ public class Player extends Character {
 		return movingLeft;
 	}
 
-	//TODO Pasar algunas animaciones a que solo se reproduzcan 1 vez
-	
 	public void drawCabeza() {
-	
+		
 		if(move && shoot && isFacing == "LEFT") {
 			animations.get("Shoot").get(isFacing).draw(x-72,y);
 		}else if(move && shoot) {
 			animations.get("Shoot").get(isFacing).draw(x+3,y);
 		}else if(move && hasjumped && isFacing == "LEFT"){
-			//TODO cuadrar las animaciones de jump2 con las piernas
-			animations.get("JumpHead2").get(isFacing).draw(x+10,y-10  );
+			animations.get("JumpHead2").get(isFacing).draw(x+18,y-12);
+		}else if(move && hasjumped && isFacing == "RIGHT"){
+			animations.get("JumpHead2").get(isFacing).draw(x-10,y-12);
 		}else if(move) {
 			animations.get("RunHead").get(isFacing).draw(x,y);
 		}else if(!move && shoot && isFacing == "LEFT"){
@@ -140,25 +139,19 @@ public class Player extends Character {
 			animations.get("StandbyHead").get(isFacing).draw(x,y);
 		}
 		
-		
 	}
 
 	public void drawPiernas() {
-		
 		if(move && firstRun) {
 			animations.get("RunFoot1").get(isFacing).draw(x,y);
 			firstRun = false;
 		}else if(move && !firstRun){
 			animations.get("RunFoot2").get(isFacing).draw(x,y);
-		}else if(move && hasjumped){
-			animations.get("JumpFoot2").get(isFacing).draw(x,y);
 		}else if(!move && hasjumped) {
 			animations.get("JumpFoot1").get(isFacing).draw(x,y);
 		}else if(!move) {
 			animations.get("StandbyFoot").get(isFacing).draw(x,y);
 		}
-		
-		
 	}
 
 	@Override
