@@ -14,11 +14,13 @@ public class Enemy extends Character {
 	private float minMovementX, maxMovementX;
 	
 	private ArrayList<Bullet> bullets;
+	private boolean moving;
 
 	public Enemy(float x, float y, float minX, float maxX) {
 		super(x, y, 30, 30, 100, null);
 		this.minMovementX = minX;
 		this.maxMovementX = maxX;
+		moving = true;
 	}
 
 	private void shoot() {
@@ -32,14 +34,20 @@ public class Enemy extends Character {
 
 	public void update(int delta, ArrayList<Bullet> playerbullets, ArrayList<Granada> granadas) {
 		timeCounter += delta;
-		moveX(delta, movingLeft);
+		if(moving)
+			moveX(delta, movingLeft);
 
 		moveY(delta);
 		detectPlatformCollisions();
 
-		if (timeCounter > 1000 && distanceTo(this.getCenter(), player.getCenter()) < 500) {
-			shoot();
-			timeCounter = 0;
+		if (distanceTo(this.getCenter(), player.getCenter()) < 500) {
+			moving = false;
+			if(timeCounter > 1000) {
+				shoot();
+				timeCounter = 0;
+			}
+		} else {
+			moving = true;
 		}
 		if(getX() < minMovementX || getX() > maxMovementX) {
 			movingLeft = !movingLeft;
