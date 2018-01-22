@@ -6,6 +6,7 @@ import java.util.Iterator;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
@@ -29,9 +30,12 @@ public class NivelBoss extends BasicGameState {
 	private Rectangle healthBar;
 	private ArrayList<Granada> granadas;
 	
+	private Image background;
+	
 	@Override
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
+		background.draw(0, 0);
 		player.drawPiernas();
 		player.drawCabeza();			
 		g.setColor(Color.cyan);
@@ -58,11 +62,12 @@ public class NivelBoss extends BasicGameState {
 	}
 
 	@Override
-	public void init(GameContainer gc, StateBasedGame game) throws SlickException{
+	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
 		// TODO Auto-generated method stub
 		platforms = new ArrayList<>();
 		enemyBullets = new ArrayList<>();
 		playerBullets = new ArrayList<>();
+		granadas = new ArrayList<>();
 		player = new Player(platforms, playerBullets);
 		boss = new Boss(platforms, enemyBullets);
 		platforms.add(new Platform(0, 0, 20, 720, false));
@@ -70,6 +75,8 @@ public class NivelBoss extends BasicGameState {
 		platforms.add(new Platform(0, 700, 1280, 20, false));
 		platforms.add(new Platform(1260, 0, 20, 720, false));
 		healthBar = new Rectangle(140, 50, 1000, 20);
+		
+		background = new Image("resources/data/Boss.png");
 	}
 
 	@Override

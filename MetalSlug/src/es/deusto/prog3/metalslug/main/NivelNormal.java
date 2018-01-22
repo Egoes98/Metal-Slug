@@ -35,8 +35,8 @@ public class NivelNormal extends BasicGameState {
 	private Image background;
 	
 	//Pausa
-	Image menu_pausa;
-	boolean pausa;
+	private Image menu_pausa;
+	private boolean pausa;
 
 	public NivelNormal(int nivel) {
 		super();
