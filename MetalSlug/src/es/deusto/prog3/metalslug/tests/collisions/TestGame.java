@@ -1,5 +1,6 @@
 package es.deusto.prog3.metalslug.tests.collisions;
 
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -11,6 +12,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -25,6 +28,8 @@ public class TestGame extends BasicGame {
 	static ArrayList<Bullet> enemyBullets = new ArrayList<>();
 	static ArrayList<Enemy> enemies = new ArrayList<>();
 	private Image background;
+	private int time;
+	private TrueTypeFont font;
 
 	public TestGame(String title) {
 		super(title);
@@ -82,6 +87,11 @@ public class TestGame extends BasicGame {
 				g.fill(gr);
 		}
 		
+		g.resetTransform();
+		g.setColor(Color.black);
+		g.setFont(font);
+		g.drawString(String.format("%02d", time/1000), 1230, 670);
+		
 	}
 
 	@Override
@@ -110,6 +120,8 @@ public class TestGame extends BasicGame {
 		
 		
 		background = new Image("resources/data/Mission1.png", false, Image.FILTER_NEAREST).getScaledCopy(3);
+		
+		font = new TrueTypeFont(new Font("Arial", Font.BOLD, 30), true);
 		
 		
 	}
@@ -152,6 +164,8 @@ public class TestGame extends BasicGame {
 			Bullet b = iterator.next();
 			b.update(delta);
 		}
+		
+		time += delta;
 		
 		
 	}

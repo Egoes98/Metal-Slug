@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 
 public class TestGame extends BasicGame {
@@ -24,9 +25,6 @@ public class TestGame extends BasicGame {
 	public static void main(String[] args) {
 		try {
 			AppGameContainer container = new AppGameContainer(new TestGame("Prueba"), 1280, 720, false);
-			container.setMaximumLogicUpdateInterval(10);
-			container.setSmoothDeltas(true);
-			container.setVSync(true);
 			container.start();
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
