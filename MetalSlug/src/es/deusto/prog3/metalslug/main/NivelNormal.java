@@ -61,7 +61,7 @@ public class NivelNormal extends BasicGameState {
 			e.setPlataformas(platforms);
 			e.setPlayer(player);
 		}
-		input = new Input(720);
+		input = gc.getInput();
 		background = new Image("resources/data/Mission" + nivel + ".png", false, Image.FILTER_NEAREST).getScaledCopy(3);
 		
 		//Menu Pausa
@@ -157,21 +157,30 @@ public class NivelNormal extends BasicGameState {
 					iterator.remove();
 				}
 			}
+			
 			if(player.getX() > background.getWidth()) {
+				if(nivel + 1 == 3) {
+					game.addState(new NivelBoss());
+					game.getState(100).init(gc, game);
+					game.getState(10 + nivel).leave(gc, game);
+					game.enterState(100);
+				} else {
 				game.addState(new NivelNormal(nivel + 1));
 				game.getState(10 + nivel + 1).init(gc, game);
 				game.getState(10 + nivel).leave(gc, game);
 				game.enterState(nivel + 10 + 1);
+				}
 			}
 		}
 		
 		//Menu Pausa
-		Input input = gc.getInput();
 		if(input.isKeyPressed(Input.KEY_ESCAPE)){
 			if(pausa){
 				pausa = false;
+				gc.setPaused(false);
 			} else {
 				pausa = true;
+				gc.setPaused(true);
 			}
 		}
 		
@@ -190,19 +199,7 @@ public class NivelNormal extends BasicGameState {
 			
 		}
 		
-		if(player.getX() > background.getWidth()) {
-			if(nivel + 1 == 3) {
-				game.addState(new NivelBoss());
-				game.getState(100).init(gc, game);
-				game.getState(10 + nivel).leave(gc, game);
-				game.enterState(100);
-			} else {
-			game.addState(new NivelNormal(nivel + 1));
-			game.getState(10 + nivel + 1).init(gc, game);
-			game.getState(10 + nivel).leave(gc, game);
-			game.enterState(nivel + 10 + 1);
-			}
-		}
+		
 	}
 
 	@Override
