@@ -63,7 +63,7 @@ public class Player extends Character {
 		
 	}
 
-	protected void jump() {
+	public void jump() {
 		// TODO Auto-generated method stub
 		System.out.println(hasjumped);
 		if(!hasjumped) {

@@ -39,7 +39,6 @@ public class Enemy extends Character {
 
 		moveY(delta);
 		detectPlatformCollisions();
-
 		if (distanceTo(this.getCenter(), player.getCenter()) < 500) {
 			moving = false;
 			if(timeCounter > 1000) {

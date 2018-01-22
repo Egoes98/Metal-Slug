@@ -7,6 +7,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
@@ -48,10 +49,12 @@ public class NivelNormal extends BasicGameState {
 		playerBullets = new ArrayList<>();
 		granadas = new ArrayList<>();
 		enemies = BaseDeDatos.getEnemigos(nivel);
+		// enemies.add(new Enemy(1000, 200, 900, 1100));
 		
 		for(Enemy e : enemies) {
 			e.setBullets(enemyBullets);
 			e.setPlataformas(platforms);
+			e.setPlayer(player);
 		}
 		
 		background = new Image("resources/data/Mission" + nivel + ".png", false, Image.FILTER_NEAREST).getScaledCopy(3);
@@ -86,7 +89,11 @@ public class NivelNormal extends BasicGameState {
 		g.setColor(Color.green);
 		for(Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
 			Granada gr = iterator.next();
-			g.fill(gr);
+			if(gr.getStatus() == Granada.STATUS_EXPLODING) {
+				gr.drawExplosion();
+			}
+			else 
+				g.fill(gr);
 		}
 	}
 
@@ -106,7 +113,7 @@ public class NivelNormal extends BasicGameState {
 			Granada gr = iterator.next();
 			gr.update(delta);
 			gr.detectCollisions();
-			if(gr.getStatus() == Granada.STATUS_EXPLODING) {
+			if(gr.getStatus() == Granada.STATUS_EXPLODED) {
 				// TODO comprobar colisiones con enemigos
 				iterator.remove();
 			}
@@ -130,6 +137,8 @@ public class NivelNormal extends BasicGameState {
 		}
 		if(player.getX() > background.getWidth()) {
 			game.addState(new NivelNormal(nivel + 1));
+			game.getState(10 + nivel + 1).init(gc, game);
+			game.getState(10 + nivel).leave(gc, game);
 			game.enterState(nivel + 10 + 1);
 		}
 	}
@@ -138,6 +147,16 @@ public class NivelNormal extends BasicGameState {
 	public int getID() {
 		// TODO Auto-generated method stub
 		return 10 + nivel;
+	}
+	
+	@Override
+	public void keyPressed(int key, char c) {
+		if(key == Input.KEY_SPACE) {
+			player.jump();
+		} else if (key == Input.KEY_G) {
+			// TODO Granadas limitadas, comprobar a ver si quedan
+			granadas.add(new Granada(player.getCenterX(), player.getCenterY(), player.getMovingLeft(), platforms));
+		}
 	}
 
 }

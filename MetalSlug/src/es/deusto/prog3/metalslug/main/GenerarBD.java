@@ -38,26 +38,24 @@ public class GenerarBD {
 		platforms.add(new Slope(1274, 560, 1716, 680));
 		platforms.add(new Platform(0, 640, 1500, 80, false));
 		platforms.add(new Platform(-20, 0, 20, 720, false));
-		platforms.add(new Platform(7947, 0 , 20, 720, false));
 		BaseDeDatos.guardarPlataformas(platforms, 1);
 		
 		// Nivel 2
 		platforms.clear();
-		platforms.add(new Platform(0, 535, 1027, 40, false));
-		platforms.add(new Slope(771, 535, 1027, 420));
-		platforms.add(new Platform(0, 579, 8454, 40, false));
-		platforms.add(new Platform(1518, 430, 189, 100, false));
-		platforms.add(new Platform(2034, 430, 214, 100, false));
-		platforms.add(new Platform(2700, 430, 858, 100, false));
-		platforms.add(new Slope(4320, 560, 4054, 420));
-		platforms.add(new Platform(4054, 560, 1979, 40, false));
-		platforms.add(new Slope(5778, 560, 6033, 420));
-		platforms.add(new Platform(7017, 430, 243, 100, false));
-		platforms.add(new Platform(7695, 430, 759, 100, false));
-		platforms.add(new Platform(4827, 389, 267, 10, true));
-		platforms.add(new Platform(5285, 389, 267, 10, true));
+		platforms.add(new Platform(0, 563, 865, 40, false));
+        platforms.add(new Slope(652, 563, 875, 489));
+        platforms.add(new Platform(0, 601, 7232, 40, false));
+        platforms.add(new Platform(1300, 489, 137, 100, false));
+        platforms.add(new Platform(1729, 489, 178, 100, false));
+        platforms.add(new Platform(2310, 489, 720, 100, false));
+        platforms.add(new Slope(3684, 579, 3456, 489));
+        platforms.add(new Platform(3456, 579, 1690, 40, false));
+        platforms.add(new Slope(4964, 579, 5175, 480));
+        platforms.add(new Platform(5997, 489, 175, 100, false));
+        platforms.add(new Platform(6581, 489, 656, 100, false));
+        platforms.add(new Platform(4133, 437, 189, 10, true));
+        platforms.add(new Platform(4516, 437, 189, 10, true));
 		platforms.add(new Platform(-20, 0, 20, 720, false));
-		platforms.add(new Platform(7947, 0 , 20, 720, false));
 
 		BaseDeDatos.guardarPlataformas(platforms, 2);
 	}
