@@ -17,7 +17,7 @@ public class Enemy extends Character {
 	private boolean moving;
 
 	public Enemy(float x, float y, float minX, float maxX) {
-		super(x, y, 30, 30, 100, null);
+		super(x, y, 30, 30, 300, null);
 		this.minMovementX = minX;
 		this.maxMovementX = maxX;
 		moving = true;
@@ -48,7 +48,7 @@ public class Enemy extends Character {
 		} else {
 			moving = true;
 		}
-		if(getX() < minMovementX || getX() > maxMovementX) {
+		if(getX() < minMovementX && movingLeft || getX() > maxMovementX && !movingLeft) {
 			movingLeft = !movingLeft;
 		}
 

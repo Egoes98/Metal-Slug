@@ -30,6 +30,7 @@ public class NivelNormal extends BasicGameState {
 	private ArrayList<Bullet> enemyBullets;
 	private ArrayList<Bullet> playerBullets;
 	private ArrayList<Granada> granadas;
+	private Input input;
 	
 	private Image background;
 
@@ -56,7 +57,7 @@ public class NivelNormal extends BasicGameState {
 			e.setPlataformas(platforms);
 			e.setPlayer(player);
 		}
-		
+		input = new Input(720);
 		background = new Image("resources/data/Mission" + nivel + ".png", false, Image.FILTER_NEAREST).getScaledCopy(3);
 	}
 
@@ -79,7 +80,7 @@ public class NivelNormal extends BasicGameState {
 		g.setColor(Color.cyan);
 		for (Iterator<Bullet> iterator = playerBullets.iterator(); iterator.hasNext();) {
 			Bullet b = iterator.next();
-			g.fill(new Circle(b.getX(), b.getY(), 2));
+			g.fill(new Circle(b.getX(), b.getY(), 10));
 		}
 		
 		for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext();) {
@@ -101,6 +102,10 @@ public class NivelNormal extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
 		// TODO Auto-generated method stub
 		player.update(delta);
+		if(player.isCanShoot() && input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			addNewBullet(input.getMouseX(), input.getMouseY());
+			player.setCanShoot(false);
+		}
 		for(Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext(); ) {
 			Bullet ibullet = iterator.next();
 			ibullet.update(delta);
@@ -157,6 +162,13 @@ public class NivelNormal extends BasicGameState {
 			// TODO Granadas limitadas, comprobar a ver si quedan
 			granadas.add(new Granada(player.getCenterX(), player.getCenterY(), player.getMovingLeft(), platforms));
 		}
+	}
+	
+	private void addNewBullet(int x, int y) {
+		if(player.getCenterX() < 640) 
+			playerBullets.add(new Bullet(player.getCenterX(), player.getCenterY(), x, y, 1f));
+		else
+			playerBullets.add(new Bullet(player.getCenterX(), player.getCenterY(), x - 640 + player.getCenterX(), y, 1f));
 	}
 
 }

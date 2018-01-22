@@ -28,6 +28,7 @@ public class Player extends Character {
 	
 	private int lives;
 	private ArrayList<Bullet> bullets;
+	private boolean hasShot;
 	
 	public Player(ArrayList<Shape> platforms, ArrayList<Bullet> bullets) {
 		super(200, 200, 93, 114, 300, platforms);
@@ -65,7 +66,6 @@ public class Player extends Character {
 
 	public void jump() {
 		// TODO Auto-generated method stub
-		System.out.println(hasjumped);
 		if(!hasjumped) {
 			vy = -800;
 			setY(getY() - 2);
@@ -102,6 +102,15 @@ public class Player extends Character {
 		moveY(delta);
 		detectPlatformCollisions();
 		
+		if(animations.get("Shoot").get(isFacing).getFrame() == 1) {
+			if(!hasShot) {
+				canShoot = true;
+				hasShot = true;
+			}
+		} else {
+			canShoot = false;
+			hasShot = false;
+		}
 	}
 	
 	public boolean getMovingLeft() {
@@ -162,6 +171,14 @@ public class Player extends Character {
 			this.setDead(false);
 		}
 			
+	}
+
+	public boolean isCanShoot() {
+		return canShoot;
+	}
+
+	public void setCanShoot(boolean canShoot) {
+		this.canShoot = canShoot;
 	}
 
 	
