@@ -72,16 +72,16 @@ public class NivelNormal extends BasicGameState {
 		pausa = false;
 		
 		//Timer
-		n0 = new Image("resources/Interfaz/0.png");
-		n1 = new Image("resources/Interfaz/1.png");
-		n2 = new Image("resources/Interfaz/2.png");
-		n3 = new Image("resources/Interfaz/3.png");
-		n4 = new Image("resources/Interfaz/4.png");
-		n5 = new Image("resources/Interfaz/5.png");
-		n6 = new Image("resources/Interfaz/6.png");
-		n7 = new Image("resources/Interfaz/7.png");
-		n8 = new Image("resources/Interfaz/8.png");
-		n9 = new Image("resources/Interfaz/9.png");
+		n0 = new Image("resources/Interfaz/n0.png");
+		n1 = new Image("resources/Interfaz/n1.png");
+		n2 = new Image("resources/Interfaz/n2.png");
+		n3 = new Image("resources/Interfaz/n3.png");
+		n4 = new Image("resources/Interfaz/n4.png");
+		n5 = new Image("resources/Interfaz/n5.png");
+		n6 = new Image("resources/Interfaz/n6.png");
+		n7 = new Image("resources/Interfaz/n7.png");
+		n8 = new Image("resources/Interfaz/n8.png");
+		n9 = new Image("resources/Interfaz/n9.png");
 	}
 
 	@Override
