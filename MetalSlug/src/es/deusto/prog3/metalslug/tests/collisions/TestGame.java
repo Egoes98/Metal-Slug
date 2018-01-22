@@ -74,7 +74,11 @@ public class TestGame extends BasicGame {
 		g.setColor(Color.green);
 		for(Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
 			Granada gr = iterator.next();
-			g.fill(gr);
+			if(gr.getStatus() == Granada.STATUS_EXPLODING) {
+				gr.drawExplosion();
+			}
+			else 
+				g.fill(gr);
 		}
 		
 	}
@@ -123,7 +127,7 @@ public class TestGame extends BasicGame {
 			Granada gr = iterator.next();
 			gr.update(delta);
 			gr.detectCollisions();
-			if(gr.getStatus() == Granada.STATUS_EXPLODING) {
+			if(gr.getStatus() == Granada.STATUS_EXPLODED) {
 				// TODO comprobar colisiones con enemigos
 				iterator.remove();
 			}

@@ -1,5 +1,6 @@
 package es.deusto.prog3.metalslug.tests.collisions;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -9,20 +10,26 @@ public class Granada extends Circle {
 	private static final int GRAVITY = 1500;
 	public static final String STATUS_FLYING = "FLYING";
 	public static final String STATUS_EXPLODING = "EXPLODING";
+	public static final String STATUS_EXPLODED = "EXPLODED";
 	private String status;
 	private int vx, vy;
+	private Animation explosion;
 
 	public Granada(float centerPointX, float centerPointY, boolean goingLeft) {
 		super(centerPointX, centerPointY, 5);
 		vy = -700;
 		vx = goingLeft ? -500 : 500;
 		status = STATUS_FLYING;
+		explosion = new Animation(AnimationImages.explosion, 50);
+		explosion.setLooping(false);
 	}
 
 	public void update(int delta) {
 		moveX(delta);
 		moveY(delta);
-
+		if(explosion.getFrame() == explosion.getFrameCount() - 1) {
+			status = STATUS_EXPLODED;
+		}
 	}
 
 	private void moveY(int delta) {
@@ -57,6 +64,10 @@ public class Granada extends Circle {
 
 	public String getStatus() {
 		return status;
+	}
+	
+	public void drawExplosion() {
+		explosion.draw(getX() - 90, getY() - 300);
 	}
 
 }

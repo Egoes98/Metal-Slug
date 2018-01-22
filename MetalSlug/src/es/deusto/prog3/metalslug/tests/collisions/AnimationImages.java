@@ -18,6 +18,8 @@ public class AnimationImages {
 	
 	public static Image[] soldierWalk;
 	public static Image[] soldierShoot;
+	
+	public static Image[] explosion;
 
 	static {
 		try {
@@ -112,6 +114,22 @@ public class AnimationImages {
 					new Image("resources/SoldierAnimation/Shoot/SoldierPreShoot2.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
 					new Image("resources/SoldierAnimation/Shoot/SoldierPreShoot3.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
 			};
+			
+			explosion = new Image[] {new Image("resources/explosionAnimation/Explosion1.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion2.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion3.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion4.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion5.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion6.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion7.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion8.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion9.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion10.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion11.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion12.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion13.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion14.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/explosionAnimation/Explosion15.png", false, Image.FILTER_NEAREST).getScaledCopy(3)};
 
 
 		} catch (SlickException e) {
