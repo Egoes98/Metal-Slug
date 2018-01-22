@@ -12,8 +12,8 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 import es.deusto.prog3.metalslug.game.entities.Enemy;
-import es.deusto.prog3.metalslug.tests.collisions.Platform;
-import es.deusto.prog3.metalslug.tests.collisions.Slope;
+import es.deusto.prog3.metalslug.game.entities.Platform;
+import es.deusto.prog3.metalslug.game.entities.Slope;
 
 public class BaseDeDatos {
 	static Connection connection = null;
@@ -177,10 +177,10 @@ public class BaseDeDatos {
 				float[] point0 = slope.getPoint(0);
 				float[] point1 = slope.getPoint(1);
 				sql = "insert into plataformas values ('Slope'," + point0[0] + "," + point0[1] + "," + point1[0] + ","
-						+ point1[1] + 0 + "," + nivel + ")";
+						+ point1[1] + "," + 0 + "," + nivel + ")";
 			}
 			try {
-				statement.executeQuery(sql);
+				statement.executeUpdate(sql);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -197,14 +197,14 @@ public class BaseDeDatos {
 		}
 		ArrayList<Shape> plataformas = new ArrayList<>();
 		try {
-			ResultSet plats = statement.executeQuery("select * from platformas where nivel=" + nivel + "");
+			ResultSet plats = statement.executeQuery("select * from plataformas where nivel=" + nivel + "");
 			while (plats.next()) {
-				if (plats.getString(0).equals("Platform")) {
-					plataformas.add(new Platform(plats.getFloat(1), plats.getFloat(2), plats.getFloat(3),
-							plats.getFloat(4), plats.getBoolean(5)));
-				} else if (plats.getString(0).equals("Slope")) {
+				if (plats.getString(1).equals("Platform")) {
+					plataformas.add(new Platform(plats.getFloat(2), plats.getFloat(3), plats.getFloat(4),
+							plats.getFloat(5), plats.getBoolean(6)));
+				} else if (plats.getString(1).equals("Slope")) {
 					plataformas
-							.add(new Slope(plats.getFloat(1), plats.getFloat(2), plats.getFloat(3), plats.getFloat(4)));
+							.add(new Slope(plats.getFloat(2), plats.getFloat(3), plats.getFloat(4), plats.getFloat(5)));
 				}
 			}
 		} catch (SQLException e) {
