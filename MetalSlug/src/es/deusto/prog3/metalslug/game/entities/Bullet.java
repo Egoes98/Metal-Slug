@@ -26,7 +26,7 @@ public class Bullet extends Point {
 		this.cos = Math.cos(angle);
 		this.sin = Math.sin(angle);
 		try {
-			sprite = new Image("resources/Sprites/Bullet.png", false, Image.FILTER_NEAREST);
+			sprite = new Image("resources/data/Bullet.png", false, Image.FILTER_NEAREST);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
