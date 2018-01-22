@@ -12,19 +12,18 @@ public class Enemy extends Character {
 	private Player player;
 	private boolean shooting = false;
 	private Thread changeDirection;
-	private Thread stopT;
 	private boolean movingLeft;
 	private boolean dead;
 	private int timeCounter;
 	private HashMap<String,HashMap<Boolean, Animation>> animations = new HashMap<String,HashMap<Boolean, Animation>>();
 	private HashMap<Boolean, Animation> animation;
 	private boolean move = true;
-	private boolean stop = false;
 
 	public Enemy(float x, float y, Player player) {
 		super(x, y, 78, 111, 100);
 		addAnimation("Correr", AnimationImages.soldierWalk, 100);
-		addAnimation("Disparar", AnimationImages.soldierShoot, 300);
+		addAnimation("Disparar", AnimationImages.soldierShoot, 270);
+		animations.get("Disparar").get(movingLeft).setLooping(false);
 		this.player = player;
 		dead = false;
 
