@@ -141,10 +141,17 @@ public class NivelNormal extends BasicGameState {
 			}
 		}
 		if(player.getX() > background.getWidth()) {
+			if(nivel + 1 == 3) {
+				game.addState(new NivelBoss());
+				game.getState(100).init(gc, game);
+				game.getState(10 + nivel).leave(gc, game);
+				game.enterState(100);
+			} else {
 			game.addState(new NivelNormal(nivel + 1));
 			game.getState(10 + nivel + 1).init(gc, game);
 			game.getState(10 + nivel).leave(gc, game);
 			game.enterState(nivel + 10 + 1);
+			}
 		}
 	}
 
