@@ -14,14 +14,14 @@ public class MainGame extends StateBasedGame {
 	public MainGame(String gamename) {
 		super(gamename);
 		this.addState(new MainMenu(main_menu));
-		this.addState(new MenuSelPer(menu_sel_per));
+		this.addState(new NivelNormal(1));
 		this.addState(new Menu_P(menu_p));
 		this.addState(new Menu_Opciones(menu_opciones));
 	}
 	
 	public void initStatesList(GameContainer gc) throws SlickException {
 		this.getState(main_menu).init(gc, this);
-		this.getState(menu_sel_per).init(gc, this);
+		this.getState(11).init(gc, this);
 		this.getState(menu_p).init(gc, this);
 		this.getState(menu_opciones).init(gc, this);
 		this.enterState(main_menu);
