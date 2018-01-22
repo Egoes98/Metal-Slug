@@ -37,6 +37,9 @@ public class NivelNormal extends BasicGameState {
 	//Pausa
 	private Image menu_pausa;
 	private boolean pausa;
+	
+	//Timer
+	Image n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
 
 	public NivelNormal(int nivel) {
 		super();
@@ -67,6 +70,18 @@ public class NivelNormal extends BasicGameState {
 		//Menu Pausa
 		menu_pausa = new Image("resources/data/pausa.png");
 		pausa = false;
+		
+		//Timer
+		n0 = new Image("resources/Interfaz/0.png");
+		n1 = new Image("resources/Interfaz/1.png");
+		n2 = new Image("resources/Interfaz/2.png");
+		n3 = new Image("resources/Interfaz/3.png");
+		n4 = new Image("resources/Interfaz/4.png");
+		n5 = new Image("resources/Interfaz/5.png");
+		n6 = new Image("resources/Interfaz/6.png");
+		n7 = new Image("resources/Interfaz/7.png");
+		n8 = new Image("resources/Interfaz/8.png");
+		n9 = new Image("resources/Interfaz/9.png");
 	}
 
 	@Override
@@ -112,6 +127,60 @@ public class NivelNormal extends BasicGameState {
 	        	g.resetTransform();
 	        	menu_pausa.draw(250,140);
 	   	}
+		
+		//Timer
+		String timer = time/1000 +"";
+		if(time/1000 >= 99) {
+			g.drawImage(n9, 540,100);
+			g.drawImage(n9, 570,100);
+		}else {
+			if(timer.charAt(0) == '0'){
+				g.drawImage(n0, 540, 100);
+			}else if(timer.charAt(0) == '1'){
+				g.drawImage(n1, 540, 100);
+			}else if(timer.charAt(0) == '2') {
+				g.drawImage(n2, 540, 100);
+			}else if(timer.charAt(0) == '3') {
+				g.drawImage(n3, 540, 100);
+			}else if(timer.charAt(0) == '4') {
+				g.drawImage(n4, 540, 100);
+			}else if(timer.charAt(0) == '5') {
+				g.drawImage(n5, 540, 100);
+			}else if(timer.charAt(0) == '6') {
+				g.drawImage(n6, 540, 100);
+			}else if(timer.charAt(0) == '7') {
+				g.drawImage(n7, 540, 100);
+			}else if(timer.charAt(0) == '8') {
+				g.drawImage(n8, 540, 100);
+			}else {
+				g.drawImage(n9, 540, 100);
+			}
+			
+			if(timer.length() ==2) {
+			
+				if(timer.charAt(0) == '0'){
+					g.drawImage(n0, 570, 100);
+				}else if(timer.charAt(1) == '1'){
+					g.drawImage(n1, 570, 100);
+				}else if(timer.charAt(1) == '2') {
+					g.drawImage(n2, 570, 100);
+				}else if(timer.charAt(1) == '3') {
+					g.drawImage(n3, 570, 100);
+				}else if(timer.charAt(1) == '4') {
+					g.drawImage(n4, 570, 100);
+				}else if(timer.charAt(1) == '5') {
+					g.drawImage(n5, 570, 100);
+				}else if(timer.charAt(1) == '6') {
+					g.drawImage(n6, 570, 100);
+				}else if(timer.charAt(1) == '7') {
+					g.drawImage(n7, 570, 100);
+				}else if(timer.charAt(1) == '8') {
+					g.drawImage(n8, 570, 100);
+				}else {
+					g.drawImage(n9, 570, 100);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -171,6 +240,8 @@ public class NivelNormal extends BasicGameState {
 				game.enterState(nivel + 10 + 1);
 				}
 			}
+			//Timer
+			time += delta;
 		}
 		
 		//Menu Pausa
@@ -194,7 +265,7 @@ public class NivelNormal extends BasicGameState {
 			
 			if(Mouse.getX() >= 456 && Mouse.getX() <= 832 && Mouse.getY() >= 287 && Mouse.getY() <= 366){
 				if(Mouse.isButtonDown(0)) {
-					System.out.println("Entra en menu");
+					game.enterState(0);
 				}
 			}
 		}
