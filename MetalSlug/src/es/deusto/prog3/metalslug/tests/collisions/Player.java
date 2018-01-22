@@ -19,6 +19,8 @@ public class Player extends Character {
 	
 	private boolean movingLeft = false;
 	private boolean shoot = false;
+	private boolean canShoot = false;
+	private boolean hasShot = false;
 	
 	public Player() {
 		super(200, 200, 93, 114, 300);
@@ -90,6 +92,15 @@ public class Player extends Character {
 		
 		moveY(delta);
 		detectPlatformCollisions();
+		if(animations.get("Shoot").get(isFacing).getFrame() == 1) {
+			if(!hasShot) {
+				canShoot = true;
+				hasShot = true;
+			}
+		} else {
+			canShoot = false;
+			hasShot = false;
+		}
 	}
 	
 	public boolean getMovingLeft() {
@@ -139,5 +150,15 @@ public class Player extends Character {
 		
 		
 	}
+	
+	public boolean isCanShoot() {
+		return canShoot;
+	}
+
+	public void setCanShoot(boolean canShoot) {
+		this.canShoot = canShoot;
+	}
+	
+	
 
 }

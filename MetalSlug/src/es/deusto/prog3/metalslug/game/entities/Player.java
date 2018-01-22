@@ -24,10 +24,14 @@ public class Player extends Character {
 	private boolean movingLeft = false;
 	private boolean shoot = false;
 	
-	private int lives;
+	private boolean canShoot = false;
 	
-	public Player(ArrayList<Shape> platforms) {
+	private int lives;
+	private ArrayList<Bullet> bullets;
+	
+	public Player(ArrayList<Shape> platforms, ArrayList<Bullet> bullets) {
 		super(200, 200, 93, 114, 300, platforms);
+		this.bullets = bullets;
 		input = new Input(720);
 		addAnimation("StandbyHead", AnimationImages.eriStandbyHead, 400);
 		addAnimation("StandbyFoot", AnimationImages.eriStandbyFoot, 300);
@@ -97,6 +101,7 @@ public class Player extends Character {
 		
 		moveY(delta);
 		detectPlatformCollisions();
+		
 	}
 	
 	public boolean getMovingLeft() {
@@ -158,6 +163,8 @@ public class Player extends Character {
 		}
 			
 	}
+
+	
 	
 	
 

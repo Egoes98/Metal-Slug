@@ -43,7 +43,7 @@ public class NivelNormal extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
 		// TODO Auto-generated method stub
 		platforms = BaseDeDatos.getPlataformas(nivel);
-		player = new Player(platforms);
+		player = new Player(platforms, playerBullets);
 		enemyBullets = new ArrayList<>();
 		playerBullets = new ArrayList<>();
 		granadas = new ArrayList<>();

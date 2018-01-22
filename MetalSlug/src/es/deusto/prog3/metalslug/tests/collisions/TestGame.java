@@ -18,6 +18,7 @@ import org.newdawn.slick.geom.Shape;
 public class TestGame extends BasicGame {
 	
 	Player player;
+	Input input;
 	static ArrayList<Shape> platforms = new ArrayList<>(); // TODO una clase especial para platform
 	static ArrayList<Bullet> bullets = new ArrayList<>();
 	static ArrayList<Granada> granadas = new ArrayList<>();
@@ -86,6 +87,7 @@ public class TestGame extends BasicGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		player = new Player();
+		input = new Input(720);
 		platforms.add(new Platform(1700, 680, 7947, 40, false));
 		platforms.add(new Platform(1760, 525, 154, 5, true));
 		platforms.add(new Platform(1911, 417, 175, 5, true));
@@ -115,6 +117,10 @@ public class TestGame extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		player.update(delta);
+		if(player.isCanShoot() && input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			addNewBullet(input.getMouseX(), input.getMouseY());
+			player.setCanShoot(false);
+		}
 		for(Iterator<Bullet> iterator = bullets.iterator(); iterator.hasNext(); ) {
 			Bullet ibullet = iterator.next();
 			ibullet.update(delta);
@@ -161,7 +167,8 @@ public class TestGame extends BasicGame {
 	}
 	
 	public void mousePressed(int button, int x, int y) {
-		addNewBullet(x,y);
+		
+			
 	}
 
 	private void addNewBullet(int x, int y) {
