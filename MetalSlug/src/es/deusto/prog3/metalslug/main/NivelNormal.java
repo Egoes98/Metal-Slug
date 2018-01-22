@@ -174,32 +174,30 @@ public class NivelNormal extends BasicGameState {
 		}
 		
 		//Menu Pausa
-		if(input.isKeyPressed(Input.KEY_ESCAPE)){
+		Input input = gc.getInput();
+		if(input.isKeyPressed(input.KEY_ESCAPE)){
 			if(pausa){
 				pausa = false;
-				gc.setPaused(false);
-			} else {
+				player.start();
+			}else {
 				pausa = true;
-				gc.setPaused(true);
+				player.stop();
 			}
 		}
 		
 		if(pausa) {
-			if(input.getMouseX() >= 456 && input.getMouseX()<= 832 && input.getMouseY() >= 386 && input.getMouseY() <= 469){
-				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			if(Mouse.getX() >= 456 && Mouse.getX()<= 832 && Mouse.getY() >= 386 && Mouse.getY() <= 469){
+				if(Mouse.isButtonDown(0)) {
 					pausa = false;
 				}
 			}
 			
-			if(input.getMouseX() >= 456 && input.getMouseX() <= 832 && input.getMouseY() >= 287 && input.getMouseX() <= 366){
-				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			if(Mouse.getX() >= 456 && Mouse.getX() <= 832 && Mouse.getY() >= 287 && Mouse.getY() <= 366){
+				if(Mouse.isButtonDown(0)) {
 					System.out.println("Entra en menu");
 				}
 			}
-			
 		}
-		
-		
 	}
 
 	@Override
