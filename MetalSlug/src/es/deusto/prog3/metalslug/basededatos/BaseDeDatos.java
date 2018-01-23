@@ -228,7 +228,7 @@ public class BaseDeDatos {
 			for (Enemy e : enemigos) {
 				sql = "insert into enemigos values (" + e.getX() + "," + e.getY() + "," + e.getMinMovementX() + ","
 						+ e.getMaxMovementX() + "," + nivel + ");";
-				statement.executeQuery(sql);
+				statement.executeUpdate(sql);
 
 			}
 		} catch (SQLException e1) {

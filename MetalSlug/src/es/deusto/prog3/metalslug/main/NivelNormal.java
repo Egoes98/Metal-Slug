@@ -65,6 +65,9 @@ public class NivelNormal extends BasicGameState {
 		player.set(platforms, playerBullets);
 		player.resetPos();
 		enemies.add(new Enemy(1000, 200, 900, 1100));
+		player.resetPos();
+		
+		// enemies.add(new Enemy(1000, 200, 900, 1100));
 		
 		for(Enemy e : enemies) {
 			e.setBullets(enemyBullets);
