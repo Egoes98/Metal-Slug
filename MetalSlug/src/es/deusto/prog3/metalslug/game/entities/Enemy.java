@@ -96,14 +96,6 @@ public class Enemy extends Character {
 
 	}
 	
-	public void stop() {
-	animations.get("Correr").get(movingLeft).stop();
-	}
-	
-	public void start() {
-		animations.get("Correr").get(movingLeft).start();
-	}
-	
 	public void setBullets(ArrayList<Bullet> bullets) {
 		this.bullets = bullets;
 	}
