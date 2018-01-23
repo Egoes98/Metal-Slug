@@ -215,7 +215,7 @@ public class BaseDeDatos {
 
 	}
 
-	public static void guardarEnemigos(ArrayList<Enemy> enemigos, int nivel) {
+	public static void guardarEnemigo(float x, float y, float minX, float maxX, int nivel) {
 		try {
 			conectar();
 		} catch (ClassNotFoundException e) {
@@ -225,12 +225,10 @@ public class BaseDeDatos {
 
 		String sql = "";
 		try {
-			for (Enemy e : enemigos) {
-				sql = "insert into enemigos values (" + e.getX() + "," + e.getY() + "," + e.getMinMovementX() + ","
-						+ e.getMaxMovementX() + "," + nivel + ");";
-				statement.executeUpdate(sql);
+			sql = "insert into enemigos values (" + x + "," + y + "," + minX + ","
+						+ maxX + "," + nivel + ");";
+			statement.executeUpdate(sql);
 
-			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
