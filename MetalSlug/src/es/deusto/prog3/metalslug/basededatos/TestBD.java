@@ -14,7 +14,7 @@ import es.deusto.prog3.metalslug.game.entities.Platform;
 import es.deusto.prog3.metalslug.game.entities.Slope;
 
 public class TestBD {
-/*
+
 	@Test
 	public void testInsertarValores() throws ClassNotFoundException {
 		
@@ -33,7 +33,7 @@ public class TestBD {
 		assertTrue(1100 == puntuacionTotal.get("Alvaro"));
 		
 	}
-	*/
+	
 	@Test
 	public void testInsertarPlataformas() {
 		ArrayList<Shape> plataformas = new ArrayList<>();

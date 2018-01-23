@@ -20,6 +20,7 @@ public class AnimationImages {
 	public static Image[] soldierShoot;
 	
 	public static Image[] explosion;
+	public static Image[] eriDie;
 
 	static {
 		try {
@@ -132,6 +133,25 @@ public class AnimationImages {
 					new Image("resources/explosionAnimation/Explosion14.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
 					new Image("resources/explosionAnimation/Explosion15.png", false, Image.FILTER_NEAREST).getScaledCopy(3)};
 
+			eriDie = new Image[] {new Image("resources/EriAnimations/Die/Die1.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die2.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die3.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die4.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die5.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die6.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die7.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die8.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die9.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die10.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die11.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die12.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die13.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die14.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die15.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die16.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die17.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/EriAnimations/Die/Die18.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					};
 
 		} catch (SlickException e) {
 		}
