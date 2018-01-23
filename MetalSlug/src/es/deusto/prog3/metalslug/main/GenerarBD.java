@@ -50,8 +50,8 @@ public class GenerarBD {
 		platforms.add(new Platform(1300, 489, 137, 100, false));
 		platforms.add(new Platform(1729, 489, 178, 100, false));
 		platforms.add(new Platform(2310, 489, 720, 100, false));
-		platforms.add(new Slope(3684, 579, 3456, 489));
-		platforms.add(new Platform(3456, 580, 1690, 40, false));
+		platforms.add(new Slope(3684, 589, 3456, 489));
+		platforms.add(new Platform(3456, 579, 1690, 40, false));
 		platforms.add(new Slope(4964, 589, 5175, 480));
 		platforms.add(new Platform(5997, 489, 175, 100, false));
 		platforms.add(new Platform(6581, 489, 656, 100, false));
