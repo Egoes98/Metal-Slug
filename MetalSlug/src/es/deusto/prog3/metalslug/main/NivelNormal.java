@@ -39,7 +39,8 @@ public class NivelNormal extends BasicGameState {
 	private boolean pausa;
 	
 	//Timer
-	Image n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
+	private int time;
+	private Image[] numbers;
 
 	public NivelNormal(int nivel) {
 		super();
@@ -72,16 +73,16 @@ public class NivelNormal extends BasicGameState {
 		pausa = false;
 		
 		//Timer
-		n0 = new Image("resources/Interfaz/n0.png");
-		n1 = new Image("resources/Interfaz/n1.png");
-		n2 = new Image("resources/Interfaz/n2.png");
-		n3 = new Image("resources/Interfaz/n3.png");
-		n4 = new Image("resources/Interfaz/n4.png");
-		n5 = new Image("resources/Interfaz/n5.png");
-		n6 = new Image("resources/Interfaz/n6.png");
-		n7 = new Image("resources/Interfaz/n7.png");
-		n8 = new Image("resources/Interfaz/n8.png");
-		n9 = new Image("resources/Interfaz/n9.png");
+		numbers =  new Image[] {new Image("resources/Interfaz/n0.png"), 
+				new Image("resources/Interfaz/n1.png"), 
+				new Image("resources/Interfaz/n2.png"), 
+				new Image("resources/Interfaz/n3.png"),
+				new Image("resources/Interfaz/n4.png"), 
+				new Image("resources/Interfaz/n5.png"), 
+				new Image("resources/Interfaz/n6.png"), 
+				new Image("resources/Interfaz/n7.png"), 
+				new Image("resources/Interfaz/n8.png"), 
+				new Image("resources/Interfaz/n9.png")};
 	}
 
 	@Override
@@ -129,57 +130,13 @@ public class NivelNormal extends BasicGameState {
 	   	}
 		
 		//Timer
-		String timer = time/1000 +"";
+		String timer = String.format("%02d", time/1000);
 		if(time/1000 >= 99) {
-			g.drawImage(n9, 540,100);
-			g.drawImage(n9, 570,100);
-		}else {
-			if(timer.charAt(0) == '0'){
-				g.drawImage(n0, 540, 100);
-			}else if(timer.charAt(0) == '1'){
-				g.drawImage(n1, 540, 100);
-			}else if(timer.charAt(0) == '2') {
-				g.drawImage(n2, 540, 100);
-			}else if(timer.charAt(0) == '3') {
-				g.drawImage(n3, 540, 100);
-			}else if(timer.charAt(0) == '4') {
-				g.drawImage(n4, 540, 100);
-			}else if(timer.charAt(0) == '5') {
-				g.drawImage(n5, 540, 100);
-			}else if(timer.charAt(0) == '6') {
-				g.drawImage(n6, 540, 100);
-			}else if(timer.charAt(0) == '7') {
-				g.drawImage(n7, 540, 100);
-			}else if(timer.charAt(0) == '8') {
-				g.drawImage(n8, 540, 100);
-			}else {
-				g.drawImage(n9, 540, 100);
-			}
-			
-			if(timer.length() ==2) {
-			
-				if(timer.charAt(0) == '0'){
-					g.drawImage(n0, 570, 100);
-				}else if(timer.charAt(1) == '1'){
-					g.drawImage(n1, 570, 100);
-				}else if(timer.charAt(1) == '2') {
-					g.drawImage(n2, 570, 100);
-				}else if(timer.charAt(1) == '3') {
-					g.drawImage(n3, 570, 100);
-				}else if(timer.charAt(1) == '4') {
-					g.drawImage(n4, 570, 100);
-				}else if(timer.charAt(1) == '5') {
-					g.drawImage(n5, 570, 100);
-				}else if(timer.charAt(1) == '6') {
-					g.drawImage(n6, 570, 100);
-				}else if(timer.charAt(1) == '7') {
-					g.drawImage(n7, 570, 100);
-				}else if(timer.charAt(1) == '8') {
-					g.drawImage(n8, 570, 100);
-				}else {
-					g.drawImage(n9, 570, 100);
-				}
-			}
+			g.drawImage(numbers[9], 540,100);
+			g.drawImage(numbers[9], 570,100);
+		} else {
+			g.drawImage(numbers[Integer.parseInt("" + timer.charAt(0))], 540, 100);
+			g.drawImage(numbers[Integer.parseInt("" + timer.charAt(1))], 570, 100);
 		}
 	}
 
@@ -245,8 +202,7 @@ public class NivelNormal extends BasicGameState {
 		}
 		
 		//Menu Pausa
-		Input input = gc.getInput();
-		if(input.isKeyPressed(input.KEY_ESCAPE)){
+		if(input.isKeyPressed(Input.KEY_ESCAPE)){
 			if(pausa){
 				pausa = false;
 				player.start();
@@ -257,14 +213,14 @@ public class NivelNormal extends BasicGameState {
 		}
 		
 		if(pausa) {
-			if(Mouse.getX() >= 456 && Mouse.getX()<= 832 && Mouse.getY() >= 386 && Mouse.getY() <= 469){
-				if(Mouse.isButtonDown(0)) {
+			if(input.getMouseX() >= 456 && input.getMouseX()<= 832 && input.getMouseY() >= 386 && input.getMouseY() <= 469){
+				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 					pausa = false;
 				}
 			}
 			
-			if(Mouse.getX() >= 456 && Mouse.getX() <= 832 && Mouse.getY() >= 287 && Mouse.getY() <= 366){
-				if(Mouse.isButtonDown(0)) {
+			if(input.getMouseX() >= 456 && input.getMouseX() <= 832 && input.getMouseY() >= 287 && input.getMouseY() <= 366){
+				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 					game.enterState(0);
 				}
 			}
