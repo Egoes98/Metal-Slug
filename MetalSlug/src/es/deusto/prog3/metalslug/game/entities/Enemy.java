@@ -64,7 +64,7 @@ public class Enemy extends Character {
 
 		moveY(delta);
 		detectPlatformCollisions();
-		if (distanceTo(this.getCenter(), player.getCenter()) < 500) {
+		if (distanceTo(this.getCenter(), player.getCenter()) < 500 && !player.isDead()) {
 			moving = false;
 			if(timeCounter > 1000) {
 				shoot();

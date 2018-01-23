@@ -48,7 +48,8 @@ public class Player extends Character {
 		addAnimation("JumpHead2", AnimationImages.eriJumpHead2, 270);
 		addAnimation("JumpFoot2", AnimationImages .eriJumpFoot2, 270);
 		addAnimation("Die", AnimationImages.eriDie, 100);
-		
+		animations.get("Die").get("RIGHT").setLooping(false);
+		animations.get("Die").get("LEFT").setLooping(false);
 		isFacing = "RIGHT";
 		lives = 3;
 	}
@@ -252,6 +253,10 @@ public class Player extends Character {
 		if(animations.get("Die").get(isFacing).getFrame() == 17) {
 			done = true;
 			die();
+			if(lives > 0) {
+				animations.get("Die").get(isFacing).restart();
+			}
+			
 		}
 	}
 
