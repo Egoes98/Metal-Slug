@@ -40,7 +40,7 @@ public class GenerarBD {
 		platforms.add(new Platform(0, 640, 1500, 80, false));
 		platforms.add(new Platform(-20, 0, 20, 720, false));
 		BaseDeDatos.guardarPlataformas(platforms, 1);
-		BaseDeDatos.guardarEnemigo(810, 600, 600, 1140, 1);
+		
 		// Nivel 2
 		platforms.clear();
 		platforms.add(new Platform(0, 563, 865, 40, false));
@@ -62,6 +62,30 @@ public class GenerarBD {
 		
 		//Enemigos
 		//Nivel1
+		BaseDeDatos.guardarEnemigo(810, 600, 600, 1140,1);
+		BaseDeDatos.guardarEnemigo(1200, 600, 945, 1500, 1);
+		BaseDeDatos.guardarEnemigo(1605, 600, 1290, 1920, 1);
+		BaseDeDatos.guardarEnemigo(1995, 600, 1890, 2070, 1);
+		BaseDeDatos.guardarEnemigo(2010, 600, 1710, 2310, 1);
+		BaseDeDatos.guardarEnemigo(2460, 600, 2235, 2655, 1);
+		BaseDeDatos.guardarEnemigo(2835, 600, 2610, 3090, 1);
+		BaseDeDatos.guardarEnemigo(3150, 600, 2925, 3405, 1);
+		BaseDeDatos.guardarEnemigo(3540, 600, 3240, 3840, 1);
+		BaseDeDatos.guardarEnemigo(3975, 0, 3855, 4365, 1);
+		BaseDeDatos.guardarEnemigo(3600, 0, 3855, 4365, 1);
+		BaseDeDatos.guardarEnemigo(4320, 600, 4200, 4500, 1);
+		BaseDeDatos.guardarEnemigo(4500, 600, 4350, 4710, 1);
+		BaseDeDatos.guardarEnemigo(4500, 600, 4350, 4710, 1);
+		BaseDeDatos.guardarEnemigo(4800, 0, 4725, 5310, 1);
+		BaseDeDatos.guardarEnemigo(5040, 0, 4725, 5310, 1);
+		BaseDeDatos.guardarEnemigo(5190, 600, 4845, 5460, 1);
+		BaseDeDatos.guardarEnemigo(5790, 600, 5460, 6120, 1);
+		BaseDeDatos.guardarEnemigo(6450, 600, 6150, 6720, 1);
+		BaseDeDatos.guardarEnemigo(5955, 0, 5760, 6180, 1);
+		BaseDeDatos.guardarEnemigo(6150, 0, 5955, 6390, 1);
+		BaseDeDatos.guardarEnemigo(6900, 600, 6600, 7200, 1);
+		BaseDeDatos.guardarEnemigo(7200, 600, 6900, 7500, 1);
+		BaseDeDatos.guardarEnemigo(7500, 600, 6600, 7800, 1);
 		//Nivel2
 		BaseDeDatos.guardarEnemigo(1314,470,1314,1422, 2);
 		BaseDeDatos.guardarEnemigo(2397,470,2397,2925, 2);
