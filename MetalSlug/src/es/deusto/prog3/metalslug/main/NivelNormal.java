@@ -135,8 +135,8 @@ public class NivelNormal extends BasicGameState {
 			g.drawImage(numbers[9], 540,100);
 			g.drawImage(numbers[9], 570,100);
 		} else {
-			g.drawImage(numbers[Integer.parseInt("" + timer.charAt(0))], 540, 100);
-			g.drawImage(numbers[Integer.parseInt("" + timer.charAt(1))], 570, 100);
+			g.drawImage(numbers[timer.charAt(0) - '0'], 540, 100);
+			g.drawImage(numbers[timer.charAt(1) - '0'], 570, 100);
 		}
 	}
 
