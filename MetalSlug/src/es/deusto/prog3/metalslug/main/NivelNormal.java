@@ -27,6 +27,7 @@ public class NivelNormal extends BasicGameState {
 	private int nivel;
 
 	private Player player;
+	private Enemy enemy;
 	private ArrayList<Shape> platforms;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Bullet> enemyBullets;
@@ -64,6 +65,8 @@ public class NivelNormal extends BasicGameState {
 		enemies = BaseDeDatos.getEnemigos(nivel);
 		player.set(platforms, playerBullets);
 		player.resetPos();
+		enemy.init();
+		
 		// enemies.add(new Enemy(1000, 200, 900, 1100));
 		
 		for(Enemy e : enemies) {
