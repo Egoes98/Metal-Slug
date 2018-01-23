@@ -51,7 +51,7 @@ public class GenerarBD {
 		platforms.add(new Platform(1729, 489, 178, 100, false));
 		platforms.add(new Platform(2310, 489, 720, 100, false));
 		platforms.add(new Slope(3684, 579, 3456, 489));
-		platforms.add(new Platform(3456, 579, 1690, 40, false));
+		platforms.add(new Platform(3456, 580, 1690, 40, false));
 		platforms.add(new Slope(4964, 589, 5175, 480));
 		platforms.add(new Platform(5997, 489, 175, 100, false));
 		platforms.add(new Platform(6581, 489, 656, 100, false));
@@ -101,7 +101,7 @@ public class GenerarBD {
 		BaseDeDatos.guardarEnemigo(1476, 550, 1476, 1638, 2);
 		BaseDeDatos.guardarEnemigo(1953, 550, 1953, 2193, 2);
 		BaseDeDatos.guardarEnemigo(5187, 550, 5187, 5889, 2);
-		BaseDeDatos.guardarEnemigo(6249, 550, 1314, 6468, 2);
+		BaseDeDatos.guardarEnemigo(6249, 550, 6249, 6468, 2);
 	}
 
 }
