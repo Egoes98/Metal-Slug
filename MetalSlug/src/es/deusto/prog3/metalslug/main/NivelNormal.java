@@ -132,11 +132,11 @@ public class NivelNormal extends BasicGameState {
 		//Timer
 		String timer = String.format("%02d", time/1000);
 		if(time/1000 >= 99) {
-			g.drawImage(numbers[9], 540,100);
-			g.drawImage(numbers[9], 570,100);
+			g.drawImage(numbers[9], 615,100);
+			g.drawImage(numbers[9], 640,100);
 		} else {
-			g.drawImage(numbers[timer.charAt(0) - '0'], 540, 100);
-			g.drawImage(numbers[timer.charAt(1) - '0'], 570, 100);
+			g.drawImage(numbers[timer.charAt(0) - '0'], 615, 100);
+			g.drawImage(numbers[timer.charAt(1) - '0'], 640, 100);
 		}
 	}
 
