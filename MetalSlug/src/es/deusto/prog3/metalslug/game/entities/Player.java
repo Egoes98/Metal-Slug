@@ -254,4 +254,10 @@ public class Player extends Character {
 			die();
 		}
 	}
+
+	public void set(ArrayList<Shape> platforms, ArrayList<Bullet> playerBullets) {
+		// TODO Auto-generated method stub
+		super.setPlataformas(platforms);
+		this.bullets = playerBullets;
+	}
 }

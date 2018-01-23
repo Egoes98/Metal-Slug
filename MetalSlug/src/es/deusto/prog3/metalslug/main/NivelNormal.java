@@ -45,9 +45,10 @@ public class NivelNormal extends BasicGameState {
 	private int time;
 	private Image[] numbers;
 
-	public NivelNormal(int nivel) {
+	public NivelNormal(int nivel, Player player) {
 		super();
 		this.nivel = nivel;
+		this.player = player;
 		// TODO Auto-generated constructor stub
 
 	}
@@ -56,12 +57,12 @@ public class NivelNormal extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
 		// TODO Auto-generated method stub
 		platforms = BaseDeDatos.getPlataformas(nivel);
-		player = new Player(platforms, playerBullets);
+		
 		enemyBullets = new ArrayList<>();
 		playerBullets = new ArrayList<>();
 		granadas = new ArrayList<>();
 		enemies = BaseDeDatos.getEnemigos(nivel);
-
+		player.set(platforms, playerBullets);
 		enemies.add(new Enemy(1000, 200, 900, 1100));
 		
 		for(Enemy e : enemies) {
@@ -208,7 +209,7 @@ public class NivelNormal extends BasicGameState {
 					game.getState(10 + nivel).leave(gc, game);
 					game.enterState(100);
 				} else {
-					game.addState(new NivelNormal(nivel + 1));
+					game.addState(new NivelNormal(nivel + 1, player));
 					game.getState(10 + nivel + 1).init(gc, game);
 					game.getState(10 + nivel).leave(gc, game);
 					game.enterState(nivel + 10 + 1);
