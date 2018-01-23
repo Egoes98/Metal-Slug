@@ -29,6 +29,7 @@ public class Player extends Character {
 	private int lives;
 	private ArrayList<Bullet> bullets;
 	private boolean hasShot;
+	private boolean done = false;
 	
 	public Player(ArrayList<Shape> platforms, ArrayList<Bullet> bullets) {
 		super(200, 200, 93, 114, 300, platforms);
@@ -44,6 +45,8 @@ public class Player extends Character {
 		addAnimation("JumpFoot1", AnimationImages.eriJumpFoot1, 270);
 		addAnimation("JumpHead2", AnimationImages.eriJumpHead2, 270);
 		addAnimation("JumpFoot2", AnimationImages .eriJumpFoot2, 270);
+		addAnimation("Die", AnimationImages.eriDie, 100);
+		
 		isFacing = "RIGHT";
 		lives = 3;
 	}
@@ -76,6 +79,7 @@ public class Player extends Character {
 	private static final long serialVersionUID = 1L;
 	
 	public void update(int delta) {
+		
 		if(input.isKeyDown(Input.KEY_LEFT)) {
 			moveX(delta, true);
 			movingLeft = true;
@@ -111,6 +115,8 @@ public class Player extends Character {
 			canShoot = false;
 			hasShot = false;
 		}
+		
+		
 	}
 	
 	public boolean getMovingLeft() {
@@ -153,15 +159,25 @@ public class Player extends Character {
 			animations.get("StandbyFoot").get(isFacing).draw(x,y);
 		}
 	}
+	
+	public boolean getDone() {
+		return done ;
+	}
+	
+	public int getLives() {
+		return lives;
+	}
 
 	@Override
 	public void die() {
 		// TODO Auto-generated method stub
 		super.die();
-		lives -= 1;
-		if(lives > 0) {
+		if(done) lives -= 1;
+
+		if(lives > 0 && done) {
 			this.setLocation(200, 200);
 			this.setDead(false);
+			done = false;
 		}
 			
 	}
@@ -219,6 +235,16 @@ public class Player extends Character {
 			animations.get("Shoot").get(isFacing).start();		
 			animations.get("JumpHead1").get(isFacing).start();		
 			animations.get("StandbyHead").get(isFacing).start();
+		
+	}
+
+	public void drawDeathAnimation() {
+		animations.get("Die").get(isFacing).draw(x,y);
+		if(animations.get("Die").get(isFacing).getFrame() == 17) {
+			done = true;
+			die();
+		}
+		
 		
 	}
 }

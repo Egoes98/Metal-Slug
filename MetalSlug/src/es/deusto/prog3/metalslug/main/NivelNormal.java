@@ -3,6 +3,7 @@ package es.deusto.prog3.metalslug.main;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -60,7 +61,7 @@ public class NivelNormal extends BasicGameState {
 		playerBullets = new ArrayList<>();
 		granadas = new ArrayList<>();
 		enemies = BaseDeDatos.getEnemigos(nivel);
-		// enemies.add(new Enemy(1000, 200, 900, 1100));
+		enemies.add(new Enemy(1000, 200, 900, 1100));
 		
 		for(Enemy e : enemies) {
 			e.setBullets(enemyBullets);
@@ -103,8 +104,14 @@ public class NivelNormal extends BasicGameState {
 			g.translate(-background.getWidth() + gc.getWidth(), 0);
 		}
 		background.draw(0, 0);
-		player.drawPiernas();
-		player.drawCabeza();	
+		
+		if(player.isDead()) {
+			player.drawDeathAnimation();
+		}else {
+			player.drawPiernas();
+			player.drawCabeza();	
+		}
+		
 		for(Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
 			Enemy e = iterator.next();
 			g.fill(e);
