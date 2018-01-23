@@ -187,66 +187,38 @@ public class Player extends Character {
 	}
 	
 	public void stop() {
-		if(move && firstRun) {
+		
 			animations.get("RunFoot1").get(isFacing).stop();
-			firstRun = false;
-		}else if(move && !firstRun){
 			animations.get("RunFoot2").get(isFacing).stop();
-		}else if(!move && hasjumped) {
 			animations.get("JumpFoot1").get(isFacing).stop();
-		}else if(!move) {
 			animations.get("StandbyFoot").get(isFacing).stop();
-		}
-		if(move && shoot && isFacing == "LEFT") {
 			animations.get("Shoot").get(isFacing).stop();
-		}else if(move && shoot) {
 			animations.get("Shoot").get(isFacing).stop();
-		}else if(move && hasjumped && isFacing == "LEFT"){
-			animations.get("JumpHead2").get(isFacing).stop();
-		}else if(move && hasjumped && isFacing == "RIGHT"){
-			animations.get("JumpHead2").get(isFacing).stop();
-		}else if(move) {
-			animations.get("RunHead").get(isFacing).stop();
-		}else if(!move && shoot && isFacing == "LEFT"){
-			animations.get("Shoot").get(isFacing).stop();
-		}else if(!move && shoot){
-			animations.get("Shoot").get(isFacing).stop();
-		}else if (!move && hasjumped) {
-			animations.get("JumpHead1").get(isFacing).stop();
-		}else if (!move) {
+			animations.get("JumpHead2").get(isFacing).stop();		
+			animations.get("JumpHead2").get(isFacing).stop();		
+			animations.get("RunHead").get(isFacing).stop();		
+			animations.get("Shoot").get(isFacing).stop();		
+			animations.get("Shoot").get(isFacing).stop();		
+			animations.get("JumpHead1").get(isFacing).stop();		
 			animations.get("StandbyHead").get(isFacing).stop();
-		}
+		
 	}
 	
 	public void start() {
-		if(move && firstRun) {
+		
 			animations.get("RunFoot1").get(isFacing).start();
-			firstRun = false;
-		}else if(move && !firstRun){
-			animations.get("RunFoot2").get(isFacing).start();
-		}else if(!move && hasjumped) {
-			animations.get("JumpFoot1").get(isFacing).start();
-		}else if(!move) {
-			animations.get("StandbyFoot").get(isFacing).start();
-		}
-		if(move && shoot && isFacing == "LEFT") {
-			animations.get("Shoot").get(isFacing).start();
-		}else if(move && shoot) {
-			animations.get("Shoot").get(isFacing).start();
-		}else if(move && hasjumped && isFacing == "LEFT"){
-			animations.get("JumpHead2").get(isFacing).start();
-		}else if(move && hasjumped && isFacing == "RIGHT"){
-			animations.get("JumpHead2").get(isFacing).start();
-		}else if(move) {
-			animations.get("RunHead").get(isFacing).start();
-		}else if(!move && shoot && isFacing == "LEFT"){
-			animations.get("Shoot").get(isFacing).start();
-		}else if(!move && shoot){
-			animations.get("Shoot").get(isFacing).start();
-		}else if (!move && hasjumped) {
-			animations.get("JumpHead1").get(isFacing).start();
-		}else if (!move) {
+			animations.get("RunFoot2").get(isFacing).start();		
+			animations.get("JumpFoot1").get(isFacing).start();	
+			animations.get("StandbyFoot").get(isFacing).start();		
+			animations.get("Shoot").get(isFacing).start();		
+			animations.get("Shoot").get(isFacing).start();		
+			animations.get("JumpHead2").get(isFacing).start();		
+			animations.get("JumpHead2").get(isFacing).start();		
+			animations.get("RunHead").get(isFacing).start();		
+			animations.get("Shoot").get(isFacing).start();		
+			animations.get("Shoot").get(isFacing).start();		
+			animations.get("JumpHead1").get(isFacing).start();		
 			animations.get("StandbyHead").get(isFacing).start();
-		}
+		
 	}
 }
