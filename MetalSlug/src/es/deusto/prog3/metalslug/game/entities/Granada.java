@@ -3,6 +3,8 @@ package es.deusto.prog3.metalslug.game.entities;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -18,8 +20,18 @@ public class Granada extends Circle {
 	private String status;
 	private int vx, vy;
 	private Animation explosion;
+	private static Image granada;
 	private ArrayList<Shape> platforms;
 
+	static {
+		try {
+			granada = new Image("resources/data/granada.png");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public Granada(float centerPointX, float centerPointY, boolean goingLeft, ArrayList<Shape> platforms) {
 		super(centerPointX, centerPointY, 5);
 		this.platforms = platforms;
@@ -74,6 +86,10 @@ public class Granada extends Circle {
 	
 	public void drawExplosion() {
 		explosion.draw(getX() - 90, getY() - 270);
+	}
+	
+	public void draw() {
+		granada.draw(x, y);
 	}
 
 }

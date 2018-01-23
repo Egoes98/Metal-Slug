@@ -1,9 +1,5 @@
 package es.deusto.prog3.metalslug.main;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,14 +9,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
-import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.util.ResourceLoader;
 
 import es.deusto.prog3.metalslug.basededatos.BaseDeDatos;
 import es.deusto.prog3.metalslug.game.entities.Bullet;
@@ -134,7 +127,7 @@ public class NivelNormal extends BasicGameState {
 				gr.drawExplosion();
 			}
 			else 
-				g.fill(gr);
+				gr.draw();
 		}
 		
 		g.resetTransform();
