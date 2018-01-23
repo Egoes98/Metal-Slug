@@ -256,4 +256,16 @@ public class BaseDeDatos {
 		return enemigos;
 
 	}
+	public static void borrar() {
+		try {
+			conectar();
+			statement.executeUpdate("drop table puntuacion");
+			statement.executeUpdate("drop table plataformas");
+			statement.executeUpdate("drop table enemigos");
+		} catch (SQLException | ClassNotFoundException e) {
+			System.err.println(e.getMessage());
+		}
+		desconectar();
+	}
+	
 }
