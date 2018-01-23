@@ -249,6 +249,7 @@ public class NivelNormal extends BasicGameState {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					game.getState(0).init(gc, game);
 					game.enterState(0);
 				}
 			}
