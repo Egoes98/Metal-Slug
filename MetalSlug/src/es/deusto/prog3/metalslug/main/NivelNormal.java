@@ -1,5 +1,9 @@
 package es.deusto.prog3.metalslug.main;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -9,10 +13,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.util.ResourceLoader;
 
 import es.deusto.prog3.metalslug.basededatos.BaseDeDatos;
 import es.deusto.prog3.metalslug.game.entities.Bullet;
@@ -33,6 +41,7 @@ public class NivelNormal extends BasicGameState {
 	private Input input;
 	
 	private Image background;
+	private UnicodeFont scorefont;
 	
 	//Pausa
 	private Image menu_pausa;
@@ -83,6 +92,11 @@ public class NivelNormal extends BasicGameState {
 				new Image("resources/Interfaz/n7.png"), 
 				new Image("resources/Interfaz/n8.png"), 
 				new Image("resources/Interfaz/n9.png")};
+		
+		scorefont = new UnicodeFont("resources/ARCADECLASSIC.TTF", 40, false, false);
+		scorefont.addAsciiGlyphs();
+		scorefont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+		scorefont.loadGlyphs();
 	}
 
 	@Override
@@ -120,24 +134,30 @@ public class NivelNormal extends BasicGameState {
 			else 
 				g.fill(gr);
 		}
-		//Pausa
-	 	if (pausa) {
-	        	Color trans = new Color(0f,0f,0f,0.5f);
-	        	g.setColor(trans);
-	        	g.fillRect(0,0, background.getWidth(), background.getHeight());
-	        	g.resetTransform();
-	        	menu_pausa.draw(250,140);
-	   	}
+		
+		g.resetTransform();
 		
 		//Timer
-		String timer = String.format("%02d", time/1000);
-		if(time/1000 >= 99) {
-			g.drawImage(numbers[9], 615,100);
-			g.drawImage(numbers[9], 640,100);
+		String timer = String.format("%02d", time / 1000);
+		if (time / 1000 >= 99) {
+			g.drawImage(numbers[9], 615, 100);
+			g.drawImage(numbers[9], 640, 100);
 		} else {
 			g.drawImage(numbers[timer.charAt(0) - '0'], 615, 100);
 			g.drawImage(numbers[timer.charAt(1) - '0'], 640, 100);
 		}
+		
+		//Pausa
+	 	if (pausa) {
+	        	Color trans = new Color(0f,0f,0f,0.5f);
+	        	g.setColor(trans);
+	        	g.fillRect(0,0, 1280, 720);
+	        	menu_pausa.draw(250,140);
+	   	}
+	 	
+	 	g.setColor(Color.white);
+	 	scorefont.drawString(1000, 20, "score  000000");
+		
 	}
 
 	@Override
