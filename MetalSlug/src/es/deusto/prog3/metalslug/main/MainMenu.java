@@ -2,7 +2,6 @@ package es.deusto.prog3.metalslug.main;
 
 import org.newdawn.slick.*;
 import org.lwjgl.input.*;
-import org.lwjgl.opengl.Drawable;
 import org.newdawn.slick.state.*;
 
 public class MainMenu extends BasicGameState{
