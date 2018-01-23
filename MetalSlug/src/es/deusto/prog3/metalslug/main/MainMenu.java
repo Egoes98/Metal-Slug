@@ -73,6 +73,12 @@ public class MainMenu extends BasicGameState{
 		if((mouseX >= 192 && mouseX <= 554) && (mouseY >= 316 && mouseY <= 446)) {
 			sel_c = true;
 			if(Mouse.isButtonDown(0)) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				((NivelNormal) sbg.getState(11)).resetPlayer();
 				sbg.getState(11).init(gc, sbg);
 				sbg.enterState(11);
