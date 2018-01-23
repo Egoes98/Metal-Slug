@@ -2,9 +2,11 @@ package es.deusto.prog3.metalslug.game.entities;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 
+import es.deusto.prog3.metalslug.game.data.AnimationImages;
 import es.deusto.prog3.metalslug.utils.CollisionUtils;
 
 public class Boss extends Circle {
@@ -15,6 +17,8 @@ public class Boss extends Circle {
 	private int aliveTime = 0;
 	private int health;
 	private double angle;
+	
+	private Animation animation;
 
 	public Boss(ArrayList<Shape> platforms, ArrayList<Bullet> enemyBullets) {
 		super(600, 300, 60);
@@ -23,6 +27,7 @@ public class Boss extends Circle {
 		vx = vy = 0.2f;
 		health = 100;
 		angle = 0;
+		animation = new Animation(AnimationImages.boss, 80);
 	}
 	
 	public void update(int delta) {
@@ -30,8 +35,8 @@ public class Boss extends Circle {
 		setY(getY() + vy * delta);
 		detectCollisions();
 		aliveTime += delta;
-		angle += 0.01*delta;
-		if(aliveTime > 200) {
+		angle += 0.02*delta;
+		if(aliveTime > 600) {
 			aliveTime = 0;
 			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle, 0.5f));
 			enemyBullets.add(new Bullet(getCenterX(), getCenterY(), angle + Math.PI/2, 0.5f));
@@ -68,6 +73,9 @@ public class Boss extends Circle {
 		return health;
 	}
 	
+	public void draw() {
+		animation.draw(x, y);
+	}
 	
 
 }

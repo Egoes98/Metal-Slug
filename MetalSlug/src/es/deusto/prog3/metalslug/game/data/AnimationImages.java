@@ -21,6 +21,8 @@ public class AnimationImages {
 	
 	public static Image[] explosion;
 	public static Image[] eriDie;
+	
+	public static Image[] boss;
 
 	static {
 		try {
@@ -152,6 +154,23 @@ public class AnimationImages {
 					new Image("resources/EriAnimations/Die/Die17.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
 					new Image("resources/EriAnimations/Die/Die18.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
 					};
+			
+			boss = new Image[] {new Image("resources/bossAnimation/Boss1.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss2.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss3.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss4.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss5.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss6.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss7.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss8.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss9.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss10.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss11.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss12.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss13.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss14.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss15.png", false, Image.FILTER_NEAREST).getScaledCopy(3),
+					new Image("resources/bossAnimation/Boss16.png", false, Image.FILTER_NEAREST).getScaledCopy(3)};
 
 		} catch (SlickException e) {
 		}

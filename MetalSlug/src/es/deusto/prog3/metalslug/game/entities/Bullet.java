@@ -13,7 +13,7 @@ public class Bullet extends Point {
 	private float speed;
 	private double sin, cos;
 	private float sourceX, sourceY;
-	private ArrayList<Shape> platforms;
+	private double angle;
 	private Image sprite;
 
 	public Bullet(float sourceX, float sourceY, float x, float y, float speed) {
@@ -23,10 +23,12 @@ public class Bullet extends Point {
 	public Bullet(float sourceX, float sourceY, double angle, float speed) {
 		super(sourceX, sourceY);
 		this.speed = speed;
+		this.angle = Math.toDegrees(angle);
 		this.cos = Math.cos(angle);
 		this.sin = Math.sin(angle);
 		try {
-			sprite = new Image("resources/data/Bullet.png", false, Image.FILTER_NEAREST);
+			sprite = new Image("resources/data/Bullet.png", false, Image.FILTER_NEAREST).getScaledCopy(2);
+			sprite.rotate((float) this.angle - 90);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,22 +40,25 @@ public class Bullet extends Point {
 		y += speed * -cos * delta;
 	}
 	
-	public boolean detectCollisionPlatforms() {
-		boolean collided = false;
+	public boolean detectCollisionPlatforms(ArrayList<Shape> platforms, boolean checkAtravesable) {
 		
 		for(Shape platform : platforms) {
-			if(platform.contains(getX(), getY())) {
-				collided = true;
+			if(platform.contains(this.getX(), this.getY())) {
+				if(platform instanceof Platform) {
+					Platform p = (Platform) platform;
+					if(p.isAtravesable() && !checkAtravesable) {
+						return true;
+					} else if (!p.isAtravesable()) {
+						return true;
+					}
+				}
+				if(platform instanceof Slope) {
+					return true;
+				}
 			}
 		}
 		
-		
-		
-		if(getY() < 100 || getY() > 720) {
-			collided = true;
-		}
-		
-		return collided;
+		return false;
 	}
 	
 	public boolean detectCollisionCharacter(Character character) {
@@ -75,7 +80,7 @@ public class Bullet extends Point {
 	}
 
 	public void draw() {
-		sprite.draw(x, y);
+		sprite.drawCentered(x, y);
 	}
 	
 	

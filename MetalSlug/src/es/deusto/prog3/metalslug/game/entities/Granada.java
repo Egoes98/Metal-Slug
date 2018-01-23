@@ -79,6 +79,15 @@ public class Granada extends Circle {
 			}
 		}
 	}
+	
+	public void detectCollisions(Boss boss) {
+		if(this.intersects(boss)) {
+			if(this.status == STATUS_FLYING) {
+				status = STATUS_EXPLODING;
+				boss.hit();
+			}
+		}
+	}
 
 	public String getStatus() {
 		return status;

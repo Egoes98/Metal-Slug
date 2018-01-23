@@ -64,6 +64,11 @@ public class MainMenu extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException { //Para cuando las cosas cambian
 		mouseX = Mouse.getX();
 		mouseY = Mouse.getY();
+		if(gc.getInput().isKeyDown(Input.KEY_B)) {
+			sbg.addState(new NivelBoss());
+			sbg.getState(100).init(gc, sbg);
+			sbg.enterState(100);
+		}
 		
 		if((mouseX >= 192 && mouseX <= 554) && (mouseY >= 316 && mouseY <= 446)) {
 			sel_c = true;
@@ -108,5 +113,6 @@ public class MainMenu extends BasicGameState{
 	public int getID() {
 		return 0;
 	}
+	
 
 }

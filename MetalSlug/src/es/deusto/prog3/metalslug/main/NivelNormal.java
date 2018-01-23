@@ -64,7 +64,7 @@ public class NivelNormal extends BasicGameState {
 		enemies = BaseDeDatos.getEnemigos(nivel);
 		player.set(platforms, playerBullets);
 		player.resetPos();
-		// enemies.add(new Enemy(1000, 200, 900, 1100));
+		enemies.add(new Enemy(1000, 200, 900, 1100));
 		
 		for(Enemy e : enemies) {
 			e.setBullets(enemyBullets);
@@ -105,6 +105,7 @@ public class NivelNormal extends BasicGameState {
 	
 		if(player.isDead()) {
 			player.drawDeathAnimation();
+			enemyBullets.clear();
 		}else {
 			player.drawPiernas();
 			player.drawCabeza();	
@@ -171,7 +172,7 @@ public class NivelNormal extends BasicGameState {
 			for (Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext();) {
 				Bullet ibullet = iterator.next();
 				ibullet.update(delta);
-				if (ibullet.detectCollisionCharacter(player) || player.isDead()) {
+				if (ibullet.detectCollisionCharacter(player) || ibullet.detectCollisionPlatforms(platforms, true)) {
 					iterator.remove();
 				}
 			}
@@ -198,7 +199,7 @@ public class NivelNormal extends BasicGameState {
 			for (Iterator<Bullet> iterator = playerBullets.iterator(); iterator.hasNext();) {
 				Bullet b = iterator.next();
 				b.update(delta);
-				if (b.detectCollisionCharacter(enemies)) {
+				if (b.detectCollisionCharacter(enemies) || b.detectCollisionPlatforms(platforms, true)) {
 					iterator.remove();
 				}
 			}
