@@ -243,9 +243,17 @@ public class NivelNormal extends BasicGameState {
 			if (pausa) {
 				pausa = false;
 				player.start();
+				for (Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
+					Enemy e = iterator.next();
+					e.start();
+				}
 			} else {
 				pausa = true;
 				player.stop();
+				for (Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
+					Enemy e = iterator.next();
+					e.stop();
+				}
 			}
 		}
 
