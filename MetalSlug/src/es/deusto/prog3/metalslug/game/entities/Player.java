@@ -246,7 +246,7 @@ public class Player extends Character {
 	
 	public void addScore(int i) {
 		score += i;
-
+	}
 	public void drawDeathAnimation() {
 		animations.get("Die").get(isFacing).draw(x,y);
 		if(animations.get("Die").get(isFacing).getFrame() == 17) {
