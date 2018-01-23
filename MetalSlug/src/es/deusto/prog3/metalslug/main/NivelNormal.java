@@ -228,14 +228,20 @@ public class NivelNormal extends BasicGameState {
 		}
 		
 		if(pausa) {
-			if(input.getMouseX() >= 456 && input.getMouseX()<= 832 && input.getMouseY() >= 386 && input.getMouseY() <= 469){
-				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			if(Mouse.getX() >= 456 && Mouse.getX()<= 832 && Mouse.getY() >= 386 && Mouse.getY() <= 469){
+				if(Mouse.isButtonDown(0)) {
 					pausa = false;
 				}
 			}
 			
-			if(input.getMouseX() >= 456 && input.getMouseX() <= 832 && input.getMouseY() >= 287 && input.getMouseY() <= 366){
-				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			if(Mouse.getX() >= 456 && Mouse.getX() <= 832 && Mouse.getY() >= 287 && Mouse.getY() <= 366){
+				if(Mouse.isButtonDown(0)) {
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					game.enterState(0);
 				}
 			}
