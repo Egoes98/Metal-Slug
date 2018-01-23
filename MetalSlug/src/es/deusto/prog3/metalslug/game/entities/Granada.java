@@ -89,7 +89,7 @@ public class Granada extends Circle {
 	}
 	
 	public void draw() {
-		granada.draw(x, y);
+		granada.drawCentered(x, y);
 	}
 
 }

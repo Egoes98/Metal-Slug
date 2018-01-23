@@ -30,6 +30,8 @@ public class Player extends Character {
 	private ArrayList<Bullet> bullets;
 	private boolean hasShot;
 	
+	private int score;
+	
 	public Player(ArrayList<Shape> platforms, ArrayList<Bullet> bullets) {
 		super(200, 200, 93, 114, 300, platforms);
 		this.bullets = bullets;
@@ -220,5 +222,13 @@ public class Player extends Character {
 			animations.get("JumpHead1").get(isFacing).start();		
 			animations.get("StandbyHead").get(isFacing).start();
 		
+	}
+	
+	public int getScore() {
+		return score;
+	}
+	
+	public void addScore(int i) {
+		score += i;
 	}
 }
