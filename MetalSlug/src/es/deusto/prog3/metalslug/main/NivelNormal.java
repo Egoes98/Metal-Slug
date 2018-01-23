@@ -63,7 +63,8 @@ public class NivelNormal extends BasicGameState {
 		granadas = new ArrayList<>();
 		enemies = BaseDeDatos.getEnemigos(nivel);
 		player.set(platforms, playerBullets);
-		enemies.add(new Enemy(1000, 200, 900, 1100));
+		player.resetPos();
+		// enemies.add(new Enemy(1000, 200, 900, 1100));
 		
 		for(Enemy e : enemies) {
 			e.setBullets(enemyBullets);
@@ -203,6 +204,7 @@ public class NivelNormal extends BasicGameState {
 			}
 
 			if (player.getX() > background.getWidth()) {
+				System.out.println(nivel);
 				if (nivel + 1 == 3) {
 					game.addState(new NivelBoss());
 					game.getState(100).init(gc, game);
@@ -271,6 +273,7 @@ public class NivelNormal extends BasicGameState {
 	}
 
 	private void addNewBullet(int x, int y) {
+		player.addScore(100);
 		if (player.getCenterX() < 640)
 			playerBullets.add(new Bullet(player.getShootingX(), player.getShootingY(), x, y, 1f));
 		else

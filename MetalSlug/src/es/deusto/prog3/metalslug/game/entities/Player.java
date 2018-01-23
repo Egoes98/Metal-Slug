@@ -260,4 +260,9 @@ public class Player extends Character {
 		super.setPlataformas(platforms);
 		this.bullets = playerBullets;
 	}
+
+	public void resetPos() {
+		// TODO Auto-generated method stub
+		this.setLocation(200, 200);
+	}
 }
