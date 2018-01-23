@@ -24,7 +24,7 @@ import es.deusto.prog3.metalslug.game.entities.Player;
 
 public class NivelNormal extends BasicGameState {
 
-	private int nivel;
+	private int nivel = 0;
 
 	private Player player;
 	private ArrayList<Shape> platforms;
@@ -109,7 +109,17 @@ public class NivelNormal extends BasicGameState {
 			player.drawDeathAnimation();
 			enemyBullets.clear();
 			if(player.isRestart()) {
-				game.getState(11).init(gc, game);
+				if (nivel == 3) {
+					game.addState(new NivelBoss());
+					game.getState(100).init(gc, game);
+					game.getState(10 + nivel).leave(gc, game);
+					game.enterState(100);
+				} else {
+					game.addState(new NivelNormal(nivel, player));
+					game.getState(10 + nivel).init(gc, game);
+					game.getState(10 + nivel).leave(gc, game);
+					game.enterState(nivel + 10);
+				}
 				player.setRestart(false);
 			}
 		}else {
