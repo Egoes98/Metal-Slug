@@ -64,8 +64,7 @@ public class NivelNormal extends BasicGameState {
 		enemies = BaseDeDatos.getEnemigos(nivel);
 		player.set(platforms, playerBullets);
 		player.resetPos();
-		enemies.add(new Enemy(1000, 200, 900, 1100));
-		player.resetPos();
+		
 		
 		// enemies.add(new Enemy(1000, 200, 900, 1100));
 		
@@ -109,6 +108,10 @@ public class NivelNormal extends BasicGameState {
 		if(player.isDead()) {
 			player.drawDeathAnimation();
 			enemyBullets.clear();
+			if(player.isRestart()) {
+				game.getState(11).init(gc, game);
+				player.setRestart(false);
+			}
 		}else {
 			player.drawPiernas();
 			player.drawCabeza();	
@@ -116,7 +119,7 @@ public class NivelNormal extends BasicGameState {
 		
 		for(Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
 			Enemy e = iterator.next();
-			g.fill(e);
+			e.draw();
 		}
 
 		g.setColor(Color.cyan);

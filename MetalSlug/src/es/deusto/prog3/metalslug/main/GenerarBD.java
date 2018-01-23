@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.geom.Shape;
 
 import es.deusto.prog3.metalslug.basededatos.BaseDeDatos;
+import es.deusto.prog3.metalslug.game.entities.Enemy;
 import es.deusto.prog3.metalslug.game.entities.Platform;
 import es.deusto.prog3.metalslug.game.entities.Slope;
 
@@ -39,7 +40,7 @@ public class GenerarBD {
 		platforms.add(new Platform(0, 640, 1500, 80, false));
 		platforms.add(new Platform(-20, 0, 20, 720, false));
 		BaseDeDatos.guardarPlataformas(platforms, 1);
-		
+		BaseDeDatos.guardarEnemigo(810, 600, 600, 1140, 1);
 		// Nivel 2
 		platforms.clear();
 		platforms.add(new Platform(0, 563, 865, 40, false));
