@@ -221,13 +221,9 @@ public class Player extends Character {
 			animations.get("RunFoot2").get(isFacing).stop();
 			animations.get("JumpFoot1").get(isFacing).stop();
 			animations.get("StandbyFoot").get(isFacing).stop();
-			animations.get("Shoot").get(isFacing).stop();
-			animations.get("Shoot").get(isFacing).stop();
 			animations.get("JumpHead2").get(isFacing).stop();		
 			animations.get("JumpHead2").get(isFacing).stop();		
-			animations.get("RunHead").get(isFacing).stop();		
-			animations.get("Shoot").get(isFacing).stop();		
-			animations.get("Shoot").get(isFacing).stop();		
+			animations.get("RunHead").get(isFacing).stop();			
 			animations.get("JumpHead1").get(isFacing).stop();		
 			animations.get("StandbyHead").get(isFacing).stop();
 		
@@ -238,14 +234,10 @@ public class Player extends Character {
 			animations.get("RunFoot1").get(isFacing).start();
 			animations.get("RunFoot2").get(isFacing).start();		
 			animations.get("JumpFoot1").get(isFacing).start();	
-			animations.get("StandbyFoot").get(isFacing).start();		
-			animations.get("Shoot").get(isFacing).start();		
-			animations.get("Shoot").get(isFacing).start();		
+			animations.get("StandbyFoot").get(isFacing).start();				
 			animations.get("JumpHead2").get(isFacing).start();		
 			animations.get("JumpHead2").get(isFacing).start();		
-			animations.get("RunHead").get(isFacing).start();		
-			animations.get("Shoot").get(isFacing).start();		
-			animations.get("Shoot").get(isFacing).start();		
+			animations.get("RunHead").get(isFacing).start();	
 			animations.get("JumpHead1").get(isFacing).start();		
 			animations.get("StandbyHead").get(isFacing).start();
 		
