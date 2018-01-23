@@ -47,7 +47,7 @@ public class Character extends Rectangle {
 						setX(getX() + rightOverlap);
 					} else if (overlappingSide == bottomOverlap) {
 						if(atravesando != platform)
-							setY(getY() - bottomOverlap);
+							setY(getY() - bottomOverlap + 1);
 						if (vy > 0)
 							vy = 0;
 						hasjumped = false;

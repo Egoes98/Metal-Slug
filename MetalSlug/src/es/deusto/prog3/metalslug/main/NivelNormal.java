@@ -97,6 +97,8 @@ public class NivelNormal extends BasicGameState {
 		scorefont.addAsciiGlyphs();
 		scorefont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
 		scorefont.loadGlyphs();
+		
+		time = 100000;
 	}
 
 	@Override
@@ -218,7 +220,7 @@ public class NivelNormal extends BasicGameState {
 				}
 			}
 			//Timer
-			time += delta;
+			time -= delta;
 		}
 		
 		//Menu Pausa

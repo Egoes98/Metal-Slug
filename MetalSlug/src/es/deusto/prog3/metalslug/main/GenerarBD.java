@@ -43,14 +43,14 @@ public class GenerarBD {
 		// Nivel 2
 		platforms.clear();
 		platforms.add(new Platform(0, 563, 865, 40, false));
-        platforms.add(new Slope(652, 563, 875, 489));
+        platforms.add(new Slope(642, 580, 875, 489));
         platforms.add(new Platform(0, 601, 7232, 40, false));
         platforms.add(new Platform(1300, 489, 137, 100, false));
         platforms.add(new Platform(1729, 489, 178, 100, false));
         platforms.add(new Platform(2310, 489, 720, 100, false));
         platforms.add(new Slope(3684, 579, 3456, 489));
         platforms.add(new Platform(3456, 579, 1690, 40, false));
-        platforms.add(new Slope(4964, 579, 5175, 480));
+        platforms.add(new Slope(4964, 589, 5175, 480));
         platforms.add(new Platform(5997, 489, 175, 100, false));
         platforms.add(new Platform(6581, 489, 656, 100, false));
         platforms.add(new Platform(4133, 437, 189, 10, true));
