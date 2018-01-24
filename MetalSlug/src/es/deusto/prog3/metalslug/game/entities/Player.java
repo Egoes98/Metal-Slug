@@ -33,7 +33,7 @@ public class Player extends Character {
 	
 	private int score;
 	private boolean restart = false;
-	private boolean boss;
+	private boolean boss = false;
 	
 	public boolean isRestart() {
 		return restart;

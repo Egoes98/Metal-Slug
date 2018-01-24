@@ -29,7 +29,6 @@ public class NivelBoss extends BasicGameState {
 	private Boss boss;
 	private ArrayList<Bullet> playerBullets;
 	private Rectangle healthBar;
-	private ArrayList<Granada> granadas;
 	
 	private Image background;
 	private Input input;
@@ -57,14 +56,7 @@ public class NivelBoss extends BasicGameState {
 			b.draw();
 		}
 		g.setColor(Color.green);
-		for(Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
-			Granada gr = iterator.next();
-			if(gr.getStatus() == Granada.STATUS_EXPLODING) {
-				gr.drawExplosion();
-			}
-			else 
-				g.fill(gr);
-		}
+		
 		
 		boss.draw();
 		g.setColor(Color.red);
@@ -77,7 +69,7 @@ public class NivelBoss extends BasicGameState {
 		platforms = new ArrayList<>();
 		enemyBullets = new ArrayList<>();
 		playerBullets = new ArrayList<>();
-		granadas = new ArrayList<>();
+		
 		if(player == null)
 			player = new Player(platforms, playerBullets);
 		else {
@@ -130,16 +122,6 @@ public class NivelBoss extends BasicGameState {
 			}
 		}
 		
-		for (Iterator<Granada> iterator = granadas.iterator(); iterator.hasNext();) {
-			Granada gr = iterator.next();
-			gr.update(delta);
-			gr.detectCollisions();
-			gr.detectCollisions(boss);
-			if (gr.getStatus() == Granada.STATUS_EXPLODED) {
-				iterator.remove();
-			}
-		}
-		
 		boss.update(delta);
 		healthBar.setWidth(boss.getHealth() * 10);
 		
@@ -163,8 +145,6 @@ public class NivelBoss extends BasicGameState {
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_SPACE) {
 			player.jump();
-		} else if (key == Input.KEY_G) {
-			granadas.add(new Granada(player.getCenterX(), player.getCenterY(), player.getMovingLeft(), platforms));
 		}
 	}
 	
