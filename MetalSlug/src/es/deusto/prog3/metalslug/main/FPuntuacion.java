@@ -56,7 +56,7 @@ public class FPuntuacion extends BasicGameState{
 		fondo_fs = new Image ("resources/Menu/Menu_fp/fondo_fp.png");
 		input = gc.getInput();
 
-		scorefont = new UnicodeFont("resources/ARCADECLASSIC.TTF", 40, false, false);
+		scorefont = new UnicodeFont("resources/mini_pixel-7.ttf", 40, false, false);
 		scorefont.addAsciiGlyphs();
 		scorefont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
 		scorefont.loadGlyphs();
@@ -86,7 +86,7 @@ public class FPuntuacion extends BasicGameState{
 			if(tF) {
 				g.setColor(Color.white);
 				nJugador.render(gc, g);
-			}else {
+			} else {
 				texto.draw(402,314);
 				b_comprobacion.draw(310,448);
 			}
