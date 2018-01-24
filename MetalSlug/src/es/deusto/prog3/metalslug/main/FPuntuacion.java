@@ -23,7 +23,8 @@ import es.deusto.prog3.metalslug.basededatos.BaseDeDatos;
 import es.deusto.prog3.metalslug.game.entities.Player;
 
 public class FPuntuacion extends BasicGameState{
-	Image fondo_fs, m_ij, n_best, b_comprobacion, texto;
+	Image fondo_fs, m_ij, n_best, b_comprobacion;
+	String texto;
 	
 	int mouseY;
 	int mouseX;
@@ -62,7 +63,7 @@ public class FPuntuacion extends BasicGameState{
 		scorefont.loadGlyphs();
 		
 		b_comprobacion = new Image("resources/Menu/Menu_fp/b_comprobacion.png");
-		texto = new Image("resources/Menu/Menu_fp/texto.png");
+		texto = "Player already exists.\nAre you sure you want to save with this name?";
 		m_ij = new Image("resources/Menu/Menu_fp/m_ij.png");
 		n_best = new Image("resources/Menu/Menu_fp/newBest.png");
 		nJugador = new TextField(gc, scorefont, 510, 388, 250, 40);
@@ -87,8 +88,8 @@ public class FPuntuacion extends BasicGameState{
 				g.setColor(Color.white);
 				nJugador.render(gc, g);
 			} else {
-				texto.draw(402,314);
 				b_comprobacion.draw(310,448);
+				scorefont.drawString(402, 314, texto);
 			}
 		}else {
 			scorefont.drawString(304, 433, String.format("%06d", BaseDeDatos.getPuntuacionJ(jugador)));
@@ -105,6 +106,7 @@ public class FPuntuacion extends BasicGameState{
 			if(input.getMouseX() >= 427 && input.getMouseX() <= 798 && input.getMouseY() >= 628
 					&& input.getMouseY() <= 706){
 				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+					((Menu_P) sbg.getState(2)).updatePoints();
 					sbg.enterState(2);
 				}
 			}

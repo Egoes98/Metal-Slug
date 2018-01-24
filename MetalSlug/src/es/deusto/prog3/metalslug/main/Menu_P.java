@@ -10,6 +10,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -25,12 +27,20 @@ public class Menu_P extends BasicGameState{
 	boolean MM;
 	
 	HashMap<String, Integer> p;
+	private UnicodeFont scorefont;
+	
+	
 	
 	public Menu_P(int state) {
 	}
 
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
+		
+		scorefont = new UnicodeFont("resources/mini_pixel-7.ttf", 40, false, false);
+		scorefont.addAsciiGlyphs();
+		scorefont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
+		scorefont.loadGlyphs();
 		fondo = new Image ("resources/Menu/Menu_p/fondo_logo.jpg");
 
 		b_MM = new Image("resources/Menu/Menu_p/Menu_principal.png");
@@ -52,15 +62,15 @@ public class Menu_P extends BasicGameState{
 		}
 		
 		int y = 296;
-		for(String key:p.keySet()) {
-			g.drawString("Jugador: " +key + " Puntos:" + p.get(key), 433, y);
-			y += 20;
+		for(String key : p.keySet()) {
+			scorefont.drawString(433, y, "Jugador: " +key + " Puntos:" + p.get(key));
+			y += 30;
 		}
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
-		p = BaseDeDatos.getPuntuacionR();
+		
 		
 		mouseX = Mouse.getX();
 		mouseY = Mouse.getY();
@@ -81,5 +91,9 @@ public class Menu_P extends BasicGameState{
 	public int getID() {
 		// TODO Auto-generated method stub
 		return 2;
+	}
+	
+	public void updatePoints() {
+		p = BaseDeDatos.getPuntuacionR();
 	}
 }

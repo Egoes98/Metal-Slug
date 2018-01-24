@@ -224,10 +224,15 @@ public class NivelNormal extends BasicGameState {
 					game.getState(10 + nivel).leave(gc, game);
 					game.enterState(100);
 				} else {
+					game.addState(new FPuntuacion(0, player));
+					game.getState(4).init(gc, game);
+					game.enterState(4);
+					/*
 					game.addState(new NivelNormal(nivel + 1, player));
 					game.getState(10 + nivel + 1).init(gc, game);
 					game.getState(10 + nivel).leave(gc, game);
 					game.enterState(nivel + 10 + 1);
+					*/
 				}
 			}
 			// Timer
@@ -288,7 +293,6 @@ public class NivelNormal extends BasicGameState {
 		if (key == Input.KEY_SPACE) {
 			player.jump();
 		} else if (key == Input.KEY_G) {
-			// TODO Granadas limitadas, comprobar a ver si quedan
 			granadas.add(new Granada(player.getCenterX(), player.getCenterY(), player.getMovingLeft(), platforms));
 		}
 	}

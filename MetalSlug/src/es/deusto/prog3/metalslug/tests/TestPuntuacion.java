@@ -59,7 +59,7 @@ public class TestPuntuacion extends BasicGame {
 		newBest = false;
 		bg = new Image("resources/Menu_fp/fondo_fp2.png");
 		volver = new Image("resources/Menu_fp/volver.png");
-		nb = new Image("resources/Menu_fp/newBest.png");
+		nb = new Image("resources/Menu/Menu_fp/newBest.png");
 		scorefont = new UnicodeFont("resources/mini_pixel-7.ttf", 60, false, false);
 		scorefont.addAsciiGlyphs();
 		scorefont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
@@ -81,7 +81,7 @@ public class TestPuntuacion extends BasicGame {
 		if (button == 0) {
 			if (new Rectangle(427, 628, 373, 79).contains(x, y)) {
 				if (!guardado) {
-					if(false /*BaseDeDatos.existeJ("jugador") && BaseDeDatos.mayorP("jugador", score)*/) {
+					if(true /*BaseDeDatos.existeJ("jugador") && BaseDeDatos.mayorP("jugador", score)*/) {
 						newBest = true;
 					}
 					System.out.println("Guardado jugador " + nJugador.getText());

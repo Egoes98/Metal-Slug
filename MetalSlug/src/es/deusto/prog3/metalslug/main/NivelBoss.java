@@ -164,7 +164,6 @@ public class NivelBoss extends BasicGameState {
 		if (key == Input.KEY_SPACE) {
 			player.jump();
 		} else if (key == Input.KEY_G) {
-			// TODO Granadas limitadas, comprobar a ver si quedan
 			granadas.add(new Granada(player.getCenterX(), player.getCenterY(), player.getMovingLeft(), platforms));
 		}
 	}
