@@ -67,9 +67,9 @@ public class BaseDeDatos {
 				}
 			}
 			if (repetido) {
-				statement.executeUpdate("update puntuacion set puntos=" + puntos + " WHERE jugador='" + jugador);
+				statement.executeUpdate("update puntuacion set puntos=" + puntos + " WHERE jugador='" + jugador+"'");
 			} else {
-				statement.executeUpdate("insert into puntuacion values(" + jugador + ", " + puntos +")");
+				statement.executeUpdate("insert into puntuacion values('" + jugador + "', " + puntos +")");
 			}
 			repetido = false;
 
@@ -100,7 +100,7 @@ public class BaseDeDatos {
 		int puntJ = 0;
 		try {
 			conectar();
-			ResultSet rp = statement.executeQuery("select puntos from puntuacion where jugador="+Jugador+"");
+			ResultSet rp = statement.executeQuery("select puntos from puntuacion where jugador='"+Jugador+"'");
 			while (rp.next()) {
 				puntJ = rp.getInt("puntos");
 			}
