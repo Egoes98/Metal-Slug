@@ -84,8 +84,8 @@ public class Granada extends Circle {
 		if(this.intersects(boss)) {
 			if(this.status == STATUS_FLYING) {
 				status = STATUS_EXPLODING;
-				boss.hit();
 			}
+			boss.hit();
 		}
 	}
 

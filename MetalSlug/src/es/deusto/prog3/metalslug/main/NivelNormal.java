@@ -87,7 +87,7 @@ public class NivelNormal extends BasicGameState {
 				new Image("resources/Interfaz/n6.png"), new Image("resources/Interfaz/n7.png"),
 				new Image("resources/Interfaz/n8.png"), new Image("resources/Interfaz/n9.png") };
 
-		scorefont = new UnicodeFont("resources/ARCADECLASSIC.TTF", 40, false, false);
+		scorefont = new UnicodeFont("resources/mini_pixel-7.ttf", 40, false, false);
 		scorefont.addAsciiGlyphs();
 		scorefont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
 		scorefont.loadGlyphs();
@@ -108,13 +108,6 @@ public class NivelNormal extends BasicGameState {
 		if(player.isDead()) {
 			player.drawDeathAnimation();
 			enemyBullets.clear();
-			if(player.isRestart()) {
-				game.addState(new NivelNormal(nivel, player));
-				game.getState(10 + nivel).init(gc, game);
-				game.getState(10 + nivel).leave(gc, game);
-				game.enterState(nivel + 10);
-				player.setRestart(false);
-			}
 		}else {
 			player.drawPiernas();
 			player.drawCabeza();	
@@ -165,7 +158,7 @@ public class NivelNormal extends BasicGameState {
 		}
 
 		g.setColor(Color.white);
-		scorefont.drawString(1000, 20, String.format("score  %06d", player.getScore()));
+		scorefont.drawString(1090, 20, String.format("SCORE: %06d", player.getScore()));
 
 	}
 
@@ -173,6 +166,14 @@ public class NivelNormal extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
 		// TODO Auto-generated method stub
 		if (!pausa) {
+			if(player.isRestart()) {
+				player.addScore(-500);
+				game.addState(new NivelNormal(nivel, player));
+				game.getState(10 + nivel).init(gc, game);
+				game.getState(10 + nivel).leave(gc, game);
+				game.enterState(nivel + 10);
+				player.setRestart(false);
+			}
 			player.update(delta);
 			if (player.isCanShoot() && input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 				addNewBullet(input.getMouseX(), input.getMouseY());
@@ -200,6 +201,7 @@ public class NivelNormal extends BasicGameState {
 				Enemy e = iterator.next();
 				e.update(delta);
 				if (e.isDead()) {
+					player.addScore(200);
 					iterator.remove(); // Sustituir por animación de morir?
 
 				}
@@ -214,7 +216,7 @@ public class NivelNormal extends BasicGameState {
 			}
 
 			if (player.getX() > background.getWidth()) {
-				System.out.println(nivel);
+				player.addScore(time/100);
 				if (nivel + 1 == 3) {
 					game.addState(new NivelBoss(player));
 					game.getState(100).init(gc, game);
@@ -291,7 +293,6 @@ public class NivelNormal extends BasicGameState {
 	}
 
 	private void addNewBullet(int x, int y) {
-		player.addScore(100);
 		if (player.getCenterX() < 640)
 			playerBullets.add(new Bullet(player.getShootingX(), player.getShootingY(), x, y, 1f));
 		else
