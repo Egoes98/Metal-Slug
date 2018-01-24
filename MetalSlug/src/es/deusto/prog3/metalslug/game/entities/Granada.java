@@ -101,4 +101,15 @@ public class Granada extends Circle {
 		granada.drawCentered(x, y);
 	}
 
+	public void detectCollisions(ArrayList<Enemy> enemies) {
+		// TODO Auto-generated method stub
+		for(Enemy e : enemies) {
+			if(this.intersects(e)) {
+				e.die();
+				if(status == STATUS_FLYING)
+					status = STATUS_EXPLODING;
+			}
+		}
+	}
+
 }

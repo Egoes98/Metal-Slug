@@ -190,15 +190,15 @@ public class NivelNormal extends BasicGameState {
 				Granada gr = iterator.next();
 				gr.update(delta);
 				gr.detectCollisions();
+				gr.detectCollisions(enemies);
 				if (gr.getStatus() == Granada.STATUS_EXPLODED) {
-					// TODO comprobar colisiones con enemigos
 					iterator.remove();
 				}
 			}
 
 			for (Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
 				Enemy e = iterator.next();
-				e.update(delta, playerBullets, granadas);
+				e.update(delta);
 				if (e.isDead()) {
 					iterator.remove(); // Sustituir por animación de morir?
 

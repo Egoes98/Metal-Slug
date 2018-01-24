@@ -54,7 +54,7 @@ public class Enemy extends Character {
 		return (float) Math.hypot(a[0] - b[0], a[1] - b[1]);
 	}
 
-	public void update(int delta, ArrayList<Bullet> playerbullets, ArrayList<Granada> granadas) {
+	public void update(int delta) {
 		timeCounter += delta;
 		if(!shooting) {
 			moveX(delta, movingLeft);

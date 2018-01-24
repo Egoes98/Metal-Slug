@@ -43,7 +43,7 @@ public class FPuntuacion extends BasicGameState{
 	public FPuntuacion(int state, Player player) {
 		super();
 		this.player = player;
-		this.score = score;
+		this.score = player.getScore();
 		// TODO Auto-generated constructor stub
 
 	}

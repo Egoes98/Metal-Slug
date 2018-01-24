@@ -133,7 +133,6 @@ public class NivelBoss extends BasicGameState {
 			gr.detectCollisions();
 			gr.detectCollisions(boss);
 			if (gr.getStatus() == Granada.STATUS_EXPLODED) {
-				// TODO comprobar colisiones con enemigos
 				iterator.remove();
 			}
 		}
