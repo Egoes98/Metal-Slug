@@ -53,7 +53,7 @@ public class FPuntuacion extends BasicGameState{
 		fondo_fs = new Image ("resources/Menu/Menu_fp/fondo_fp.png");
 		input = gc.getInput();
 
-		scorefont = new UnicodeFont("resources/ARCADECLASSIC.TTF", 40, false, false);
+		scorefont = new UnicodeFont("resources/mini_pixel-7.TTF", 40, false, false);
 		scorefont.addAsciiGlyphs();
 		scorefont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
 		scorefont.loadGlyphs();

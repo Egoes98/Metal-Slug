@@ -80,8 +80,10 @@ public class NivelBoss extends BasicGameState {
 		granadas = new ArrayList<>();
 		if(player == null)
 			player = new Player(platforms, playerBullets);
-		else
+		else {
+			player.resetPos();
 			player.set(platforms, playerBullets);
+		}
 		boss = new Boss(platforms, enemyBullets);
 		platforms.add(new Platform(0, 604, 1280, 20, false));
 		platforms.add(new Platform(-20, 0, 20, 720, false));
