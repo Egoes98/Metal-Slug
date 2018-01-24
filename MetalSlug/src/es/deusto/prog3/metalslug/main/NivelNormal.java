@@ -63,6 +63,7 @@ public class NivelNormal extends BasicGameState {
 		granadas = new ArrayList<>();
 		enemies = BaseDeDatos.getEnemigos(nivel);
 		player.set(platforms, playerBullets);
+		player.setBoss(false);
 		player.resetPos();
 		
 		

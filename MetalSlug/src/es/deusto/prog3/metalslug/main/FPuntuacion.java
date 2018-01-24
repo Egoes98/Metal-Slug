@@ -38,7 +38,10 @@ public class FPuntuacion extends BasicGameState{
 	String jugador = "";
 	TextField nJugador;
 	boolean tF, mIJ, mC, nB; 
-	
+	//tF Para saber si mostramos el TextField
+	//mIJ Para saber si mostrar el Menu de insertar jugador
+	//mC Para saber si se muestran los componentes de comprobacion
+	//nB Se activa cuando la puntuacion nueva es mayor que la puntuacion de la BD y muestra una Imagen en pantalla
 	
 	public FPuntuacion(int state, Player player) {
 		super();
