@@ -6,7 +6,7 @@ Objetivos principales del proyecto:
 
   -Crear una inteligencia para los enemigos y que esta funcione correctamente.
   
-  -Crear varios niveles con diferentes temáticas y un boss finales.
+  -Crear varios niveles con diferentes temáticas y un boss final.
   
   -Un sistema de puntuación. Es decir que al completar el juego te diga la puntuación que has conseguido dependiendo de si te han golpeado y el tiempo que has tardado en completarlo.
  
