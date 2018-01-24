@@ -117,26 +117,28 @@ public class FPuntuacion extends BasicGameState{
 					tF = false;
 				}
 			}
-			if(BaseDeDatos.existeJ(jugador)) {
-				mC = true;
-				if(input.getMouseX() >= 310 && input.getMouseX() <= 414 && input.getMouseY() >= 457 && input.getMouseY() <= 559 
-						&& input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-					mC = false;
-					tF = true;
-				}else if(input.getMouseX() >= 870 && input.getMouseX() <= 977 && input.getMouseY() >= 449 && input.getMouseY() <= 554 
-						&& input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-					mIJ = true;
-					mC = false;
-					if(BaseDeDatos.mayorP(jugador, player.getScore())) {
-					}else {
-						BaseDeDatos.agregarPuntuacion(jugador, player.getScore());
-						nB = true;
+				if(!tF) {
+				if(BaseDeDatos.existeJ(jugador)) {
+					mC = true;
+					if(input.getMouseX() >= 310 && input.getMouseX() <= 414 && input.getMouseY() >= 457 && input.getMouseY() <= 559 
+							&& input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+						mC = false;
+						tF = true;
+					}else if(input.getMouseX() >= 870 && input.getMouseX() <= 977 && input.getMouseY() >= 449 && input.getMouseY() <= 554 
+							&& input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+						mIJ = true;
+						mC = false;
+						if(BaseDeDatos.mayorP(jugador, player.getScore())) {
+						}else {
+							BaseDeDatos.agregarPuntuacion(jugador, player.getScore());
+							nB = true;
+						}
 					}
+				}else{
+					BaseDeDatos.agregarPuntuacion(jugador, player.getScore());
+					nB = true;
+					mIJ = true;
 				}
-			}else{
-				BaseDeDatos.agregarPuntuacion(jugador, player.getScore());
-				nB = true;
-				mIJ = true;
 			}
 		}
 	}
