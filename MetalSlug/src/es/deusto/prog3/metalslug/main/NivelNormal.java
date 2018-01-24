@@ -224,15 +224,10 @@ public class NivelNormal extends BasicGameState {
 					game.getState(10 + nivel).leave(gc, game);
 					game.enterState(100);
 				} else {
-					game.addState(new FPuntuacion(0, player));
-					game.getState(4).init(gc, game);
-					game.enterState(4);
-					/*
 					game.addState(new NivelNormal(nivel + 1, player));
 					game.getState(10 + nivel + 1).init(gc, game);
 					game.getState(10 + nivel).leave(gc, game);
 					game.enterState(nivel + 10 + 1);
-					*/
 				}
 			}
 			// Timer

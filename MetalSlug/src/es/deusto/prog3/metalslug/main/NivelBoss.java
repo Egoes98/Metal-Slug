@@ -126,7 +126,9 @@ public class NivelBoss extends BasicGameState {
 		healthBar.setWidth(boss.getHealth() * 10);
 		
 		if(boss.getHealth() >= 0) {
-			terminado = true;
+			game.addState(new FPuntuacion(0, player));
+			game.getState(4).init(gc, game);
+			game.enterState(4);
 		}
 	}
 

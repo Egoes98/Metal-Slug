@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.swing.JComboBox;
 
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -61,13 +62,13 @@ public class Menu_P extends BasicGameState{
 			b_MM.draw(1074,633);
 		}
 		
-		scorefont.drawString(433, 300, String.format("PLAYERS"), Color.gray);
-		scorefont.drawString(600, 300, String.format("POINTS"), Color.gray);
+		scorefont.drawString(433, 300, "PLAYERS", Color.gray);
+		scorefont.drawString(600, 300, "POINTS", Color.gray);
 		
 		int y = 340;
 		for(String key : p.keySet()) {
 			g.setColor(Color.white);
-			scorefont.drawString(433, y, String.format(key.toUpperCase()));
+			scorefont.drawString(433, y, key.toUpperCase());
 			scorefont.drawString(600, y, String.format("%06d",p.get(key)));
 			y += 40;
 		}
