@@ -80,6 +80,10 @@ public class Boss extends Circle {
 	public int getHealth() {
 		return health;
 	}
+	
+	public void setHealth(int h) {
+		health = h;
+	}
 	/**
 	 * Dibuja la animación
 	 */

@@ -32,7 +32,7 @@ public class NivelBoss extends BasicGameState {
 	
 	private Image background;
 	private Input input;
-	private boolean terminado;
+	private boolean reset;
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
@@ -125,10 +125,19 @@ public class NivelBoss extends BasicGameState {
 		boss.update(delta);
 		healthBar.setWidth(boss.getHealth() * 10);
 		
-		if(boss.getHealth() >= 0) {
+		if(boss.getHealth() <= 0) {
 			game.addState(new FPuntuacion(0, player));
 			game.getState(4).init(gc, game);
 			game.enterState(4);
+		}
+		
+		if(player.isDead()) {
+			reset = true;
+			enemyBullets.clear();
+			boss.setHealth(100);
+		} else if(reset) {
+			boss.setLocation(700, 200);
+			reset = false;
 		}
 	}
 
