@@ -109,17 +109,10 @@ public class NivelNormal extends BasicGameState {
 			player.drawDeathAnimation();
 			enemyBullets.clear();
 			if(player.isRestart()) {
-				if (nivel == 3) {
-					game.addState(new NivelBoss());
-					game.getState(100).init(gc, game);
-					game.getState(10 + nivel).leave(gc, game);
-					game.enterState(100);
-				} else {
-					game.addState(new NivelNormal(nivel, player));
-					game.getState(10 + nivel).init(gc, game);
-					game.getState(10 + nivel).leave(gc, game);
-					game.enterState(nivel + 10);
-				}
+				game.addState(new NivelNormal(nivel, player));
+				game.getState(10 + nivel).init(gc, game);
+				game.getState(10 + nivel).leave(gc, game);
+				game.enterState(nivel + 10);
 				player.setRestart(false);
 			}
 		}else {
@@ -223,7 +216,7 @@ public class NivelNormal extends BasicGameState {
 			if (player.getX() > background.getWidth()) {
 				System.out.println(nivel);
 				if (nivel + 1 == 3) {
-					game.addState(new NivelBoss());
+					game.addState(new NivelBoss(player));
 					game.getState(100).init(gc, game);
 					game.getState(10 + nivel).leave(gc, game);
 					game.enterState(100);

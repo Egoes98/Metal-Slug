@@ -65,7 +65,7 @@ public class MainMenu extends BasicGameState{
 		mouseX = Mouse.getX();
 		mouseY = Mouse.getY();
 		if(gc.getInput().isKeyDown(Input.KEY_B)) {
-			sbg.addState(new NivelBoss());
+			sbg.addState(new NivelBoss(null));
 			sbg.getState(100).init(gc, sbg);
 			sbg.enterState(100);
 		}

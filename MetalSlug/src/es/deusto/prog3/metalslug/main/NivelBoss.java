@@ -78,7 +78,10 @@ public class NivelBoss extends BasicGameState {
 		enemyBullets = new ArrayList<>();
 		playerBullets = new ArrayList<>();
 		granadas = new ArrayList<>();
-		player = new Player(platforms, playerBullets);
+		if(player == null)
+			player = new Player(platforms, playerBullets);
+		else
+			player.set(platforms, playerBullets);
 		boss = new Boss(platforms, enemyBullets);
 		platforms.add(new Platform(0, 604, 1280, 20, false));
 		platforms.add(new Platform(-20, 0, 20, 720, false));
@@ -141,6 +144,11 @@ public class NivelBoss extends BasicGameState {
 		if(boss.getHealth() >= 0) {
 			terminado = true;
 		}
+	}
+
+	public NivelBoss(Player player) {
+		super();
+		this.player = player;
 	}
 
 	@Override
