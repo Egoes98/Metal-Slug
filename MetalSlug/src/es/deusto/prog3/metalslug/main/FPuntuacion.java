@@ -63,7 +63,7 @@ public class FPuntuacion extends BasicGameState{
 		scorefont.loadGlyphs();
 		
 		b_comprobacion = new Image("resources/Menu/Menu_fp/b_comprobacion.png");
-		texto = "Player already exists.\nAre you sure you want to save with this name?";
+		texto = "There is already an score with this name\nAre you sure you want to save?";
 		m_ij = new Image("resources/Menu/Menu_fp/m_ij.png");
 		n_best = new Image("resources/Menu/Menu_fp/newBest.png");
 		nJugador = new TextField(gc, scorefont, 510, 388, 250, 40);
