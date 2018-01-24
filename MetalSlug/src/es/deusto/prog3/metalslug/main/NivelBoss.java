@@ -84,6 +84,7 @@ public class NivelBoss extends BasicGameState {
 			player.resetPos();
 			player.set(platforms, playerBullets);
 		}
+		player.setBoss(true);
 		boss = new Boss(platforms, enemyBullets);
 		platforms.add(new Platform(0, 604, 1280, 20, false));
 		platforms.add(new Platform(-20, 0, 20, 720, false));
@@ -99,7 +100,7 @@ public class NivelBoss extends BasicGameState {
 		
 		background = new Image("resources/data/BossBackground.png");
 	}
-
+	
 	@Override
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException{
 		// TODO Auto-generated method stub
@@ -167,11 +168,7 @@ public class NivelBoss extends BasicGameState {
 			granadas.add(new Granada(player.getCenterX(), player.getCenterY(), player.getMovingLeft(), platforms));
 		}
 	}
-	/**
-	 * Añade una bala desde player a x, y
-	 * @param x
-	 * @param y
-	 */
+	
 	private void addNewBullet(int x, int y) {
 		playerBullets.add(new Bullet(player.getShootingX(), player.getShootingY(), x, y, 1f));
 	}

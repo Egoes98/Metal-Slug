@@ -26,13 +26,14 @@ public class Player extends Character {
 	
 	private boolean canShoot = false;
 	
-	private int lives;
+
 	private ArrayList<Bullet> bullets;
 	private boolean hasShot;
 	private boolean done = false;
 	
 	private int score;
 	private boolean restart = false;
+	private boolean boss;
 	
 	public boolean isRestart() {
 		return restart;
@@ -60,14 +61,9 @@ public class Player extends Character {
 		animations.get("Die").get("RIGHT").setLooping(false);
 		animations.get("Die").get("LEFT").setLooping(false);
 		isFacing = "RIGHT";
-		lives = 3;
+		
 	}
-	/**
-	 * Añade una animación al mapa
-	 * @param name
-	 * @param images
-	 * @param duration
-	 */
+
 	private void addAnimation(String name, Image[] images, int duration) {
 		animation = new HashMap<String, Animation>();
 		
@@ -83,7 +79,7 @@ public class Player extends Character {
 		
 		
 	}
-	
+
 	public void jump() {
 		// TODO Auto-generated method stub
 		if(!hasjumped) {
@@ -95,57 +91,76 @@ public class Player extends Character {
 
 	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * Actualiza su posición, detecta colisiones y actualiza estado de disparo
-	 * @param delta
-	 */
 	public void update(int delta) {
-		
-		if(input.isKeyDown(Input.KEY_A)) {
-			moveX(delta, true);
-			movingLeft = true;
-			move = true;
+		if(!isDead()) {
+			if(input.isKeyDown(Input.KEY_A)) {
+				moveX(delta, true);
+				movingLeft = true;
+				move = true;
+				
+				isFacing = "LEFT";
+			}else if(input.isKeyDown(Input.KEY_D)) {
+				moveX(delta, false);
+				movingLeft = false;
+				
+				move = true;
+				isFacing = "RIGHT";
+			}else {
+				move = false;
+				firstRun = true;
+			}
 			
-			isFacing = "LEFT";
-		}else if(input.isKeyDown(Input.KEY_D)) {
-			moveX(delta, false);
-			movingLeft = false;
+			if(!boss) {
+				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && getCenterX() > input.getMouseX() && getCenterX() < 640 && isFacing == "LEFT") {
+					shoot  = true;
+				}else if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && getCenterX() > input.getMouseX() + (getCenterX() - 640) && isFacing == "LEFT") {
+					shoot  = true;
+				}else if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && input.getMouseX() > getCenterX() && getCenterX() < 640 && isFacing == "RIGHT") {
+					shoot  = true;
+				}else if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && input.getMouseX() + (getCenterX() - 640) > getCenterX() && isFacing == "RIGHT" ) {
+					shoot  = true;
+				}else {
+					shoot = false;
+				}
+			}else {
+				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && getCenterX() > input.getMouseX() && isFacing == "LEFT") {
+					shoot  = true;
+				}else if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && input.getMouseX() > getCenterX() && isFacing == "RIGHT") {
+					shoot  = true;
+				}else {
+					shoot = false;
+				}
+			}
 			
-			move = true;
-			isFacing = "RIGHT";
-		}else {
-			move = false;
-			firstRun = true;
-		}
-		
-		if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			shoot  = true;
-		}else {
-			shoot = false;
+			if(animations.get("Shoot").get(isFacing).getFrame() == 1) {
+				
+				if(!hasShot) {
+					canShoot = true;
+					hasShot = true;
+				}
+			} else {
+				canShoot = false;
+				hasShot = false;
+			}
 		}
 		
 		moveY(delta);
 		detectPlatformCollisions();
-		
-		if(animations.get("Shoot").get(isFacing).getFrame() == 1) {
-			if(!hasShot) {
-				canShoot = true;
-				hasShot = true;
-			}
-		} else {
-			canShoot = false;
-			hasShot = false;
-		}
-		
-		
+
 	}
 	
+	public boolean isBoss() {
+		return boss;
+	}
+
+	public void setBoss(boolean boss) {
+		this.boss = boss;
+	}
+
 	public boolean getMovingLeft() {
 		return movingLeft;
 	}
-	/**
-	 * Dibuja la cabeza con su animación correspondiente
-	 */
+
 	public void drawCabeza() {
 		
 		if(move && shoot && isFacing == "LEFT") {
@@ -169,9 +184,7 @@ public class Player extends Character {
 		}
 		
 	}
-	/**
-	 * Dibuja las piernas con su animación correspondiente
-	 */
+
 	public void drawPiernas() {
 		if(move && firstRun) {
 			animations.get("RunFoot1").get(isFacing).draw(x,y);
@@ -189,17 +202,14 @@ public class Player extends Character {
 		return done ;
 	}
 	
-	public int getLives() {
-		return lives;
-	}
+	
 
 	@Override
 	public void die() {
 		// TODO Auto-generated method stub
 		super.die();
-		if(done) lives -= 1;
 
-		if(lives > 0 && done) {
+		if(done) {
 			this.setLocation(200, 200);
 			this.setDead(false);
 			done = false;
@@ -215,10 +225,7 @@ public class Player extends Character {
 	public void setCanShoot(boolean canShoot) {
 		this.canShoot = canShoot;
 	}
-	/**
-	 * Calcula la posición x donde está la pistola (y tienen que salir las balas)
-	 * @return
-	 */
+
 	public float getShootingX() {
 		if(isFacing.equals("RIGHT")) {
 			return getMaxX();
@@ -226,40 +233,35 @@ public class Player extends Character {
 			return getMinX();
 		}
 	}
-	/**
-	 * Calcula la posición y donde está la pistola (y tienen que salir las balas)
-	 * @return
-	 */
+	
 	public float getShootingY() {
 		return getY() + 30;
 	}
 	
-	/**
-	 * Para todas las animaciones (para cuando esté en pausa)
-	 */
 	public void stop() {
 		
 			animations.get("RunFoot1").get(isFacing).stop();
 			animations.get("RunFoot2").get(isFacing).stop();
 			animations.get("JumpFoot1").get(isFacing).stop();
 			animations.get("StandbyFoot").get(isFacing).stop();
+			animations.get("Shoot").get(isFacing).stop();
 			animations.get("JumpHead2").get(isFacing).stop();		
-			animations.get("RunHead").get(isFacing).stop();			
+			animations.get("JumpHead2").get(isFacing).stop();		
+			animations.get("RunHead").get(isFacing).stop();		
 			animations.get("JumpHead1").get(isFacing).stop();		
 			animations.get("StandbyHead").get(isFacing).stop();
 		
 	}
-	/**
-	 * Reinicia todas las animaciones
-	 */
+	
 	public void start() {
 		
 			animations.get("RunFoot1").get(isFacing).start();
 			animations.get("RunFoot2").get(isFacing).start();		
 			animations.get("JumpFoot1").get(isFacing).start();	
-			animations.get("StandbyFoot").get(isFacing).start();						
-			animations.get("JumpHead2").get(isFacing).start();			
-			animations.get("RunHead").get(isFacing).start();	
+			animations.get("StandbyFoot").get(isFacing).start();		
+			animations.get("JumpHead2").get(isFacing).start();		
+			animations.get("JumpHead2").get(isFacing).start();		
+			animations.get("RunHead").get(isFacing).start();		
 			animations.get("JumpHead1").get(isFacing).start();		
 			animations.get("StandbyHead").get(isFacing).start();
 		
@@ -272,28 +274,22 @@ public class Player extends Character {
 	public void addScore(int i) {
 		score += i;
 	}
-	/**
-	 * Dibuja la animación de muerte
-	 */
 	public void drawDeathAnimation() {
 		animations.get("Die").get(isFacing).draw(x,y);
 		if(animations.get("Die").get(isFacing).getFrame() == 17) {
 			done = true;
 			die();
-			if(lives > 0) {
-				animations.get("Die").get(isFacing).restart();
-			}
+			animations.get("Die").get(isFacing).restart();
 			
 		}
 	}
+
 	public void set(ArrayList<Shape> platforms, ArrayList<Bullet> playerBullets) {
 		// TODO Auto-generated method stub
 		super.setPlataformas(platforms);
 		this.bullets = playerBullets;
 	}
-	/**
-	 * Reinicia su posicion al inicio
-	 */
+
 	public void resetPos() {
 		// TODO Auto-generated method stub
 		this.setLocation(200, 200);
