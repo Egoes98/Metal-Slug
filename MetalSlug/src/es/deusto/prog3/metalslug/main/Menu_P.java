@@ -61,10 +61,15 @@ public class Menu_P extends BasicGameState{
 			b_MM.draw(1074,633);
 		}
 		
-		int y = 296;
+		scorefont.drawString(433, 300, String.format("PLAYERS"), Color.gray);
+		scorefont.drawString(600, 300, String.format("POINTS"), Color.gray);
+		
+		int y = 340;
 		for(String key : p.keySet()) {
-			scorefont.drawString(433, y, "Jugador: " +key + " Puntos:" + p.get(key));
-			y += 30;
+			g.setColor(Color.white);
+			scorefont.drawString(433, y, String.format(key.toUpperCase()));
+			scorefont.drawString(600, y, String.format("%06d",p.get(key)));
+			y += 40;
 		}
 	}
 
