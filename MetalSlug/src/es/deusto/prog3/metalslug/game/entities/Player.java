@@ -113,11 +113,13 @@ public class Player extends Character {
 			if(!boss) {
 				if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && getCenterX() > input.getMouseX() && getCenterX() < 640 && isFacing == "LEFT") {
 					shoot  = true;
-				}else if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && getCenterX() > input.getMouseX() + (getCenterX() - 640) && isFacing == "LEFT") {
+				}else if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && input.getMouseX() < 640 && getCenterX() < 640 && input.getMouseX() + (getCenterX() - 640) < getCenterX() && isFacing == "LEFT"){
+					shoot = false;
+				}else if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) &&  input.getMouseX() + (getCenterX() - 640) < getCenterX() && isFacing == "LEFT" ) {
 					shoot  = true;
 				}else if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && input.getMouseX() > getCenterX() && getCenterX() < 640 && isFacing == "RIGHT") {
 					shoot  = true;
-				}else if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && input.getMouseX() + (getCenterX() - 640) > getCenterX() && isFacing == "RIGHT" ) {
+				}else if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && input.getMouseX() + (getCenterX() - 640) > getCenterX() && isFacing == "RIGHT") {
 					shoot  = true;
 				}else {
 					shoot = false;
