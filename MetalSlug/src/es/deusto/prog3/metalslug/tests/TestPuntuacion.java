@@ -11,11 +11,13 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.gui.TextField;
 
+import es.deusto.prog3.metalslug.basededatos.BaseDeDatos;
+
 public class TestPuntuacion extends BasicGame {
 
 	private TextField nJugador;
 	private UnicodeFont scorefont;
-	private Image bg, volver;
+	private Image bg, volver, nb;
 	private int score = 123456;
 
 	private boolean guardado, newBest;
@@ -45,6 +47,9 @@ public class TestPuntuacion extends BasicGame {
 		if(guardado) {
 			volver.draw(427, 628);
 		}
+		if(newBest) {
+			nb.draw(700, 300);
+		}
 	}
 
 	@Override
@@ -54,6 +59,7 @@ public class TestPuntuacion extends BasicGame {
 		newBest = false;
 		bg = new Image("resources/Menu_fp/fondo_fp2.png");
 		volver = new Image("resources/Menu_fp/volver.png");
+		nb = new Image("resources/Menu_fp/newBest.png");
 		scorefont = new UnicodeFont("resources/mini_pixel-7.ttf", 60, false, false);
 		scorefont.addAsciiGlyphs();
 		scorefont.getEffects().add(new ColorEffect(java.awt.Color.WHITE));
@@ -75,6 +81,9 @@ public class TestPuntuacion extends BasicGame {
 		if (button == 0) {
 			if (new Rectangle(427, 628, 373, 79).contains(x, y)) {
 				if (!guardado) {
+					if(false /*BaseDeDatos.existeJ("jugador") && BaseDeDatos.mayorP("jugador", score)*/) {
+						newBest = true;
+					}
 					System.out.println("Guardado jugador " + nJugador.getText());
 					nJugador.setAcceptingInput(false);
 					guardado = true;

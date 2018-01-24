@@ -3,8 +3,6 @@ package es.deusto.prog3.metalslug.main;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
-import es.deusto.prog3.metalslug.game.entities.Player;
-
 public class MainGame extends StateBasedGame {
 
 	public static final String gamename = "Metal Smug";
