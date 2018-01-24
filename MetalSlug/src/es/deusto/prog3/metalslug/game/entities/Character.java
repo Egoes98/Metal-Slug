@@ -26,7 +26,9 @@ public class Character extends Rectangle {
 		this.platforms = platforms;
 		dead = false;
 	}
-	
+	/**
+	 * Detecta las colisiones con plataformas
+	 */
 	protected void detectPlatformCollisions() {
 		boolean intersected = false;
 		encima = false;
@@ -85,20 +87,23 @@ public class Character extends Rectangle {
 		}
 		
 	}
-
+	/**
+	 * Se mueve en el eje Y
+	 */
 	protected void moveY(int delta) {
 		float deltaSeconds = delta/1000f;
 		setY(getY() + vy * deltaSeconds);
 		vy += GRAVITY * deltaSeconds;
 	}
-
+	/**
+	 * Se mueve en el eje X
+	 */
 	protected void moveX(int delta, boolean isLeft) {
 		if (!dead) {
 			float deltaSeconds = delta / 1000f;
 			setX(getX() + (isLeft ? -speed * deltaSeconds : speed * deltaSeconds));
 		}
 	}
-	
 	public void setPlataformas(ArrayList<Shape> platforms) {
 		this.platforms = platforms;
 	}

@@ -62,7 +62,12 @@ public class Player extends Character {
 		isFacing = "RIGHT";
 		lives = 3;
 	}
-
+	/**
+	 * Añade una animación al mapa
+	 * @param name
+	 * @param images
+	 * @param duration
+	 */
 	private void addAnimation(String name, Image[] images, int duration) {
 		animation = new HashMap<String, Animation>();
 		
@@ -78,7 +83,7 @@ public class Player extends Character {
 		
 		
 	}
-
+	
 	public void jump() {
 		// TODO Auto-generated method stub
 		if(!hasjumped) {
@@ -90,6 +95,10 @@ public class Player extends Character {
 
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Actualiza su posición, detecta colisiones y actualiza estado de disparo
+	 * @param delta
+	 */
 	public void update(int delta) {
 		
 		if(input.isKeyDown(Input.KEY_A)) {
@@ -134,7 +143,9 @@ public class Player extends Character {
 	public boolean getMovingLeft() {
 		return movingLeft;
 	}
-
+	/**
+	 * Dibuja la cabeza con su animación correspondiente
+	 */
 	public void drawCabeza() {
 		
 		if(move && shoot && isFacing == "LEFT") {
@@ -158,7 +169,9 @@ public class Player extends Character {
 		}
 		
 	}
-
+	/**
+	 * Dibuja las piernas con su animación correspondiente
+	 */
 	public void drawPiernas() {
 		if(move && firstRun) {
 			animations.get("RunFoot1").get(isFacing).draw(x,y);
@@ -202,7 +215,10 @@ public class Player extends Character {
 	public void setCanShoot(boolean canShoot) {
 		this.canShoot = canShoot;
 	}
-
+	/**
+	 * Calcula la posición x donde está la pistola (y tienen que salir las balas)
+	 * @return
+	 */
 	public float getShootingX() {
 		if(isFacing.equals("RIGHT")) {
 			return getMaxX();
@@ -210,11 +226,17 @@ public class Player extends Character {
 			return getMinX();
 		}
 	}
-	
+	/**
+	 * Calcula la posición y donde está la pistola (y tienen que salir las balas)
+	 * @return
+	 */
 	public float getShootingY() {
 		return getY() + 30;
 	}
 	
+	/**
+	 * Para todas las animaciones (para cuando esté en pausa)
+	 */
 	public void stop() {
 		
 			animations.get("RunFoot1").get(isFacing).stop();
@@ -222,24 +244,21 @@ public class Player extends Character {
 			animations.get("JumpFoot1").get(isFacing).stop();
 			animations.get("StandbyFoot").get(isFacing).stop();
 			animations.get("JumpHead2").get(isFacing).stop();		
-			animations.get("JumpHead2").get(isFacing).stop();
-			animations.get("RunHead").get(isFacing).stop();		
-			animations.get("JumpHead2").get(isFacing).stop();		
 			animations.get("RunHead").get(isFacing).stop();			
 			animations.get("JumpHead1").get(isFacing).stop();		
 			animations.get("StandbyHead").get(isFacing).stop();
 		
 	}
-	
+	/**
+	 * Reinicia todas las animaciones
+	 */
 	public void start() {
 		
 			animations.get("RunFoot1").get(isFacing).start();
 			animations.get("RunFoot2").get(isFacing).start();		
 			animations.get("JumpFoot1").get(isFacing).start();	
-			animations.get("StandbyFoot").get(isFacing).start();			
-			animations.get("StandbyFoot").get(isFacing).start();				
-			animations.get("JumpHead2").get(isFacing).start();		
-			animations.get("JumpHead2").get(isFacing).start();		
+			animations.get("StandbyFoot").get(isFacing).start();						
+			animations.get("JumpHead2").get(isFacing).start();			
 			animations.get("RunHead").get(isFacing).start();	
 			animations.get("JumpHead1").get(isFacing).start();		
 			animations.get("StandbyHead").get(isFacing).start();
@@ -253,6 +272,9 @@ public class Player extends Character {
 	public void addScore(int i) {
 		score += i;
 	}
+	/**
+	 * Dibuja la animación de muerte
+	 */
 	public void drawDeathAnimation() {
 		animations.get("Die").get(isFacing).draw(x,y);
 		if(animations.get("Die").get(isFacing).getFrame() == 17) {
@@ -264,13 +286,14 @@ public class Player extends Character {
 			
 		}
 	}
-
 	public void set(ArrayList<Shape> platforms, ArrayList<Bullet> playerBullets) {
 		// TODO Auto-generated method stub
 		super.setPlataformas(platforms);
 		this.bullets = playerBullets;
 	}
-
+	/**
+	 * Reinicia su posicion al inicio
+	 */
 	public void resetPos() {
 		// TODO Auto-generated method stub
 		this.setLocation(200, 200);

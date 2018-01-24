@@ -29,7 +29,12 @@ public class Enemy extends Character {
 		addAnimation("Disparar", AnimationImages.soldierShoot, 270);
 		animations.get("Disparar").get(movingLeft).setLooping(false);
 	}
-	
+	/**
+	 * Añade una animación al mapa
+	 * @param name
+	 * @param images
+	 * @param duration
+	 */
 	private void addAnimation(String name, Image[] images, int duration) {
 		animation = new HashMap<Boolean, Animation>();
 		
@@ -44,16 +49,26 @@ public class Enemy extends Character {
 		animation.put(false, LeftAnimation);
 	
 	}
-
+	/**
+	 * Dispara una bala
+	 */
 	private void shoot() {
 		bullets.add(new Bullet(this.getCenterX(), this.getCenterY(), player.getCenterX(), player.getCenterY(), 0.5f));
 	}
-
+	/**
+	 * Calcula la distancia del punto a al punto b
+	 * @param a {x,y}
+	 * @param b {x,y}
+	 * @return Distancia
+	 */
 	private float distanceTo(float[] a, float[] b) {
 		// TODO Auto-generated method stub
 		return (float) Math.hypot(a[0] - b[0], a[1] - b[1]);
 	}
-
+	/**
+	 * Actualiza la posición, detectaa colisiones y dispara.
+	 * @param delta
+	 */
 	public void update(int delta) {
 		timeCounter += delta;
 		if(!shooting) {
@@ -80,7 +95,9 @@ public class Enemy extends Character {
 		}
 
 	}
-	
+	/**
+	 * Dibuja el sprite en pantalla
+	 */
 	public void draw() {
 		
 		if(moving) {

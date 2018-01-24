@@ -28,7 +28,11 @@ public class Slope extends Polygon {
 	public double getSlopeAngle() {
 		return slopeAngle;
 	}
-	
+	/**
+	 * Calcula en punto y de la recta dado un punto x
+	 * @param x
+	 * @return
+	 */
 	public float getMaxYIn(float x) {
 		float distanceToLeft = x - points[0];
 		float startingPoint = points[1];

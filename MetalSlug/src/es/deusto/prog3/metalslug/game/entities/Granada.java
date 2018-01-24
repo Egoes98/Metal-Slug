@@ -41,7 +41,9 @@ public class Granada extends Circle {
 		explosion = new Animation(AnimationImages.explosion, 50);
 		explosion.setLooping(false);
 	}
-
+	/**
+	 * Actualiza la posición y el estado
+	 */
 	public void update(int delta) {
 		moveX(delta);
 		moveY(delta);
@@ -49,7 +51,10 @@ public class Granada extends Circle {
 			status = STATUS_EXPLODED;
 		}
 	}
-
+	/**
+	 * Mueve en eje Y
+	 * @param delta
+	 */
 	private void moveY(int delta) {
 		if (status == STATUS_FLYING) {
 			float deltaSeconds = delta / 1000f;
@@ -57,14 +62,19 @@ public class Granada extends Circle {
 			vy += GRAVITY * deltaSeconds;
 		}
 	}
-
+	/**
+	 * Mueve en eje X
+	 * @param delta
+	 */
 	private void moveX(int delta) {
 		if (status == STATUS_FLYING) {
 			float deltaSeconds = delta / 1000f;
 			setX(getX() + vx * deltaSeconds);
 		}
 	}
-
+	/**
+	 * Detecta las colisiones con plataformas
+	 */
 	public void detectCollisions() {
 		for (Shape r : platforms) {
 			if (this.intersects(r)) {
@@ -79,7 +89,10 @@ public class Granada extends Circle {
 			}
 		}
 	}
-	
+	/**
+	 * Detecta las colisiones con un jefe
+	 * @param boss
+	 */
 	public void detectCollisions(Boss boss) {
 		if(this.intersects(boss)) {
 			if(this.status == STATUS_FLYING) {
@@ -92,15 +105,22 @@ public class Granada extends Circle {
 	public String getStatus() {
 		return status;
 	}
-	
+	/**
+	 * Dibuja una explosión
+	 */
 	public void drawExplosion() {
 		explosion.draw(getX() - 90, getY() - 270);
 	}
-	
+	/**
+	 * Dibuja la granada sin explotar
+	 */
 	public void draw() {
 		granada.drawCentered(x, y);
 	}
-
+	/**
+	 * Detecta las colisiones con enemigos
+	 * @param enemies
+	 */
 	public void detectCollisions(ArrayList<Enemy> enemies) {
 		// TODO Auto-generated method stub
 		for(Enemy e : enemies) {

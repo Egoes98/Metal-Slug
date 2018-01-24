@@ -15,11 +15,26 @@ public class Bullet extends Point {
 	private float sourceX, sourceY;
 	private double angle;
 	private Image sprite;
-
+	
+	/**
+	 * 
+	 * @param sourceX Coordenada x de inicio
+	 * @param sourceY Coordenada y de inicio
+	 * @param x Coordenada x de destino
+	 * @param y Coordenada y de destino
+	 * @param speed
+	 */
 	public Bullet(float sourceX, float sourceY, float x, float y, float speed) {
 		this(sourceX, sourceY, Math.atan2(x - sourceX, sourceY - y), speed);
 	}
 	
+	/**
+	 * 
+	 * @param sourceX Coordenada x de inicio
+	 * @param sourceY Coordenada y de inicio
+	 * @param angle
+	 * @param speed
+	 */
 	public Bullet(float sourceX, float sourceY, double angle, float speed) {
 		super(sourceX, sourceY);
 		this.speed = speed;
@@ -35,11 +50,21 @@ public class Bullet extends Point {
 		}
 	}
 	
+	/**
+	 * Actualiza la posición de la bala de acuerdo a la velocidad, el ángulo y delta
+	 * @param delta Tiempo de actualización
+	 */
 	public void update(int delta) {
 		x += speed * sin * delta;
 		y += speed * -cos * delta;
 	}
 	
+	/**
+	 * Comprueba colisiones de la bala con plataformas
+	 * @param platforms
+	 * @param checkAtravesable true = no chocan con plataformas atravesables
+	 * @return Si ha chocado
+	 */
 	public boolean detectCollisionPlatforms(ArrayList<Shape> platforms, boolean checkAtravesable) {
 		
 		for(Shape platform : platforms) {
@@ -61,6 +86,11 @@ public class Bullet extends Point {
 		return false;
 	}
 	
+	/**
+	 * Detecta colisiones con character, y mata al character si colisiona
+	 * @param character
+	 * @return Si ha chocado
+	 */
 	public boolean detectCollisionCharacter(Character character) {
 		if(character.contains(getX(), getY())) {
 			character.die();
@@ -69,6 +99,12 @@ public class Bullet extends Point {
 		
 		return false;
 	}
+	
+	/**
+	 * Detecta colisiones con una lista de characters, matando al character con el que colisiona
+	 * @param characters
+	 * @return Si ha chocado
+	 */
 	public boolean detectCollisionCharacter(ArrayList<Enemy> characters) {
 		for(Enemy c : characters) {
 			if(detectCollisionCharacter(c)) {
@@ -80,11 +116,16 @@ public class Bullet extends Point {
 	}
 	
 	
-
+	/**
+	 * Dibuja el sprite de la bala en pantalla
+	 */
 	public void draw() {
 		sprite.drawCentered(x, y);
 	}
-
+	
+	/*
+	 * Comprueba si se ha salido de la pantalla
+	 */
 	public boolean detectCollisionOutOfBounds(Player player) {
 		
 		

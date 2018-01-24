@@ -29,7 +29,9 @@ public class Boss extends Circle {
 		angle = 0;
 		animation = new Animation(AnimationImages.boss, 80);
 	}
-	
+	/**
+	 * Actualiza la posición del boss, comprueba las colisiones y dispara
+	 */
 	public void update(int delta) {
 		setX(getX() + vx * delta);
 		setY(getY() + vy * delta);
@@ -45,6 +47,9 @@ public class Boss extends Circle {
 		}
 	}
 	
+	/**
+	 * Comprueba las colisiones con platform
+	 */
 	public void detectCollisions() {
 		for(Shape platform : platforms) {
 			if (this.intersects(platform)) {
@@ -65,6 +70,9 @@ public class Boss extends Circle {
 		}
 	}
 	
+	/**
+	 * Resta 2 puntos de vida al jefe
+	 */
 	public void hit() {
 		health -= 2;
 	}
@@ -72,7 +80,9 @@ public class Boss extends Circle {
 	public int getHealth() {
 		return health;
 	}
-	
+	/**
+	 * Dibuja la animación
+	 */
 	public void draw() {
 		animation.draw(x, y);
 	}
