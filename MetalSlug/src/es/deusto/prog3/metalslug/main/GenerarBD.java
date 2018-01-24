@@ -8,7 +8,10 @@ import es.deusto.prog3.metalslug.basededatos.BaseDeDatos;
 import es.deusto.prog3.metalslug.game.entities.Enemy;
 import es.deusto.prog3.metalslug.game.entities.Platform;
 import es.deusto.prog3.metalslug.game.entities.Slope;
-
+/**
+ * Clase para generar los datos de los niveles en la base de datos si no se dispone de una.
+ * 
+ */
 public class GenerarBD {
 
 	public static void main(String[] args) {

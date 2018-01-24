@@ -291,7 +291,11 @@ public class NivelNormal extends BasicGameState {
 			granadas.add(new Granada(player.getCenterX(), player.getCenterY(), player.getMovingLeft(), platforms));
 		}
 	}
-
+	/**
+	 * Añade una bala desde player a x, y
+	 * @param x
+	 * @param y
+	 */
 	private void addNewBullet(int x, int y) {
 		if (player.getCenterX() < 640)
 			playerBullets.add(new Bullet(player.getShootingX(), player.getShootingY(), x, y, 1f));
@@ -299,7 +303,9 @@ public class NivelNormal extends BasicGameState {
 			playerBullets.add(
 					new Bullet(player.getShootingX(), player.getShootingY(), x - 640 + player.getCenterX(), y, 1f));
 	}
-
+	/**
+	 * Crea un nuevo jugador
+	 */
 	public void resetPlayer() {
 		player = new Player(platforms, enemyBullets);
 	}

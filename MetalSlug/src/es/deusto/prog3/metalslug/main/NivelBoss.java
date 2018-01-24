@@ -167,7 +167,11 @@ public class NivelBoss extends BasicGameState {
 			granadas.add(new Granada(player.getCenterX(), player.getCenterY(), player.getMovingLeft(), platforms));
 		}
 	}
-	
+	/**
+	 * Añade una bala desde player a x, y
+	 * @param x
+	 * @param y
+	 */
 	private void addNewBullet(int x, int y) {
 		playerBullets.add(new Bullet(player.getShootingX(), player.getShootingY(), x, y, 1f));
 	}
