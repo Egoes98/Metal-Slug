@@ -1,6 +1,6 @@
 # Proyecto-Programacion
 Resumen/Contexto:
-  En este proyecto queremos crear un juego shoot and run al puro estilo Metal Slug. Nuestra finalidad no es crear un clon exacto por lo que tendremos más flexibilidad a la hora de elegir los sprites para el proyecto. El juego, como su propio género indica, trata sobre ir disparando y acabando con diferentes enemigos mientras avanzamos por el nivel. El juego contará con una pequeña trama la cual no tendrá mucha importancia, simplemente será una excusa para darle algún sentido a lo que ocurre en pantalla. El juego consistirá en varios niveles y cada nivel tendrá sus propios enemigos y escenarios. Al final de cada nivel te encontrarás con un boss, al derrotarlo avanzaras en la trama y llegarás al siguiente nivel.
+  En este proyecto queremos crear un juego shoot and run al puro estilo Metal Slug. Nuestra finalidad no es crear un clon exacto por lo que tendremos más flexibilidad a la hora de elegir los sprites para el proyecto. El juego, como su propio género indica, trata sobre ir disparando y acabando con diferentes enemigos mientras avanzamos por el nivel. El juego consistirá en varios niveles y cada nivel tendrá sus propios enemigos y escenarios. Al final te encontrarás con un boss y al derrotarlo completarás el juego.
 
 Objetivos principales del proyecto:
 
