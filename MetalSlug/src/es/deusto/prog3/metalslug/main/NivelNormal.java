@@ -175,7 +175,8 @@ public class NivelNormal extends BasicGameState {
 			for (Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext();) {
 				Bullet ibullet = iterator.next();
 				ibullet.update(delta);
-				if (ibullet.detectCollisionCharacter(player) || ibullet.detectCollisionPlatforms(platforms, true)) {
+				if (Math.abs(player.getCenterX() - ibullet.getX()) > 1000 || ibullet.getY() < 0 || 
+						ibullet.detectCollisionCharacter(player) || ibullet.detectCollisionPlatforms(platforms, true)) {
 					iterator.remove();
 				}
 			}

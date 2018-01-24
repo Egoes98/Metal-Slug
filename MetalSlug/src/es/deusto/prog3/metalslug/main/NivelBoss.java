@@ -33,6 +33,7 @@ public class NivelBoss extends BasicGameState {
 	
 	private Image background;
 	private Input input;
+	private boolean terminado;
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
@@ -136,6 +137,10 @@ public class NivelBoss extends BasicGameState {
 		
 		boss.update(delta);
 		healthBar.setWidth(boss.getHealth() * 10);
+		
+		if(boss.getHealth() >= 0) {
+			terminado = true;
+		}
 	}
 
 	@Override
