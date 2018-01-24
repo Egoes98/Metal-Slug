@@ -6,17 +6,11 @@ Objetivos principales del proyecto:
 
   -Crear una inteligencia para los enemigos y que esta funcione correctamente.
   
-  -Crear varios niveles con diferentes temáticas y bosses finales.
+  -Crear varios niveles con diferentes temáticas y un boss finales.
   
-  -Varias armas para usar que sean bastantes diferentes entre ellas
-  
-  -Implementar diferentes tipos de vehículos que puedan utilizarse en algunos de los niveles.
-  
-  -Un sistema de puntuación. Es decir que al completar un nivel te diga la puntuación que has conseguido en ese nivel dependiendo de si te han golpeado y el tiempo que has tardado en completarlo.
+  -Un sistema de puntuación. Es decir que al completar el juego te diga la puntuación que has conseguido dependiendo de si te han golpeado y el tiempo que has tardado en completarlo.
  
- -Con esa puntuación crear un ranking de los diferentes jugadores que hayan jugado a ese nivel.
- 
- -Más de un personaje como el que jugar la “campaña” del juego.
+ -Con esa puntuación crear un ranking de los diferentes jugadores que hayan jugado.
 
 Objetivos adicionales:
 	
