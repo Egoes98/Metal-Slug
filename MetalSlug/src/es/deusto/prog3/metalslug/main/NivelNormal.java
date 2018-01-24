@@ -24,7 +24,7 @@ import es.deusto.prog3.metalslug.game.entities.Player;
 
 public class NivelNormal extends BasicGameState {
 
-	private int nivel;
+	private int nivel = 0;
 
 	private Player player;
 	private ArrayList<Shape> platforms;
@@ -64,8 +64,7 @@ public class NivelNormal extends BasicGameState {
 		enemies = BaseDeDatos.getEnemigos(nivel);
 		player.set(platforms, playerBullets);
 		player.resetPos();
-		enemies.add(new Enemy(1000, 200, 900, 1100));
-		player.resetPos();
+		
 		
 		// enemies.add(new Enemy(1000, 200, 900, 1100));
 		
@@ -109,6 +108,20 @@ public class NivelNormal extends BasicGameState {
 		if(player.isDead()) {
 			player.drawDeathAnimation();
 			enemyBullets.clear();
+			if(player.isRestart()) {
+				if (nivel == 3) {
+					game.addState(new NivelBoss());
+					game.getState(100).init(gc, game);
+					game.getState(10 + nivel).leave(gc, game);
+					game.enterState(100);
+				} else {
+					game.addState(new NivelNormal(nivel, player));
+					game.getState(10 + nivel).init(gc, game);
+					game.getState(10 + nivel).leave(gc, game);
+					game.enterState(nivel + 10);
+				}
+				player.setRestart(false);
+			}
 		}else {
 			player.drawPiernas();
 			player.drawCabeza();	
@@ -116,7 +129,7 @@ public class NivelNormal extends BasicGameState {
 		
 		for(Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
 			Enemy e = iterator.next();
-			g.fill(e);
+			e.draw();
 		}
 
 		g.setColor(Color.cyan);
@@ -175,8 +188,7 @@ public class NivelNormal extends BasicGameState {
 			for (Iterator<Bullet> iterator = enemyBullets.iterator(); iterator.hasNext();) {
 				Bullet ibullet = iterator.next();
 				ibullet.update(delta);
-				if (Math.abs(player.getCenterX() - ibullet.getX()) > 1000 || ibullet.getY() < 0 || 
-						ibullet.detectCollisionCharacter(player) || ibullet.detectCollisionPlatforms(platforms, true)) {
+				if (ibullet.detectCollisionCharacter(player) || ibullet.detectCollisionPlatforms(platforms, true) || ibullet.detectCollisionOutOfBounds(player)) {
 					iterator.remove();
 				}
 			}
@@ -203,7 +215,7 @@ public class NivelNormal extends BasicGameState {
 			for (Iterator<Bullet> iterator = playerBullets.iterator(); iterator.hasNext();) {
 				Bullet b = iterator.next();
 				b.update(delta);
-				if (b.detectCollisionCharacter(enemies) || b.detectCollisionPlatforms(platforms, true)) {
+				if (b.detectCollisionCharacter(enemies) || b.detectCollisionPlatforms(platforms, true) || b.detectCollisionOutOfBounds(player)) {
 					iterator.remove();
 				}
 			}
@@ -231,9 +243,17 @@ public class NivelNormal extends BasicGameState {
 			if (pausa) {
 				pausa = false;
 				player.start();
+				for (Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
+					Enemy e = iterator.next();
+					e.start();
+				}
 			} else {
 				pausa = true;
 				player.stop();
+				for (Iterator<Enemy> iterator = enemies.iterator(); iterator.hasNext();) {
+					Enemy e = iterator.next();
+					e.stop();
+				}
 			}
 		}
 

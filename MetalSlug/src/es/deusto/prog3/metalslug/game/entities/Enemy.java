@@ -25,7 +25,9 @@ public class Enemy extends Character {
 		this.minMovementX = minX;
 		this.maxMovementX = maxX;
 		moving = true;
-		
+		addAnimation("Correr", AnimationImages.soldierWalk, 100);
+		addAnimation("Disparar", AnimationImages.soldierShoot, 270);
+		animations.get("Disparar").get(movingLeft).setLooping(false);
 	}
 	
 	private void addAnimation(String name, Image[] images, int duration) {
@@ -41,12 +43,6 @@ public class Enemy extends Character {
 		}
 		animation.put(false, LeftAnimation);
 	
-	}
-	
-	public void init(){
-		addAnimation("Correr", AnimationImages.soldierWalk, 100);
-		addAnimation("Disparar", AnimationImages.soldierShoot, 270);
-		animations.get("Disparar").get(movingLeft).setLooping(false);
 	}
 
 	private void shoot() {
@@ -100,6 +96,13 @@ public class Enemy extends Character {
 
 	}
 	
+	public void stop() {
+		animations.get("Correr").get(movingLeft).stop();
+	}
+	
+	public void start() {
+		animations.get("Correr").get(movingLeft).start();
+	}
 	public void setBullets(ArrayList<Bullet> bullets) {
 		this.bullets = bullets;
 	}

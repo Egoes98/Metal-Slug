@@ -19,19 +19,20 @@ public class TestBD {
 	public void testInsertarValores() throws ClassNotFoundException {
 		
 		//Se debe hacer la primera vez que ejecutas el test.
-		//BaseDeDatos.crearTablas();
-		BaseDeDatos.agregarPuntuacion("Alvaro", 500, 1);
-		BaseDeDatos.agregarPuntuacion("Alvaro", 600, 2);
 		
-		HashMap<String, Integer> puntuacionNivel;
-		HashMap<String, Integer> puntuacionTotal;
-		puntuacionNivel = BaseDeDatos.puntuacionNivel(1);
-		puntuacionTotal = BaseDeDatos.puntuacionTotal();
+		//Prueba Insertar y Scara puntuaciones por jugador
+		//BaseDeDatos.agregarPuntuacion("Alvaro", 500);
+		//BaseDeDatos.agregarPuntuacion("Egoitz", 600);
 		
+		assertTrue(500 == BaseDeDatos.getPuntuacionJ("Alvaro"));
+		assertTrue(600 == BaseDeDatos.getPuntuacionJ("Egoitz"));
 		
-		assertTrue(500 == puntuacionNivel.get("Alvaro"));
-		assertTrue(1100 == puntuacionTotal.get("Alvaro"));
+		//Pruebas para sacar puntuaciones por ranking
+		HashMap<String, Integer> puntuaciones;
+		puntuaciones = BaseDeDatos.getPuntuacionR();
 		
+		assertTrue(500 == puntuaciones.get("Alvaro"));
+		assertTrue(600 == puntuaciones.get("Egoitz"));
 	}
 	
 	@Test

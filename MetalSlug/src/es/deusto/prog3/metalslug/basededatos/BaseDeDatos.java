@@ -44,9 +44,8 @@ public class BaseDeDatos {
 	public static void crearTablas() throws ClassNotFoundException {// crea las tablas de puntuacion y plataformas.
 		try {
 			conectar();
-			statement.executeUpdate("create table puntuacion (jugador String, puntos int, nivel int);");
-			statement.executeUpdate(
-					"create table plataformas (tipo string, x1 float, y1 float, x2 float, y2 float, atravesable tinyint, nivel int);");
+			statement.executeUpdate("create table puntuacion (jugador String, puntos int);");
+			statement.executeUpdate("create table plataformas (tipo string, x1 float, y1 float, x2 float, y2 float, atravesable tinyint, nivel int);");
 			statement.executeUpdate("create table enemigos (x float, y float, minx float, maxx float, nivel int);");
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -54,12 +53,12 @@ public class BaseDeDatos {
 		desconectar();
 	}
 
-	public static void agregarPuntuacion(String jugador, int puntos, int nivel) {// Añade la puntuacion al final de cada
+	public static void agregarPuntuacion(String jugador, int puntos) {// AÃ±ade la puntuacion al final de cada
 																					// nivel
 		try {
 			conectar();
 			boolean repetido = false;
-			ResultSet rs = statement.executeQuery("select jugador from puntuacion where nivel=" + nivel + "");
+			ResultSet rs = statement.executeQuery("select jugador from puntuacion");
 			while (rs.next()) {
 				// Leer el resultset
 				if (rs.getString("jugador").equals(jugador)) {
@@ -68,11 +67,9 @@ public class BaseDeDatos {
 				}
 			}
 			if (repetido) {
-				statement.executeUpdate("update puntuacion set puntos=" + puntos + " WHERE jugador='" + jugador
-						+ "' AND nivel=" + nivel + ";");
+				statement.executeUpdate("update puntuacion set puntos=" + puntos + " WHERE jugador='" + jugador+"'");
 			} else {
-				statement.executeUpdate(
-						"insert into puntuacion values('" + jugador + "', " + puntos + ", " + nivel + ")");
+				statement.executeUpdate("insert into puntuacion values('" + jugador + "', " + puntos +")");
 			}
 			repetido = false;
 
@@ -82,40 +79,37 @@ public class BaseDeDatos {
 		}
 		desconectar();
 	}
-
-	public static HashMap<String, Integer> puntuacionNivel(int nivel) {// Saca puntuacion por nivel pedido
-		HashMap<String, Integer> puntN = new HashMap<>();
+	
+	public static HashMap<String, Integer> getPuntuacionR() {// Saca puntuaciones del Ranking
+		HashMap<String, Integer> puntR = new HashMap<>();
 		try {
 			conectar();
-			ResultSet rs = statement.executeQuery("select jugador, puntos from puntuacion where nivel=" + nivel + "");
-			while (rs.next()) {
-				// Leer el resultset
-				puntN.put(rs.getString("jugador"), rs.getInt("puntos"));
+			ResultSet rp = statement.executeQuery("select jugador, puntos from puntuacion;");
+			while (rp.next()) {
+				puntR.put(rp.getString("jugador"), rp.getInt("puntos"));
 			}
-		} catch (SQLException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 		desconectar();
-		return puntN;
+		return puntR;
 	}
-
-	public static HashMap<String, Integer> puntuacionTotal() {// Saca puntuaciones totales
-		HashMap<String, Integer> puntT = new HashMap<>();
+	
+	public static int getPuntuacionJ(String Jugador) {//Saca puntuaciones de un jugador concreto
+		int puntJ = 0;
 		try {
 			conectar();
-			ResultSet rp = statement
-					.executeQuery("select jugador, sum(puntos) as pT from puntuacion group by jugador;");
+			ResultSet rp = statement.executeQuery("select puntos from puntuacion where jugador='"+Jugador+"'");
 			while (rp.next()) {
-				puntT.put(rp.getString("jugador"), rp.getInt("pT"));
+				puntJ = rp.getInt("puntos");
 			}
-
 		} catch (ClassNotFoundException | SQLException e) {
 
 			e.printStackTrace();
 		}
 		desconectar();
-		return puntT;
+		return puntJ;
 	}
 
 	public static boolean existeJ(String jugador) {// Comprueba si existe ese jugador
@@ -256,4 +250,16 @@ public class BaseDeDatos {
 		return enemigos;
 
 	}
+	public static void borrar() {
+		try {
+			conectar();
+			statement.executeUpdate("drop table puntuacion");
+			statement.executeUpdate("drop table plataformas");
+			statement.executeUpdate("drop table enemigos");
+		} catch (SQLException | ClassNotFoundException e) {
+			System.err.println(e.getMessage());
+		}
+		desconectar();
+	}
+	
 }

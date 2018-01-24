@@ -32,7 +32,16 @@ public class Player extends Character {
 	private boolean done = false;
 	
 	private int score;
+	private boolean restart = false;
 	
+	public boolean isRestart() {
+		return restart;
+	}
+
+	public void setRestart(boolean restart) {
+		this.restart = restart;
+	}
+
 	public Player(ArrayList<Shape> platforms, ArrayList<Bullet> bullets) {
 		super(200, 200, 93, 114, 300, platforms);
 		this.bullets = bullets;
@@ -83,13 +92,13 @@ public class Player extends Character {
 	
 	public void update(int delta) {
 		
-		if(input.isKeyDown(Input.KEY_LEFT)) {
+		if(input.isKeyDown(Input.KEY_A)) {
 			moveX(delta, true);
 			movingLeft = true;
 			move = true;
 			
 			isFacing = "LEFT";
-		}else if(input.isKeyDown(Input.KEY_RIGHT)) {
+		}else if(input.isKeyDown(Input.KEY_D)) {
 			moveX(delta, false);
 			movingLeft = false;
 			
@@ -181,6 +190,7 @@ public class Player extends Character {
 			this.setLocation(200, 200);
 			this.setDead(false);
 			done = false;
+			restart  = true;
 		}
 			
 	}
@@ -214,6 +224,8 @@ public class Player extends Character {
 			animations.get("JumpHead2").get(isFacing).stop();		
 			animations.get("JumpHead2").get(isFacing).stop();
 			animations.get("RunHead").get(isFacing).stop();		
+			animations.get("JumpHead2").get(isFacing).stop();		
+			animations.get("RunHead").get(isFacing).stop();			
 			animations.get("JumpHead1").get(isFacing).stop();		
 			animations.get("StandbyHead").get(isFacing).stop();
 		
@@ -225,6 +237,7 @@ public class Player extends Character {
 			animations.get("RunFoot2").get(isFacing).start();		
 			animations.get("JumpFoot1").get(isFacing).start();	
 			animations.get("StandbyFoot").get(isFacing).start();			
+			animations.get("StandbyFoot").get(isFacing).start();				
 			animations.get("JumpHead2").get(isFacing).start();		
 			animations.get("JumpHead2").get(isFacing).start();		
 			animations.get("RunHead").get(isFacing).start();	
